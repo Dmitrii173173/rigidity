@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      # Читает rust-toolchain.toml и кеширует сборку.
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: clippy, rustfmt
+
+      - name: fmt
+        run: cargo fmt --all --check
+
+      - name: clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: test
+        run: cargo test --workspace
+
+      # Битые ссылки в документации видит только rustdoc: ни clippy,
+      # ни компилятор о них не сообщают, а на docs.rs они видны всем.
+      - name: docs
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: cargo doc --workspace --no-deps
+
+      # Инвариант №4: результат не зависит от числа потоков.
+      - name: determinism (1 thread vs 8)
+        shell: bash
+        run: |
+          RAYON_NUM_THREADS=1 cargo test --workspace
+          RAYON_NUM_THREADS=8 cargo test --workspace
+
+  deps:
+    name: dependency hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      # Инвариант №5: состав прямых зависимостей ядра зафиксирован.
+      # Принцип №1 из PLAN.md проверяется машиной, а не на ревью.
+      - name: rigidity-core depends on nalgebra, rayon, thiserror — and nothing else
+        run: |
+          actual=$(cargo tree -p rigidity-core -e normal --depth 1 --prefix none \
+                   | tail -n +2 | awk '{print $1}' | sort -u | tr '\n' ' ')
+          expected="nalgebra rayon thiserror "
+          echo "actual:   $actual"
+          echo "expected: $expected"
+          test "$actual" = "$expected"

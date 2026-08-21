@@ -1,0 +1,19 @@
+[package]
+name        = "rigidity-spatial"
+description = "Пространственные индексы: kd-дерево поверх kiddo."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+rigidity-core.workspace = true
+nalgebra.workspace      = true
+kiddo.workspace         = true
+thiserror.workspace     = true
+
+[lints]
+workspace = true

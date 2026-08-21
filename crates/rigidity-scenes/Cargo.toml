@@ -1,0 +1,17 @@
+[package]
+name        = "rigidity-scenes"
+description = "Генератор синтетических сцен с аналитически известным нуль-пространством."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+rigidity-core.workspace = true
+nalgebra.workspace      = true
+
+[lints]
+workspace = true

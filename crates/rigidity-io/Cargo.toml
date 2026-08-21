@@ -1,0 +1,19 @@
+[package]
+name        = "rigidity-io"
+description = "Чтение и запись облаков точек: PLY, LAS. Тяжёлые зависимости изолированы здесь."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+rigidity-core.workspace = true
+nalgebra.workspace      = true
+thiserror.workspace     = true
+las.workspace           = true
+
+[lints]
+workspace = true

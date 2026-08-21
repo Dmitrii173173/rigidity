@@ -1,0 +1,24 @@
+[package]
+name        = "rigidity-viz"
+description = "Логирование в Rerun для отладки. Единственный крейт, знающий про визуализацию."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[features]
+default = []
+# Включается явно: `cargo run -p rigidity-cli --features rigidity-viz/rerun`.
+# Ядро о существовании rerun не знает.
+rerun = ["dep:rerun"]
+
+[dependencies]
+rigidity-core.workspace = true
+rerun = { workspace = true, optional = true }
+thiserror.workspace     = true
+
+[lints]
+workspace = true

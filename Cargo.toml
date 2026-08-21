@@ -1,0 +1,68 @@
+[workspace]
+resolver = "3"
+members  = ["crates/*"]
+
+[workspace.package]
+version      = "0.1.0"
+edition      = "2024"
+# Совпадает с rust-toolchain.toml. Резолвер v3 учитывает это поле при
+# выборе версий зависимостей: заниженное значение отсекает свежие крейты.
+rust-version = "1.97"
+license      = "MIT OR Apache-2.0"
+readme       = "README.md"
+keywords     = ["point-cloud", "registration", "icp", "robotics", "slam"]
+categories   = ["science::robotics", "mathematics", "algorithms"]
+
+# Единственный источник правды по версиям. Крейт подключает зависимость
+# явно через `dep.workspace = true` — записи, которые никто не подключил,
+# не собираются.
+[workspace.dependencies]
+# ядро
+nalgebra  = "0.35"
+rayon     = "1.12"
+thiserror = "2.0"
+# командный интерфейс
+clap = { version = "4.6", features = ["derive"] }
+
+# io
+# default = ["fixed", "multi-threaded"]. Фича `fixed` даёт деревья
+# на целочисленной арифметике, которые нам не нужны, и тянет крейт
+# `fixed`, конфликтующий по версии с rerun. Оставляем только rayon.
+kiddo = { version = "6.0", default-features = false, features = ["multi-threaded"] }
+las     = "0.11"
+e57     = "0.11"
+parquet = "59"
+# визуализация (M10)
+rerun = "0.36"
+# dev
+approx    = "0.5"
+proptest  = "1.11"
+criterion = "0.8"
+# внутренние
+rigidity-core   = { path = "crates/rigidity-core", version = "0.1.0" }
+rigidity-scenes = { path = "crates/rigidity-scenes", version = "0.1.0" }
+rigidity-io      = { path = "crates/rigidity-io", version = "0.1.0" }
+rigidity-spatial = { path = "crates/rigidity-spatial", version = "0.1.0" }
+rigidity-viz     = { path = "crates/rigidity-viz", version = "0.1.0" }
+
+[workspace.lints.rust]
+unsafe_code     = "forbid"
+unreachable_pub = "warn"
+# Публичный интерфейс без документации на docs.rs выглядит как недоделка,
+# а `-D warnings` в CI не даст пробелам разрастись.
+missing_docs    = "warn"
+
+[profile.release]
+lto           = "thin"
+codegen-units = 1
+debug         = true      # профилирование на M8 без отдельной сборки
+
+# Тесты и бенчмарки численного кода в debug невыносимо медленные.
+[profile.dev.package."*"]
+opt-level = 2
+
+# Оптимизируются и собственные крейты: Monte Carlo на M7 без этого
+# считается минутами вместо секунд. Отладочная информация сохраняется.
+[profile.test]
+opt-level = 2
+debug     = true

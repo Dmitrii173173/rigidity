@@ -1,0 +1,19 @@
+/target
+.DS_Store
+
+# Rerun recordings
+*.rrd
+
+# Datasets and generated demo data are not part of the repository
+/data
+/datasets
+/demo
+/bench-external/build
+/bench-external/data
+
+# Working notes stay local: the repository ships README.md only
+/MOTIVATION.md
+/PLAN.md
+/RELEASING.md
+/bench-external/PROTOCOL.md
+/bench-external/RESULTS.md

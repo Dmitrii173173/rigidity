@@ -1,0 +1,49 @@
+[package]
+name        = "rigidity-cli"
+description = "Headless CLI: регистрация с отчётом об обусловленности, вывод в JSON/Parquet."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[lib]
+name = "rigidity_cli"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rigidity"
+path = "src/main.rs"
+
+[dependencies]
+rigidity-core.workspace   = true
+rigidity-io.workspace     = true
+rigidity-scenes.workspace  = true
+rigidity-spatial.workspace = true
+nalgebra.workspace         = true
+clap.workspace             = true
+rigidity-viz.workspace     = true
+
+rayon.workspace           = true
+
+[features]
+default = []
+# Отладочная запись хода регистрации в Rerun. Выключена по умолчанию:
+# Rerun — крупная зависимость, а ядру она не нужна.
+viz = ["rigidity-viz/rerun"]
+
+[[example]]
+name              = "record_registration"
+required-features = ["viz"]
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name    = "registration"
+harness = false
+
+[lints]
+workspace = true
