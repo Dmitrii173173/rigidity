@@ -38,6 +38,30 @@ type VoxelKey = [i64; 3];
 /// means — colour averages, a class label does not. The returned cloud has
 /// coordinates only.
 pub fn voxel_downsample(cloud: &PointCloud, voxel_size: f64) -> Result<PointCloud, CloudError> {
+    voxel_downsample_observed(cloud, voxel_size, |_, _| {})
+}
+
+/// The same, reporting progress after each internal phase.
+///
+/// `progress` receives `(completed, total)` in phases, not in points:
+/// the work is a sequence of whole-cloud passes — keys, sort, cell
+/// boundaries, centroids — and none of them can report a fraction of
+/// itself without giving up the parallelism that makes it fast.
+///
+/// Nothing guarantees the callback ever runs: a cloud that is empty or
+/// rejected returns before the first phase. Completion is signalled by the
+/// function returning, not by a final call.
+pub fn voxel_downsample_observed<F>(
+    cloud: &PointCloud,
+    voxel_size: f64,
+    mut progress: F,
+) -> Result<PointCloud, CloudError>
+where
+    F: FnMut(usize, usize),
+{
+    /// Keys, sort, cell boundaries, centroids.
+    const PHASES: usize = 4;
+
     if !(voxel_size.is_finite() && voxel_size > 0.0) {
         return Err(CloudError::InvalidVoxelSize(voxel_size));
     }
@@ -60,11 +84,13 @@ pub fn voxel_downsample(cloud: &PointCloud, voxel_size: f64) -> Result<PointClou
             ]
         })
         .collect();
+    progress(1, PHASES);
 
     // The sort key includes the original index, so it is strict and the
     // ordered sequence is unique.
     let mut order: Vec<u32> = (0..count as u32).collect();
     order.par_sort_unstable_by_key(|&i| (keys[i as usize], i));
+    progress(2, PHASES);
 
     // Boundaries of the runs of equal keys.
     let mut segments: Vec<(usize, usize)> = Vec::new();
@@ -76,6 +102,7 @@ pub fn voxel_downsample(cloud: &PointCloud, voxel_size: f64) -> Result<PointClou
         }
     }
     segments.push((start, count));
+    progress(3, PHASES);
 
     // Across cells in parallel; within a cell strictly in order.
     let centroids: Vec<Vector3<f64>> = segments
@@ -94,6 +121,7 @@ pub fn voxel_downsample(cloud: &PointCloud, voxel_size: f64) -> Result<PointClou
     for centroid in centroids {
         result.push(cloud.origin() + centroid);
     }
+    progress(4, PHASES);
     Ok(result)
 }
 

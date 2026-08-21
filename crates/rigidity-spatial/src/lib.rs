@@ -36,14 +36,35 @@ pub struct KdTree {
 impl KdTree {
     /// Builds a tree over a cloud.
     pub fn build(cloud: &PointCloud) -> Result<Self, SpatialError> {
+        Self::build_observed(cloud, |_, _| {})
+    }
+
+    /// The same, reporting progress after each internal phase.
+    ///
+    /// `progress` receives `(completed, total)` in phases: the
+    /// coordinates are extracted, then the tree is built. Two steps is all
+    /// the resolution there is — `kiddo` builds the tree in one opaque
+    /// call, and on a large cloud that call is the larger half of the
+    /// wait. Pretending otherwise would mean a progress bar that lies.
+    pub fn build_observed<F>(cloud: &PointCloud, mut progress: F) -> Result<Self, SpatialError>
+    where
+        F: FnMut(usize, usize),
+    {
+        /// Coordinates, then construction.
+        const PHASES: usize = 2;
+
         let entries: Vec<[f64; 3]> = (0..cloud.len())
             .map(|i| {
                 let p = cloud.point(i);
                 [p.x, p.y, p.z]
             })
             .collect();
+        progress(1, PHASES);
+
         let tree = ImmutableKdTree::new_from_slice(&entries)
             .map_err(|e| SpatialError::Construction(e.to_string()))?;
+        progress(2, PHASES);
+
         Ok(Self {
             tree,
             len: cloud.len(),

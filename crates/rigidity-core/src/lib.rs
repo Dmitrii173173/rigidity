@@ -22,3 +22,11 @@ pub mod voxel;
 
 pub use cloud::{Attribute, AttributeData, CloudError, PointCloud};
 pub use neighbors::{BruteForce, Neighbor, NeighborSearch};
+
+/// The linear algebra the public interface is written in.
+///
+/// `Vector3<f64>`, `Vector6<f64>` and `Matrix6<f64>` appear in almost every
+/// signature here, so a downstream crate that resolves a different
+/// `nalgebra` gets type errors that read as nonsense. Re-exporting removes
+/// the possibility: `use rigidity_core::nalgebra` cannot drift.
+pub use nalgebra;

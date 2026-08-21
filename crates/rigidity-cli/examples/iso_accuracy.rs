@@ -13,6 +13,7 @@
 //! index construction. Otherwise a configuration that shifts work into
 //! preparation would look free.
 
+use std::ops::ControlFlow;
 use std::time::Instant;
 
 use nalgebra::Vector6;
@@ -91,6 +92,7 @@ fn run(label: &str, voxel: Option<f64>, scene: &Scene, truth: &Se3) -> Outcome {
                     *slot = Some(elapsed);
                 }
             }
+            ControlFlow::Continue(())
         },
     );
     let _ = result;

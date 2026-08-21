@@ -32,10 +32,39 @@ pub fn estimate_normals<S>(cloud: &PointCloud, search: &S, k: usize) -> Vec<Vect
 where
     S: NeighborSearch + Sync,
 {
+    estimate_normals_observed(cloud, search, k, |_, _| {})
+}
+
+/// How many points are estimated between two progress reports.
+///
+/// The chunk exists only for reporting. Points are independent, so
+/// splitting the range changes neither the values nor their order — the
+/// only cost is one rayon barrier per chunk, which at this size is lost in
+/// the noise of a single neighbourhood query.
+const PROGRESS_CHUNK: usize = 16_384;
+
+/// The same, reporting progress in points.
+///
+/// `progress` receives `(completed, total)` after each chunk, always
+/// increasing, always from the calling thread. A cloud shorter than one
+/// chunk reports once, an empty cloud not at all.
+pub fn estimate_normals_observed<S, F>(
+    cloud: &PointCloud,
+    search: &S,
+    k: usize,
+    mut progress: F,
+) -> Vec<Vector3<f64>>
+where
+    S: NeighborSearch + Sync,
+    F: FnMut(usize, usize),
+{
     assert!(k >= 3, "normal estimation needs at least three neighbours");
-    (0..cloud.len())
-        .into_par_iter()
-        .map(|index| {
+    let count = cloud.len();
+    let mut normals: Vec<Vector3<f64>> = Vec::with_capacity(count);
+    let mut done = 0;
+    while done < count {
+        let end = (done + PROGRESS_CHUNK).min(count);
+        normals.par_extend((done..end).into_par_iter().map(|index| {
             let query = cloud.point(index);
             let neighbours = search.knn(&query, k);
             if neighbours.len() < 3 {
@@ -75,6 +104,9 @@ where
             } else {
                 normal
             }
-        })
-        .collect()
+        }));
+        done = end;
+        progress(done, count);
+    }
+    normals
 }

@@ -42,6 +42,7 @@ criterion = "0.8"
 rigidity-core   = { path = "crates/rigidity-core", version = "0.1.0" }
 rigidity-scenes = { path = "crates/rigidity-scenes", version = "0.1.0" }
 rigidity-io      = { path = "crates/rigidity-io", version = "0.1.0" }
+rigidity-pipeline = { path = "crates/rigidity-pipeline", version = "0.1.0" }
 rigidity-spatial = { path = "crates/rigidity-spatial", version = "0.1.0" }
 rigidity-viz     = { path = "crates/rigidity-viz", version = "0.1.0" }
 

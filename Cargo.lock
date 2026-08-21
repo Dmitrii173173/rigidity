@@ -9676,6 +9676,7 @@ dependencies = [
  "rayon",
  "rigidity-core",
  "rigidity-io",
+ "rigidity-pipeline",
  "rigidity-scenes",
  "rigidity-spatial",
  "rigidity-viz",
@@ -9700,6 +9701,16 @@ dependencies = [
  "las",
  "nalgebra",
  "rigidity-core",
+ "thiserror 2.0.20",
+]
+
+[[package]]
+name = "rigidity-pipeline"
+version = "0.1.0"
+dependencies = [
+ "rigidity-core",
+ "rigidity-io",
+ "rigidity-spatial",
  "thiserror 2.0.20",
 ]
 

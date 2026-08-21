@@ -20,6 +20,7 @@ path = "src/main.rs"
 [dependencies]
 rigidity-core.workspace   = true
 rigidity-io.workspace     = true
+rigidity-pipeline.workspace = true
 rigidity-scenes.workspace  = true
 rigidity-spatial.workspace = true
 nalgebra.workspace         = true

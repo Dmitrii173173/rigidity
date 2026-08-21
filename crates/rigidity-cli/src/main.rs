@@ -3,20 +3,19 @@
 //! Three actions: build a synthetic scene, assess the conditioning of a
 //! single cloud, and register two clouds with an observability report.
 
-use std::path::{Path, PathBuf};
+use std::error::Error;
+use std::path::PathBuf;
 use std::process::ExitCode;
 
 use clap::{Parser, Subcommand, ValueEnum};
-use nalgebra::Vector3;
-use rigidity_core::icp::{IcpConfig, Kernel, register, surface};
 use rigidity_core::lie::Se3;
-use rigidity_core::normals::estimate_normals;
-use rigidity_core::observability::{Analysis, Correspondence, ObservabilityCriteria, analyse};
-use rigidity_core::voxel::voxel_downsample;
-use rigidity_core::{NeighborSearch, PointCloud};
-use rigidity_io::{read_ply, write_ply};
+use rigidity_core::observability::Analysis;
+use rigidity_io::write_ply;
+use rigidity_pipeline::{
+    PrepareParams, RegisterParams, ReportParams, analyse_cloud, analyse_registration, prepare,
+    register_pair, transform_cloud,
+};
 use rigidity_scenes::{Scene, SceneKind, SceneParams};
-use rigidity_spatial::KdTree;
 
 /// Conditioning of point-cloud registration.
 ///
@@ -138,38 +137,20 @@ impl From<Kind> for SceneKind {
     }
 }
 
-struct Prepared {
-    cloud: PointCloud,
-    normals: Vec<Vector3<f64>>,
-    tree: KdTree,
-}
-
-fn prepare(path: &Path, common: &Common) -> Result<Prepared, String> {
-    let raw = read_ply(path).map_err(|e| format!("{}: {e}", path.display()))?;
-    let cloud = if common.voxel > 0.0 {
-        voxel_downsample(&raw, common.voxel).map_err(|e| e.to_string())?
-    } else {
-        raw
-    };
-    if cloud.is_empty() {
-        return Err(format!(
-            "{}: no points left after downsampling",
-            path.display()
-        ));
+impl Common {
+    fn prepare(&self) -> PrepareParams {
+        PrepareParams {
+            voxel: self.voxel,
+            neighbours: self.neighbours,
+        }
     }
-    let tree = KdTree::build(&cloud).map_err(|e| e.to_string())?;
-    let normals = estimate_normals(&cloud, &tree, common.neighbours);
-    Ok(Prepared {
-        cloud,
-        normals,
-        tree,
-    })
-}
 
-fn criteria(common: &Common) -> ObservabilityCriteria {
-    ObservabilityCriteria {
-        noise_sigma: common.noise * common.calibration,
-        tolerance: common.tolerance,
+    fn report(&self) -> ReportParams {
+        ReportParams {
+            noise: self.noise,
+            tolerance: self.tolerance,
+            calibration: self.calibration,
+        }
     }
 }
 
@@ -177,10 +158,10 @@ fn print_report(analysis: &Analysis, common: &Common) {
     if common.calibration != 1.0 {
         println!("empirical correction: ×{:.0}\n", common.calibration);
     }
-    print!("{}", analysis.describe(&criteria(common)));
+    print!("{}", analysis.describe(&common.report().criteria()));
 }
 
-fn run() -> Result<(), String> {
+fn run() -> Result<(), Box<dyn Error>> {
     match Cli::parse().command {
         Command::Scene {
             kind,
@@ -213,18 +194,14 @@ fn run() -> Result<(), String> {
             let written = if motion == Se3::identity() {
                 scene.cloud.clone()
             } else {
-                let mut moved = PointCloud::with_capacity(scene.len());
-                for index in 0..scene.len() {
-                    moved.push(motion.transform_point(&scene.cloud.point(index)));
-                }
                 println!(
                     "scene translated by [{:+.4}, {:+.4}, {:+.4}] m and rotated by \
 [{:+.3}, {:+.3}, {:+.3}]°",
                     offset[0], offset[1], offset[2], angles[0], angles[1], angles[2]
                 );
-                moved
+                transform_cloud(&scene.cloud, &motion)
             };
-            write_ply(&written, &out).map_err(|e| e.to_string())?;
+            write_ply(&written, &out)?;
             println!("scene \"{}\": {} points", scene.kind.name(), scene.len());
             println!(
                 "unobservable degrees of freedom by construction: {}",
@@ -234,17 +211,9 @@ fn run() -> Result<(), String> {
         }
 
         Command::Analyse { cloud, common } => {
-            let prepared = prepare(&cloud, &common)?;
-            println!("points after downsampling: {}\n", prepared.cloud.len());
-            let analysis = analyse(prepared.cloud.len(), Kernel::Squared, |index| {
-                Some(Correspondence {
-                    point: prepared.cloud.point(index),
-                    normal: prepared.normals[index],
-                    residual: 0.0,
-                })
-            })
-            .ok_or("the cloud is empty")?;
-            print_report(&analysis, &common);
+            let prepared = prepare(&cloud, &common.prepare())?;
+            println!("points after downsampling: {}\n", prepared.len());
+            print_report(&analyse_cloud(&prepared)?, &common);
         }
 
         Command::Register {
@@ -255,28 +224,20 @@ fn run() -> Result<(), String> {
             huber,
             out,
         } => {
-            let moving = prepare(&source, &common)?;
-            let fixed = prepare(&target, &common)?;
+            let moving = prepare(&source, &common.prepare())?;
+            let fixed = prepare(&target, &common.prepare())?;
             println!(
                 "source {} points, target {} points\n",
-                moving.cloud.len(),
-                fixed.cloud.len()
+                moving.len(),
+                fixed.len()
             );
 
-            let kernel = Kernel::Huber(huber);
-            let config = IcpConfig {
-                kernel,
-                max_correspondence_distance: max_distance,
-                min_normal_cosine: 0.0,
-                ..IcpConfig::default()
+            let params = RegisterParams {
+                max_distance,
+                huber,
+                ..RegisterParams::default()
             };
-            let result = register(
-                &surface(&moving.cloud, &moving.normals),
-                &surface(&fixed.cloud, &fixed.normals),
-                &fixed.tree,
-                Se3::identity(),
-                &config,
-            );
+            let result = register_pair(&moving, &fixed, &params);
 
             let translation = result.pose.translation();
             let rotation = result.pose.rotation().log();
@@ -295,30 +256,11 @@ fn run() -> Result<(), String> {
                 result.rmse, result.correspondences, result.iterations, result.converged
             );
 
-            let analysis = analyse(moving.cloud.len(), kernel, |index| {
-                let point = result.pose.transform_point(&moving.cloud.point(index));
-                let mut found = Vec::with_capacity(1);
-                fixed.tree.knn_into(&point, 1, &mut found);
-                let nearest = found.first()?;
-                if nearest.distance_squared > max_distance * max_distance {
-                    return None;
-                }
-                let matched = nearest.index as usize;
-                Some(Correspondence {
-                    point,
-                    normal: fixed.normals[matched],
-                    residual: fixed.normals[matched].dot(&(point - fixed.cloud.point(matched))),
-                })
-            })
-            .ok_or("no correspondences left")?;
+            let analysis = analyse_registration(&moving, &fixed, &result.pose, &params)?;
             print_report(&analysis, &common);
 
             if let Some(path) = out {
-                let mut moved = PointCloud::with_capacity(moving.cloud.len());
-                for index in 0..moving.cloud.len() {
-                    moved.push(result.pose.transform_point(&moving.cloud.point(index)));
-                }
-                write_ply(&moved, &path).map_err(|e| e.to_string())?;
+                write_ply(&transform_cloud(&moving.cloud, &result.pose), &path)?;
                 println!("\ntransformed source written: {}", path.display());
             }
         }

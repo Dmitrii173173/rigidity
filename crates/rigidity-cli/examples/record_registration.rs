@@ -12,6 +12,7 @@
 //! what the spectrum does meanwhile: if a direction is unobservable, its
 //! spread does not fall along with the others.
 
+use std::ops::ControlFlow;
 use std::path::PathBuf;
 
 use nalgebra::{Vector3, Vector6};
@@ -84,7 +85,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let _ = recorder.log_cloud("scene/source", &moved, [235, 104, 52]);
         let _ = recorder.log_pose("scene/pose", &report.pose);
 
-        if let Some(analysis) = analyse(source.len(), kernel, |index| {
+        let conditioning = analyse(source.len(), kernel, |index| {
             let point = report.pose.transform_point(&source.point(index));
             let mut found = Vec::with_capacity(1);
             target_tree.knn_into(&point, 1, &mut found);
@@ -98,9 +99,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 normal: target_normals[matched],
                 residual: target_normals[matched].dot(&(point - scene.cloud.point(matched))),
             })
-        }) {
+        });
+        if let Some(analysis) = conditioning {
             let _ = recorder.log_conditioning("conditioning", &analysis.conditioning, &criteria);
         }
+        ControlFlow::Continue(())
     };
 
     let result = register_observed(

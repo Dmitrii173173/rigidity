@@ -167,6 +167,7 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 | `rigidity-spatial` | kd-tree over `kiddo` |
 | `rigidity-scenes` | synthetic scenes with analytically known null spaces |
 | `rigidity-io` | PLY (own parser), LAS, CSV |
+| `rigidity-pipeline` | file → surface → registration → report; the sequence every front end must run in the same order |
 | `rigidity-viz` | Rerun logging, behind the `rerun` feature |
 | `rigidity-cli` | the binary |
 

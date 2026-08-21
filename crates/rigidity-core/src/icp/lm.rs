@@ -1,5 +1,7 @@
 //! The point-to-plane ICP solver: Levenberg–Marquardt over IRLS.
 
+use std::ops::ControlFlow;
+
 use nalgebra::{Matrix6, Vector3, Vector6};
 use rayon::prelude::*;
 
@@ -262,7 +264,9 @@ pub fn register<S>(
 where
     S: NeighborSearch + Sync,
 {
-    register_observed(source, target, search, initial, config, |_| {})
+    register_observed(source, target, search, initial, config, |_| {
+        ControlFlow::Continue(())
+    })
 }
 
 /// The same, with an observer called after every accepted iteration.
@@ -271,6 +275,20 @@ where
 /// accuracy" rather than "time to one's own stopping criterion" requires
 /// seeing the intermediate poses. Comparing stopping criteria measures a
 /// difference in settings, not in code.
+///
+/// # Stopping early
+///
+/// Returning [`ControlFlow::Break`] ends the run. The result then carries
+/// the last accepted pose with `converged: false`: an interrupted run is
+/// not a converged one, and nothing in the result may suggest otherwise.
+///
+/// The observer only sees *accepted* iterations, so a caller watching a
+/// cancellation flag is answered after the next accepted step rather than
+/// at once — a rejected step raises the damping and retries without
+/// reporting. The delay is a few assemblies of the system and is bounded
+/// by `max_iterations`. Making it immediate would mean reporting rejected
+/// steps too, which would change what an `IterationReport` means for every
+/// existing consumer.
 pub fn register_observed<S, F>(
     source: &Surface<'_>,
     target: &Surface<'_>,
@@ -281,7 +299,7 @@ pub fn register_observed<S, F>(
 ) -> IcpResult
 where
     S: NeighborSearch + Sync,
-    F: FnMut(&IterationReport),
+    F: FnMut(&IterationReport) -> ControlFlow<()>,
 {
     assert_eq!(
         source.cloud.len(),
@@ -318,7 +336,7 @@ where
             pose = candidate_pose;
             current = candidate;
             damping = (damping * 0.1).max(1e-12);
-            observer(&IterationReport {
+            let flow = observer(&IterationReport {
                 iteration: iterations,
                 pose,
                 rmse: if current.count == 0 {
@@ -329,12 +347,17 @@ where
                 correspondences: current.count,
             });
 
+            // Convergence is checked first: it is a fact about the step
+            // that stays true whether or not the caller asked to stop.
             let translation_step = step.fixed_rows::<3>(0).norm();
             let rotation_step = step.fixed_rows::<3>(3).norm();
             if translation_step < config.translation_tolerance
                 && rotation_step < config.rotation_tolerance
             {
                 converged = true;
+                break;
+            }
+            if flow.is_break() {
                 break;
             }
         } else {
