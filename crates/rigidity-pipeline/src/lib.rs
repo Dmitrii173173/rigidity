@@ -197,7 +197,7 @@ where
         total: 1,
     });
 
-    prepare_cloud_observed(raw, params, observer).map_err(|source| PipelineError::Prepare {
+    prepare_cloud_observed(&raw, params, observer).map_err(|source| PipelineError::Prepare {
         path: path.to_path_buf(),
         source: Box::new(source),
     })
@@ -208,13 +208,22 @@ where
 /// The viewer needs it twice over: scenes are generated rather than read,
 /// and changing the voxel size must not re-read a file that has not
 /// changed.
-pub fn prepare_cloud(cloud: PointCloud, params: &PrepareParams) -> Result<Prepared, PipelineError> {
+pub fn prepare_cloud(
+    cloud: &PointCloud,
+    params: &PrepareParams,
+) -> Result<Prepared, PipelineError> {
     prepare_cloud_observed(cloud, params, |_| {})
 }
 
 /// The same, reporting progress.
+///
+/// The cloud is borrowed rather than consumed: the caller usually holds it
+/// behind a handle it cannot give up — a viewer is still drawing it — and
+/// the common path never needs to own it anyway, since downsampling reads
+/// the input and writes a new cloud. Only a disabled voxel grid copies, and
+/// that is a copy the old signature merely moved somewhere else.
 pub fn prepare_cloud_observed<F>(
-    cloud: PointCloud,
+    cloud: &PointCloud,
     params: &PrepareParams,
     mut observer: F,
 ) -> Result<Prepared, PipelineError>
@@ -222,7 +231,7 @@ where
     F: FnMut(Progress),
 {
     let cloud = if params.voxel > 0.0 {
-        voxel_downsample_observed(&cloud, params.voxel, |done, total| {
+        voxel_downsample_observed(cloud, params.voxel, |done, total| {
             observer(Progress {
                 stage: Stage::Downsampling,
                 done,
@@ -230,7 +239,7 @@ where
             })
         })?
     } else {
-        cloud
+        cloud.clone()
     };
     if cloud.is_empty() {
         return Err(PipelineError::EmptyAfterDownsampling);
