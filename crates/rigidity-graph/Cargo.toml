@@ -20,6 +20,11 @@ thiserror.workspace     = true
 
 [dev-dependencies]
 approx.workspace = true
+# The examples only: a survey against real data has to read files and run
+# the pipeline, and neither belongs in what this crate makes anyone depend
+# on. Nothing in `src/` may use these.
+rigidity-io.workspace       = true
+rigidity-pipeline.workspace = true
 
 [lints]
 workspace = true
