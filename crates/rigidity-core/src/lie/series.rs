@@ -14,6 +14,20 @@
 /// Where the Taylor branch takes over.
 pub(crate) const THETA_SMALL: f64 = 1e-2;
 
+/// The same, for the two coefficients of the `SE(3)` Jacobian's `Q` block.
+///
+/// Fifty times larger, and it has to be. The coefficients above lead with
+/// `θ²`; these lead with `θ⁴` and `θ⁵`, so their trigonometric forms
+/// subtract quantities that agree to four or five more digits before the
+/// answer appears. At θ = 1e-2 the third coefficient's numerator is 1.7e-12
+/// built out of terms of size 3e-2 — eleven digits gone, and the branch
+/// that is supposed to be the accurate one is the worse of the two.
+///
+/// At 0.5 both are around 1e-12 relative, which is the same crossover
+/// quality `THETA_SMALL` buys for the others; `q_branches_agree_at_threshold`
+/// is what holds that claim up.
+pub(crate) const THETA_SMALL_Q: f64 = 0.5;
+
 /// Width of the neighbourhood of θ = π in which `log` switches to
 /// recovering the axis from the symmetric part of the matrix.
 ///
@@ -59,6 +73,30 @@ pub(crate) fn inverse_left_jacobian_coef(theta: f64) -> f64 {
     }
 }
 
+/// `(θ² + 2 cos θ − 2) / (2 θ⁴)`.
+///
+/// The second coefficient of Barfoot's `Q`, multiplying
+/// `φ^φ^ρ^ + ρ^φ^φ^ − 3 φ^ρ^φ^`.
+pub(crate) fn q_second_coef(theta: f64) -> f64 {
+    if theta < THETA_SMALL_Q {
+        taylor_q_second_coef(theta)
+    } else {
+        trig_q_second_coef(theta)
+    }
+}
+
+/// `(2θ − 3 sin θ + θ cos θ) / (2 θ⁵)`.
+///
+/// The third coefficient of Barfoot's `Q`, multiplying
+/// `φ^ρ^φ^φ^ + φ^φ^ρ^φ^`.
+pub(crate) fn q_third_coef(theta: f64) -> f64 {
+    if theta < THETA_SMALL_Q {
+        taylor_q_third_coef(theta)
+    } else {
+        trig_q_third_coef(theta)
+    }
+}
+
 /// `θ / sin θ`, the factor appearing in the `SO(3)` logarithm.
 pub(crate) fn theta_over_sin_theta(theta: f64) -> f64 {
     if theta < THETA_SMALL {
@@ -95,6 +133,20 @@ pub(crate) fn taylor_theta_over_sin_theta(theta: f64) -> f64 {
     1.0 + t2 / 6.0 + 7.0 * t2 * t2 / 360.0
 }
 
+/// Five terms rather than three, because the branch runs out to θ = 0.5
+/// and three would leave 1e-9 there.
+pub(crate) fn taylor_q_second_coef(theta: f64) -> f64 {
+    let t2 = theta * theta;
+    1.0 / 24.0 - t2 / 720.0 + t2 * t2 / 40_320.0 - t2 * t2 * t2 / 3_628_800.0
+        + t2 * t2 * t2 * t2 / 479_001_600.0
+}
+
+pub(crate) fn taylor_q_third_coef(theta: f64) -> f64 {
+    let t2 = theta * theta;
+    1.0 / 120.0 - t2 / 2_520.0 + t2 * t2 / 120_960.0 - t2 * t2 * t2 / 9_979_200.0
+        + t2 * t2 * t2 * t2 / 1_245_404_160.0
+}
+
 // --- trigonometric forms ----------------------------------------------------
 
 /// Written through `1 − cos θ = 2 sin²(θ/2)`. The identity removes the
@@ -117,6 +169,20 @@ pub(crate) fn trig_one_minus_cos_over_theta_sq(theta: f64) -> f64 {
 /// the subtracted term goes smoothly to zero.
 pub(crate) fn trig_inverse_left_jacobian_coef(theta: f64) -> f64 {
     1.0 / (theta * theta) - 1.0 / (2.0 * theta * (0.5 * theta).tan())
+}
+
+/// Written through `2 − 2 cos θ = 4 sin²(θ/2)`, for the same reason
+/// `trig_one_minus_cos_over_theta_sq` is: the direct `2.0 * theta.cos() -
+/// 2.0` loses its digits exactly where this coefficient is used.
+pub(crate) fn trig_q_second_coef(theta: f64) -> f64 {
+    let half_sin = (0.5 * theta).sin();
+    let t2 = theta * theta;
+    (t2 - 4.0 * half_sin * half_sin) / (2.0 * t2 * t2)
+}
+
+pub(crate) fn trig_q_third_coef(theta: f64) -> f64 {
+    let t2 = theta * theta;
+    (2.0 * theta - 3.0 * theta.sin() + theta * theta.cos()) / (2.0 * t2 * t2 * theta)
 }
 
 #[cfg(test)]

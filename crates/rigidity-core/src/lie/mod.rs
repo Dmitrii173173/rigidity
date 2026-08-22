@@ -17,6 +17,9 @@ mod series;
 mod so3;
 
 pub use align::absolute_orientation;
-pub use jacobian::{inverse_left_jacobian_so3, left_jacobian_so3};
+pub use jacobian::{
+    inverse_left_jacobian_se3, inverse_left_jacobian_so3, inverse_right_jacobian_se3,
+    left_jacobian_se3, left_jacobian_so3, right_jacobian_se3,
+};
 pub use se3::{Se3, hat_se3, vee_se3};
 pub use so3::{So3, hat, vee};
