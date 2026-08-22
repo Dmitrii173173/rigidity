@@ -62,7 +62,7 @@ enum Command {
     /// It answers the question: if anything were registered against this
     /// surface, which degrees of freedom would end up determined?
     Analyse {
-        /// The file: PLY, LAS, LAZ, E57, PCD or CSV.
+        /// The file: PLY, LAS, LAZ, E57, PCD, TXT or CSV.
         cloud: PathBuf,
         #[command(flatten)]
         common: Common,

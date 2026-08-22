@@ -14,12 +14,14 @@ pub mod e57_format;
 pub mod las_format;
 pub mod pcd;
 pub mod ply;
+pub mod text;
 
 pub use csv::{read_csv, read_poses};
 pub use e57_format::{read_e57, write_e57};
 pub use las_format::{read_las, write_las};
 pub use pcd::{read_pcd, write_pcd};
 pub use ply::{read_ply, write_ply};
+pub use text::{read_text, write_text};
 
 use std::path::Path;
 
@@ -36,7 +38,7 @@ pub fn read(path: &Path) -> Result<PointCloud, IoError> {
         "las" | "laz" => read_las(path),
         "e57" => read_e57(path),
         "pcd" => read_pcd(path),
-        "csv" | "txt" => read_csv(path),
+        "csv" | "txt" => read_text(path),
         other => Err(IoError::UnknownFormat(other.to_owned())),
     }
 }
@@ -48,6 +50,7 @@ pub fn write(cloud: &PointCloud, path: &Path) -> Result<(), IoError> {
         "las" | "laz" => write_las(cloud, path),
         "e57" => write_e57(cloud, path),
         "pcd" => write_pcd(cloud, path),
+        "csv" | "txt" => write_text(cloud, path),
         other => Err(IoError::UnknownFormat(other.to_owned())),
     }
 }
@@ -56,7 +59,12 @@ pub fn write(cloud: &PointCloud, path: &Path) -> Result<(), IoError> {
 pub const READABLE: &[&str] = &["ply", "las", "laz", "e57", "pcd", "csv", "txt"];
 
 /// Every extension `write` understands.
-pub const WRITABLE: &[&str] = &["ply", "las", "laz", "e57", "pcd"];
+///
+/// `csv` joined `txt` rather than being left behind it: the two go through
+/// one writer that differs only in the separator, and a list that offered
+/// one and refused the other would be describing this crate's history
+/// rather than its behaviour.
+pub const WRITABLE: &[&str] = &["ply", "las", "laz", "e57", "pcd", "txt", "csv"];
 
 fn extension(path: &Path) -> String {
     path.extension()

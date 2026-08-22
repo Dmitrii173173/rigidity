@@ -193,7 +193,7 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 | [`rigidity-core`](https://docs.rs/rigidity-core) | Lie groups, ICP, TSQR, conditioning. Depends on `nalgebra`, `rayon`, `thiserror` — and nothing else, enforced in CI |
 | [`rigidity-spatial`](https://docs.rs/rigidity-spatial) | kd-tree over `kiddo` |
 | [`rigidity-scenes`](https://docs.rs/rigidity-scenes) | synthetic scenes with analytically known null spaces |
-| [`rigidity-io`](https://docs.rs/rigidity-io) | PLY and PCD (own parsers), LAS/LAZ, E57, CSV — read and write |
+| [`rigidity-io`](https://docs.rs/rigidity-io) | PLY and PCD (own parsers), LAS/LAZ, E57, delimited text (`.txt`, `.csv`) — read and write |
 | [`rigidity-pipeline`](https://docs.rs/rigidity-pipeline) | file → surface → registration → report; the sequence every front end must run in the same order |
 | [`rigidity-viz`](https://docs.rs/rigidity-viz) | Rerun logging, behind the `rerun` feature |
 | [`rigidity-cli`](https://crates.io/crates/rigidity-cli) | the binary |

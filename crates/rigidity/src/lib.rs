@@ -24,7 +24,7 @@
 //! | feature | pulls in | for |
 //! |---|---|---|
 //! | `pipeline` *(default)* | [`pipeline`], [`io`], [`spatial`] | file → surface → registration → report |
-//! | `io` | [`io`] | PLY, PCD, LAS/LAZ, E57, CSV |
+//! | `io` | [`io`] | PLY, PCD, LAS/LAZ, E57, TXT/CSV |
 //! | `spatial` | [`spatial`] | the kd-tree |
 //! | `scenes` | [`scenes`] | synthetic scenes with known null spaces |
 //!
