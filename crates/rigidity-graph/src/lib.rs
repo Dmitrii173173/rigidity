@@ -43,7 +43,7 @@
 //! milliseconds; sparse storage waits until a survey asks for it.
 
 use rigidity_core::lie::{Se3, inverse_right_jacobian_se3};
-use rigidity_core::nalgebra::{DMatrix, DVector, Matrix6, Vector6};
+use rigidity_core::nalgebra::{DMatrix, DVector, Matrix3, Matrix6, Vector3, Vector6};
 use rigidity_core::observability::{Conditioning, Observability, ObservabilityCriteria};
 
 /// One measured relative pose, and how much of it to believe.
@@ -518,4 +518,203 @@ pub fn weighted_information(
     }
 
     to_normalised.transpose() * normalised * to_normalised
+}
+
+/// What one edge is doing after a solve.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct EdgeReport {
+    /// Its position in [`PoseGraph::edges`].
+    pub edge: usize,
+    /// How far apart the two ends are, metres.
+    pub translation: f64,
+    /// And by what angle, radians.
+    pub rotation: f64,
+    /// `rᵀΛr`: how hard this edge is pulling against the rest.
+    ///
+    /// The pair of numbers is the diagnosis, not either alone. An edge that
+    /// disagrees by half a metre and costs nothing is an edge whose weight
+    /// along that direction was removed — it could not see along there, the
+    /// survey settled by some other path, and nothing is wrong. An edge that
+    /// disagrees by a millimetre and costs a great deal is a measurement in
+    /// a fight it should be winning.
+    pub cost: f64,
+}
+
+/// How well the survey determines one station.
+///
+/// The covariance is reported and the readings are derived from it, rather
+/// than the other way round, because the frame it is in is the caller's
+/// business. A graph built in coordinates conjugated onto the survey — which
+/// is what anything georeferenced has to do — gets marginals in those
+/// coordinates, and only the caller knows how to carry them back.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct NodeReport {
+    /// Its position in [`PoseGraph::poses`].
+    pub node: usize,
+    /// The marginal covariance of this station's pose, `ξ = [ρ; φ]`,
+    /// relative to the anchor.
+    pub covariance: Matrix6<f64>,
+    /// Whether the survey determines this station at all.
+    ///
+    /// False when some direction of it lies in the null space of the normal
+    /// equations — nothing joins it to the anchor, or nothing measures one
+    /// of its degrees of freedom. The covariance is then meaningless rather
+    /// than large, and the readings below say so by returning infinity.
+    pub determined: bool,
+}
+
+impl NodeReport {
+    /// The 3×3 marginal covariance of position.
+    pub fn position_covariance(&self) -> Matrix3<f64> {
+        if !self.determined {
+            return Matrix3::from_diagonal_element(f64::INFINITY);
+        }
+        self.covariance.fixed_view::<3, 3>(0, 0).into()
+    }
+
+    /// Standard deviation along the worst-determined direction of position,
+    /// metres, and the direction itself.
+    pub fn position(&self) -> (f64, Vector3<f64>) {
+        if !self.determined {
+            return (f64::INFINITY, Vector3::new(1.0, 0.0, 0.0));
+        }
+        let eigen = self.position_covariance().symmetric_eigen();
+        let (index, value) = eigen.eigenvalues.iter().enumerate().fold(
+            (0usize, f64::NEG_INFINITY),
+            |best, (index, value)| {
+                if *value > best.1 {
+                    (index, *value)
+                } else {
+                    best
+                }
+            },
+        );
+        (
+            value.max(0.0).sqrt(),
+            eigen.eigenvectors.column(index).into(),
+        )
+    }
+
+    /// Standard deviation about the worst-determined axis, radians.
+    pub fn orientation(&self) -> f64 {
+        if !self.determined {
+            return f64::INFINITY;
+        }
+        self.covariance
+            .fixed_view::<3, 3>(3, 3)
+            .symmetric_eigen()
+            .eigenvalues
+            .iter()
+            .fold(0.0f64, |best, value| best.max(*value))
+            .max(0.0)
+            .sqrt()
+    }
+}
+
+/// The survey, seen whole.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Diagnosis {
+    /// One per edge, in graph order.
+    pub edges: Vec<EdgeReport>,
+    /// One per node, in graph order. The anchor is absent: it is where the
+    /// survey is measured *from*, so its spread is zero by definition and a
+    /// row saying so would be a row about the definition.
+    pub nodes: Vec<NodeReport>,
+}
+
+impl PoseGraph {
+    /// What the survey looks like from above, at the poses it currently has.
+    ///
+    /// Node spreads come from the pseudo-inverse of `H = ΣJᵀΛJ`, whose
+    /// diagonal blocks are each station's marginal covariance relative to
+    /// the anchor. Pseudo- rather than plain inverse, and that is the whole
+    /// point: a survey with a direction nothing constrains has a singular
+    /// `H`, which is not an error to be damped away but the finding. A
+    /// damped inverse would answer "this station is known to a centimetre"
+    /// where the truth is that nothing in the survey knows where it is.
+    ///
+    /// The null space is left out of the sum rather than inverted into
+    /// infinities. Building `V·diag(∞)·Vᵀ` and reading blocks out of it does
+    /// not give infinity where it should — an eigenvector component that is
+    /// exactly zero turns `∞·0` into `NaN`, and the `NaN`s spread into the
+    /// blocks of stations the survey determines perfectly well. Which
+    /// coordinates are unconstrained is asked separately, of how much of
+    /// each lies in the null space.
+    ///
+    /// The cutoff is relative, at `1e-12` of the largest eigenvalue — the
+    /// same shape of judgement the conditioning report makes about a single
+    /// registration, one level up.
+    pub fn diagnose(&self, anchor: usize) -> Result<Diagnosis, GraphError> {
+        let nodes = self.poses.len();
+        if anchor >= nodes {
+            return Err(GraphError::NoSuchAnchor { anchor, nodes });
+        }
+
+        let edges = self
+            .edges
+            .iter()
+            .enumerate()
+            .map(|(index, edge)| {
+                let residual = self.residual(edge);
+                EdgeReport {
+                    edge: index,
+                    translation: residual.fixed_rows::<3>(0).norm(),
+                    rotation: residual.fixed_rows::<3>(3).norm(),
+                    cost: (residual.transpose() * edge.information * residual)[(0, 0)],
+                }
+            })
+            .collect();
+
+        let (hessian, _) = self.normal_equations(anchor);
+        let width = hessian.nrows();
+        let eigen = hessian.symmetric_eigen();
+        let largest = eigen
+            .eigenvalues
+            .iter()
+            .fold(0.0f64, |best, value| best.max(*value));
+        let cutoff = largest * 1e-12;
+
+        let mut covariance = DMatrix::zeros(width, width);
+        // How much of each coordinate lies in the null space. Anything
+        // above a rounding error there means the survey does not determine
+        // that coordinate at all.
+        let mut unconstrained: DVector<f64> = DVector::zeros(width);
+        for (index, value) in eigen.eigenvalues.iter().enumerate() {
+            let vector = eigen.eigenvectors.column(index);
+            if *value > cutoff && largest > 0.0 {
+                covariance += (vector * vector.transpose()) / *value;
+            } else {
+                for row in 0..width {
+                    unconstrained[row] += vector[row] * vector[row];
+                }
+            }
+        }
+
+        let mut reports = Vec::with_capacity(nodes.saturating_sub(1));
+        for node in 0..nodes {
+            if node == anchor {
+                continue;
+            }
+            let row = 6 * if node < anchor { node } else { node - 1 };
+            let determined = largest > 0.0 && (0..6).all(|axis| unconstrained[row + axis] <= 1e-9);
+            let mut block = Matrix6::zeros();
+            if determined {
+                for r in 0..6 {
+                    for c in 0..6 {
+                        block[(r, c)] = covariance[(row + r, row + c)];
+                    }
+                }
+            }
+            reports.push(NodeReport {
+                node,
+                covariance: block,
+                determined,
+            });
+        }
+
+        Ok(Diagnosis {
+            edges,
+            nodes: reports,
+        })
+    }
 }
