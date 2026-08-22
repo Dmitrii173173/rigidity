@@ -2,7 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    # Ветка репозитория называется master. Пока здесь стояло main,
+    # workflow не запускался ни разу — GitHub не показывал ни провала,
+    # ни успеха, а бейдж в README отдавал 404.
+    branches: [master]
   pull_request:
 
 env:
