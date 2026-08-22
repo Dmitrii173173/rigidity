@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-core"
-description = "Ядро: группы Ли, ICP, анализ обусловленности. Без I/O и UI."
+description = "The core: Lie groups, ICP, conditioning analysis. No I/O, no UI."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

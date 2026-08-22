@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-pipeline"
-description = "Сборка ядра, ввода-вывода и индекса в один сценарий: файл → отчёт."
+description = "File to report: the core, the I/O and the index assembled in the one order every front end must follow."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

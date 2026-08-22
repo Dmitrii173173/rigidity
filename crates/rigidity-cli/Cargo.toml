@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-cli"
-description = "Headless CLI: регистрация с отчётом об обусловленности, вывод в JSON/Parquet."
+description = "Headless CLI: registration with a conditioning report, output as JSON or Parquet."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-scenes"
-description = "Генератор синтетических сцен с аналитически известным нуль-пространством."
+description = "Synthetic scenes with analytically known null spaces."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

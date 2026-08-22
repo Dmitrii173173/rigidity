@@ -9688,7 +9688,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "rigidity-core",
  "rigidity-io",
@@ -9699,7 +9699,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-cli"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "criterion",
@@ -9715,7 +9715,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "approx",
  "criterion",
@@ -9727,7 +9727,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-io"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "e57",
  "las",
@@ -9738,7 +9738,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-pipeline"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "rigidity-core",
  "rigidity-io",
@@ -9748,7 +9748,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-scenes"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "nalgebra",
  "rigidity-core",
@@ -9756,7 +9756,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-spatial"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "kiddo",
  "nalgebra",
@@ -9766,7 +9766,7 @@ dependencies = [
 
 [[package]]
 name = "rigidity-viz"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "rerun",
  "rigidity-core",

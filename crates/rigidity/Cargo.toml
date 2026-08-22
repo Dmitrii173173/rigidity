@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity"
-description = "Регистрация облаков точек с отчётом о наблюдаемости шести степеней свободы. Фасад над крейтами rigidity-*."
+description = "Point-cloud registration that reports which degrees of freedom the geometry determined. A facade over the rigidity-* crates."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

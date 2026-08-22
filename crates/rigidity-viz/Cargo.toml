@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-viz"
-description = "Логирование в Rerun для отладки. Единственный крейт, знающий про визуализацию."
+description = "Rerun logging for debugging. The only crate that knows about visualisation."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true

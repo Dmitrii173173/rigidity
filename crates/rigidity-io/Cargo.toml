@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-io"
-description = "Чтение и запись облаков точек: PLY, LAS. Тяжёлые зависимости изолированы здесь."
+description = "Point-cloud reading and writing: PLY, PCD, LAS/LAZ, E57, CSV. The heavy format dependencies are isolated here."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true
