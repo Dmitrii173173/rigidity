@@ -196,4 +196,15 @@ rerun corridor.rrd
 
 ## License
 
-MIT or Apache-2.0, at your option.
+Dual-licensed: **AGPL-3.0-only**, or a commercial licence.
+
+Free under the [AGPL](LICENSE) for students, universities, research,
+personal projects, evaluation and non-profits — and for anything else you
+are willing to publish the source of. Note that in Rust a crate that
+depends on `rigidity-core` is a derivative work, so the AGPL reaches the
+whole binary; running it internally without distributing the result asks
+nothing of you.
+
+Shipping it inside a closed product, or hosting it as a service, needs the
+commercial licence. [`LICENSING.md`](LICENSING.md) has the boundary in a
+table, and the address to write to.

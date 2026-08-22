@@ -8,8 +8,12 @@ edition      = "2024"
 # Совпадает с rust-toolchain.toml. Резолвер v3 учитывает это поле при
 # выборе версий зависимостей: заниженное значение отсекает свежие крейты.
 rust-version = "1.97"
-license      = "MIT OR Apache-2.0"
+# Двойное лицензирование: AGPL-3.0 для всех, коммерческая лицензия для
+# закрытых продуктов. Условия и граница между ними — в LICENSING.md.
+license      = "AGPL-3.0-only"
 readme       = "README.md"
+repository   = "https://github.com/Dmitrii173173/rigidity"
+homepage     = "https://github.com/Dmitrii173173/rigidity"
 keywords     = ["point-cloud", "registration", "icp", "robotics", "slam"]
 categories   = ["science::robotics", "mathematics", "algorithms"]
 
