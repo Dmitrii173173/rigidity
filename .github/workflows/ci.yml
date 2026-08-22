@@ -38,10 +38,18 @@ jobs:
 
       # Битые ссылки в документации видит только rustdoc: ни clippy,
       # ни компилятор о них не сообщают, а на docs.rs они видны всем.
+      #
+      # `scenes` включается явно: фасад описывает в таблице фич все четыре
+      # и ссылается на модули, которых в сборке по умолчанию нет. docs.rs
+      # собирает его с `all-features = true` (см. metadata в его
+      # Cargo.toml), и проверять здесь надо ту же конфигурацию, иначе CI
+      # ругается на ссылку, которая у читателя документации разрешается.
+      # Через `--all-features` не идём: она включила бы `rerun` у
+      # `rigidity-viz` и притащила бы в каждый прогон половину Rerun.
       - name: docs
         env:
           RUSTDOCFLAGS: -D warnings
-        run: cargo doc --workspace --no-deps
+        run: cargo doc --workspace --no-deps --features rigidity/scenes
 
       # Инвариант №4: результат не зависит от числа потоков.
       - name: determinism (1 thread vs 8)
