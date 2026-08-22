@@ -1,3 +1,7 @@
+<img width="1774" height="887" alt="rigitily" src="https://github.com/user-attachments/assets/3d6a9269-1280-43cf-bc15-bfe51469c1af" />
+
+
+
 # rigidity
 
 **Point-cloud registration that tells you which degrees of freedom the geometry
