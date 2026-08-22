@@ -17,6 +17,7 @@ rigidity-spatial  = { workspace = true, optional = true }
 rigidity-io       = { workspace = true, optional = true }
 rigidity-pipeline = { workspace = true, optional = true }
 rigidity-scenes   = { workspace = true, optional = true }
+rigidity-graph    = { workspace = true, optional = true }
 
 [features]
 # Тот путь, по которому приходят почти все: файл на диске → отчёт.
@@ -28,6 +29,7 @@ io       = ["dep:rigidity-io"]
 # реэкспортировать можно только собственную зависимость, а не транзитивную.
 pipeline = ["dep:rigidity-pipeline", "io", "spatial"]
 scenes   = ["dep:rigidity-scenes"]
+graph    = ["dep:rigidity-graph"]
 
 [package.metadata.docs.rs]
 all-features = true

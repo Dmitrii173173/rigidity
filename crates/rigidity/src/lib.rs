@@ -27,6 +27,7 @@
 //! | `io` | [`io`] | PLY, PCD, LAS/LAZ, E57, TXT/CSV |
 //! | `spatial` | [`spatial`] | the kd-tree |
 //! | `scenes` | [`scenes`] | synthetic scenes with known null spaces |
+//! | `graph` | [`graph`] | pose graphs whose edges are weighted by their own conditioning |
 //!
 //! With `default-features = false` only the core remains: `nalgebra`,
 //! `rayon`, `thiserror` and nothing else.
@@ -74,3 +75,7 @@ pub use rigidity_pipeline as pipeline;
 #[cfg(feature = "scenes")]
 #[doc(inline)]
 pub use rigidity_scenes as scenes;
+
+#[cfg(feature = "graph")]
+#[doc(inline)]
+pub use rigidity_graph as graph;

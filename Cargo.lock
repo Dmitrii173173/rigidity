@@ -9691,6 +9691,7 @@ name = "rigidity"
 version = "0.1.1"
 dependencies = [
  "rigidity-core",
+ "rigidity-graph",
  "rigidity-io",
  "rigidity-pipeline",
  "rigidity-scenes",
@@ -9722,6 +9723,15 @@ dependencies = [
  "nalgebra",
  "proptest",
  "rayon",
+ "thiserror 2.0.20",
+]
+
+[[package]]
+name = "rigidity-graph"
+version = "0.1.1"
+dependencies = [
+ "approx",
+ "rigidity-core",
  "thiserror 2.0.20",
 ]
 

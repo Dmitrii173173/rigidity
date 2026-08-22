@@ -46,6 +46,7 @@ proptest  = "1.11"
 criterion = "0.8"
 # внутренние
 rigidity-core   = { path = "crates/rigidity-core", version = "0.1.1" }
+rigidity-graph  = { path = "crates/rigidity-graph", version = "0.1.1" }
 rigidity-scenes = { path = "crates/rigidity-scenes", version = "0.1.1" }
 rigidity-io      = { path = "crates/rigidity-io", version = "0.1.1" }
 rigidity-pipeline = { path = "crates/rigidity-pipeline", version = "0.1.1" }

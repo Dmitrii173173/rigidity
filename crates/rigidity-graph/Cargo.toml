@@ -1,0 +1,25 @@
+[package]
+name        = "rigidity-graph"
+description = "Pose-graph optimisation whose edge weights come from each registration's own conditioning."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+readme.workspace       = true
+repository.workspace   = true
+homepage.workspace     = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+# The whole dependency list, and deliberately: this crate is mathematics
+# over `Se3` and `Conditioning`, and anything it needed beyond them would
+# be a sign it had started to be about something else.
+rigidity-core.workspace = true
+thiserror.workspace     = true
+
+[dev-dependencies]
+approx.workspace = true
+
+[lints]
+workspace = true
