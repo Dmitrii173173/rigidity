@@ -155,6 +155,25 @@ pub struct Report {
     pub cost: [f64; 2],
 }
 
+/// What the edges add up to.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Shape {
+    /// How many nodes at least one edge touches.
+    pub joined: usize,
+    /// How many independent loops the edges form.
+    ///
+    /// Zero is the number that matters. A survey with no closure is a tree:
+    /// its residual is zero at whatever answer it gives, because no two
+    /// measurements are ever compared, and every error made along the way is
+    /// still in the answer.
+    pub closures: usize,
+    /// How many joined nodes no chain of edges connects to the anchor.
+    ///
+    /// Anything above zero makes the normal equations singular, and the
+    /// survey has more than one piece.
+    pub adrift: usize,
+}
+
 /// Nodes, edges, and the optimisation over them.
 #[derive(Debug, Clone, Default)]
 pub struct PoseGraph {
@@ -202,6 +221,75 @@ impl PoseGraph {
         }
         self.edges.push(edge);
         Ok(())
+    }
+
+    /// What shape the edges make, which decides what a solve can do.
+    ///
+    /// Reported rather than discovered by failing: a survey with a node
+    /// nothing joins to the anchor is one the normal equations cannot
+    /// factorise, and finding that out from `GraphError::Singular` after the
+    /// solve is a worse way to learn it than being told before.
+    pub fn shape(&self, anchor: usize) -> Shape {
+        let nodes = self.poses.len();
+        let mut neighbours: Vec<Vec<usize>> = vec![Vec::new(); nodes];
+        for edge in &self.edges {
+            neighbours[edge.from].push(edge.to);
+            neighbours[edge.to].push(edge.from);
+        }
+        let touched: Vec<bool> = neighbours.iter().map(|list| !list.is_empty()).collect();
+
+        // Components over the nodes an edge touches, by breadth-first walk.
+        // Sorted work list rather than a hash set, so the traversal order —
+        // and therefore nothing at all — depends on a hasher.
+        let mut seen = vec![false; nodes];
+        let mut components = 0;
+        for start in 0..nodes {
+            if !touched[start] || seen[start] {
+                continue;
+            }
+            components += 1;
+            let mut queue = vec![start];
+            seen[start] = true;
+            while let Some(node) = queue.pop() {
+                for next in &neighbours[node] {
+                    if !seen[*next] {
+                        seen[*next] = true;
+                        queue.push(*next);
+                    }
+                }
+            }
+        }
+
+        // Which of them the anchor can be reached from. The anchor itself
+        // may be untouched — a survey of edges that all avoid it — and then
+        // nothing is anchored and everything is adrift.
+        let mut reachable = vec![false; nodes];
+        if anchor < nodes {
+            reachable[anchor] = true;
+            let mut queue = vec![anchor];
+            while let Some(node) = queue.pop() {
+                for next in &neighbours[node] {
+                    if !reachable[*next] {
+                        reachable[*next] = true;
+                        queue.push(*next);
+                    }
+                }
+            }
+        }
+
+        let joined = touched.iter().filter(|t| **t).count();
+        Shape {
+            joined,
+            // The cyclomatic number: how many edges could be removed before
+            // the graph stops being connected the way it is. Zero means
+            // every measurement is believed exactly because nothing
+            // contradicts it — which is what a survey walked as a chain is,
+            // and why it drifts.
+            closures: (self.edges.len() + components).saturating_sub(joined),
+            adrift: (0..nodes)
+                .filter(|node| touched[*node] && !reachable[*node])
+                .count(),
+        }
     }
 
     /// The disagreement on one edge: `log(T_i⁻¹·T_j·Z⁻¹)`.
