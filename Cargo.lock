@@ -9687,6 +9687,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "rigidity"
+version = "0.1.0"
+dependencies = [
+ "rigidity-core",
+ "rigidity-io",
+ "rigidity-pipeline",
+ "rigidity-scenes",
+ "rigidity-spatial",
+]
+
+[[package]]
 name = "rigidity-cli"
 version = "0.1.0"
 dependencies = [

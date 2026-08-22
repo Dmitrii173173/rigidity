@@ -1,0 +1,36 @@
+[package]
+name        = "rigidity"
+description = "Регистрация облаков точек с отчётом о наблюдаемости шести степеней свободы. Фасад над крейтами rigidity-*."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+repository.workspace   = true
+homepage.workspace     = true
+readme.workspace       = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+rigidity-core.workspace = true
+rigidity-spatial  = { workspace = true, optional = true }
+rigidity-io       = { workspace = true, optional = true }
+rigidity-pipeline = { workspace = true, optional = true }
+rigidity-scenes   = { workspace = true, optional = true }
+
+[features]
+# Тот путь, по которому приходят почти все: файл на диске → отчёт.
+# Кому нужно только ядро, отключает default и не платит за парсеры форматов.
+default  = ["pipeline"]
+spatial  = ["dep:rigidity-spatial"]
+io       = ["dep:rigidity-io"]
+# `rigidity-pipeline` и так тянет io со spatial; включаем их явно, потому что
+# реэкспортировать можно только собственную зависимость, а не транзитивную.
+pipeline = ["dep:rigidity-pipeline", "io", "spatial"]
+scenes   = ["dep:rigidity-scenes"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

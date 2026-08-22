@@ -47,6 +47,15 @@ well-conditioned scene. Only the last line tells you not to trust that axis.
 cargo install rigidity-cli
 ```
 
+As a library:
+
+```
+cargo add rigidity
+```
+
+`rigidity` is a facade over the crates below; `default-features = false`
+leaves the core alone, without the format parsers.
+
 No system libraries. No Qt, no VTK, no Python. Builds from source on Linux,
 macOS and Windows with nothing but a Rust toolchain — which is most of the
 reason this exists in Rust rather than as another PCL module.
@@ -175,6 +184,7 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 
 | crate | what |
 |---|---|
+| `rigidity` | the facade: one dependency that re-exports the rest, feature-gated |
 | `rigidity-core` | Lie groups, ICP, TSQR, conditioning. Depends on `nalgebra`, `rayon`, `thiserror` — and nothing else, enforced in CI |
 | `rigidity-spatial` | kd-tree over `kiddo` |
 | `rigidity-scenes` | synthetic scenes with analytically known null spaces |
