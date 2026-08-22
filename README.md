@@ -4,6 +4,11 @@
 
 # rigidity
 
+[![crates.io](https://img.shields.io/crates/v/rigidity.svg)](https://crates.io/crates/rigidity)
+[![docs.rs](https://img.shields.io/docsrs/rigidity)](https://docs.rs/rigidity)
+[![CI](https://github.com/Dmitrii173173/rigidity/actions/workflows/ci.yml/badge.svg)](https://github.com/Dmitrii173173/rigidity/actions/workflows/ci.yml)
+[![licence: AGPL-3.0 or commercial](https://img.shields.io/badge/licence-AGPL--3.0%20or%20commercial-blue.svg)](LICENSING.md)
+
 **Point-cloud registration that tells you which degrees of freedom the geometry
 actually determined — and which it did not.**
 
@@ -184,14 +189,14 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 
 | crate | what |
 |---|---|
-| `rigidity` | the facade: one dependency that re-exports the rest, feature-gated |
-| `rigidity-core` | Lie groups, ICP, TSQR, conditioning. Depends on `nalgebra`, `rayon`, `thiserror` — and nothing else, enforced in CI |
-| `rigidity-spatial` | kd-tree over `kiddo` |
-| `rigidity-scenes` | synthetic scenes with analytically known null spaces |
-| `rigidity-io` | PLY and PCD (own parsers), LAS/LAZ, E57, CSV — read and write |
-| `rigidity-pipeline` | file → surface → registration → report; the sequence every front end must run in the same order |
-| `rigidity-viz` | Rerun logging, behind the `rerun` feature |
-| `rigidity-cli` | the binary |
+| [`rigidity`](https://docs.rs/rigidity) | the facade: one dependency that re-exports the rest, feature-gated |
+| [`rigidity-core`](https://docs.rs/rigidity-core) | Lie groups, ICP, TSQR, conditioning. Depends on `nalgebra`, `rayon`, `thiserror` — and nothing else, enforced in CI |
+| [`rigidity-spatial`](https://docs.rs/rigidity-spatial) | kd-tree over `kiddo` |
+| [`rigidity-scenes`](https://docs.rs/rigidity-scenes) | synthetic scenes with analytically known null spaces |
+| [`rigidity-io`](https://docs.rs/rigidity-io) | PLY and PCD (own parsers), LAS/LAZ, E57, CSV — read and write |
+| [`rigidity-pipeline`](https://docs.rs/rigidity-pipeline) | file → surface → registration → report; the sequence every front end must run in the same order |
+| [`rigidity-viz`](https://docs.rs/rigidity-viz) | Rerun logging, behind the `rerun` feature |
+| [`rigidity-cli`](https://crates.io/crates/rigidity-cli) | the binary |
 
 ## Building
 
