@@ -10,12 +10,60 @@
 //! compression.
 
 pub mod csv;
+pub mod e57_format;
 pub mod las_format;
+pub mod pcd;
 pub mod ply;
 
 pub use csv::{read_csv, read_poses};
-pub use las_format::read_las;
+pub use e57_format::{read_e57, write_e57};
+pub use las_format::{read_las, write_las};
+pub use pcd::{read_pcd, write_pcd};
 pub use ply::{read_ply, write_ply};
+
+use std::path::Path;
+
+use rigidity_core::PointCloud;
+
+/// Reads a cloud, choosing the format by the file's extension.
+///
+/// The extension is all there is to go on and all anyone uses. A reader
+/// that sniffed the contents would be right more often and would also
+/// silently open a file the person did not mean to open.
+pub fn read(path: &Path) -> Result<PointCloud, IoError> {
+    match extension(path).as_str() {
+        "ply" => read_ply(path),
+        "las" | "laz" => read_las(path),
+        "e57" => read_e57(path),
+        "pcd" => read_pcd(path),
+        "csv" | "txt" => read_csv(path),
+        other => Err(IoError::UnknownFormat(other.to_owned())),
+    }
+}
+
+/// Writes a cloud, choosing the format by the file's extension.
+pub fn write(cloud: &PointCloud, path: &Path) -> Result<(), IoError> {
+    match extension(path).as_str() {
+        "ply" => write_ply(cloud, path),
+        "las" | "laz" => write_las(cloud, path),
+        "e57" => write_e57(cloud, path),
+        "pcd" => write_pcd(cloud, path),
+        other => Err(IoError::UnknownFormat(other.to_owned())),
+    }
+}
+
+/// Every extension `read` understands, for a file dialog to offer.
+pub const READABLE: &[&str] = &["ply", "las", "laz", "e57", "pcd", "csv", "txt"];
+
+/// Every extension `write` understands.
+pub const WRITABLE: &[&str] = &["ply", "las", "laz", "e57", "pcd"];
+
+fn extension(path: &Path) -> String {
+    path.extension()
+        .and_then(|extension| extension.to_str())
+        .unwrap_or_default()
+        .to_ascii_lowercase()
+}
 
 /// Read and write errors.
 #[derive(Debug, thiserror::Error)]
@@ -58,6 +106,22 @@ pub enum IoError {
     /// An error raised by the `las` crate.
     #[error("LAS error: {0}")]
     Las(String),
+    /// An error raised by the `e57` crate.
+    #[error("E57 error: {0}")]
+    E57(String),
+    /// The PCD header is malformed.
+    #[error("malformed PCD header: {0}")]
+    BadPcd(String),
+    /// A PCD field or layout this reader does not handle.
+    #[error("unsupported PCD data: \"{0}\"")]
+    UnsupportedPcd(String),
+    /// The extension names no format this crate knows.
+    ///
+    /// The readable ones are listed in [`READABLE`], the writable ones in
+    /// [`WRITABLE`]; the message names the extension rather than reciting
+    /// the list, because a file dialog offers the list already.
+    #[error("unknown format: \"{0}\"")]
+    UnknownFormat(String),
     /// An error while building the cloud.
     #[error(transparent)]
     Cloud(#[from] rigidity_core::CloudError),

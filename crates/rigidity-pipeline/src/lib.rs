@@ -165,7 +165,10 @@ impl Prepared {
     }
 }
 
-/// Reads a PLY file and prepares it.
+/// Reads a cloud and prepares it.
+///
+/// Whatever format the extension names: both front ends get every reader
+/// the io crate has, and neither has a list of its own to fall behind.
 pub fn prepare(path: &Path, params: &PrepareParams) -> Result<Prepared, PipelineError> {
     prepare_observed(path, params, |_| {})
 }
@@ -187,7 +190,7 @@ where
         done: 0,
         total: 1,
     });
-    let raw = rigidity_io::read_ply(path).map_err(|source| PipelineError::Read {
+    let raw = rigidity_io::read(path).map_err(|source| PipelineError::Read {
         path: path.to_path_buf(),
         source,
     })?;

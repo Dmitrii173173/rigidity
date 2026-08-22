@@ -10,7 +10,6 @@ use std::process::ExitCode;
 use clap::{Parser, Subcommand, ValueEnum};
 use rigidity_core::lie::Se3;
 use rigidity_core::observability::Analysis;
-use rigidity_io::write_ply;
 use rigidity_pipeline::{
     PrepareParams, RegisterParams, ReportParams, analyse_cloud, analyse_registration, prepare,
     register_pair, transform_cloud,
@@ -63,7 +62,7 @@ enum Command {
     /// It answers the question: if anything were registered against this
     /// surface, which degrees of freedom would end up determined?
     Analyse {
-        /// The PLY file.
+        /// The file: PLY, LAS, LAZ, E57, PCD or CSV.
         cloud: PathBuf,
         #[command(flatten)]
         common: Common,
@@ -201,7 +200,7 @@ fn run() -> Result<(), Box<dyn Error>> {
                 );
                 transform_cloud(&scene.cloud, &motion)
             };
-            write_ply(&written, &out)?;
+            rigidity_io::write(&written, &out)?;
             println!("scene \"{}\": {} points", scene.kind.name(), scene.len());
             println!(
                 "unobservable degrees of freedom by construction: {}",
@@ -260,7 +259,7 @@ fn run() -> Result<(), Box<dyn Error>> {
             print_report(&analysis, &common);
 
             if let Some(path) = out {
-                write_ply(&transform_cloud(&moving.cloud, &result.pose), &path)?;
+                rigidity_io::write(&transform_cloud(&moving.cloud, &result.pose), &path)?;
                 println!("\ntransformed source written: {}", path.display());
             }
         }

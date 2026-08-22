@@ -29,7 +29,9 @@ clap = { version = "4.6", features = ["derive"] }
 # на целочисленной арифметике, которые нам не нужны, и тянет крейт
 # `fixed`, конфликтующий по версии с rerun. Оставляем только rayon.
 kiddo = { version = "6.0", default-features = false, features = ["multi-threaded"] }
-las     = "0.11"
+# `laz` is compressed LAS and is what surveys are actually shipped in; the
+# same reader and writer handle both, chosen by the file's own extension.
+las     = { version = "0.11", features = ["laz"] }
 e57     = "0.11"
 parquet = "59"
 # визуализация (M10)

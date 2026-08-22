@@ -10,16 +10,24 @@ component is essentially arbitrary. Nothing in the output says so.
 ```
 $ rigidity register corridor_source.ply corridor_target.ply --noise 0.01 --tolerance 0.001
 
-перенос:  x =  -0.0300 м   y =  -0.0190 м   z =  -0.0100 м
-RMSE: 0.00120 м   соответствий: 34361   итераций: 50
-число обусловленности: 45.5
+Translation:  x = -0.0300 m   y = -0.0190 m   z = -0.0100 m
 
-σ₁  разброс   6.590e-5 м  HIGH    ρ=[+0.99 +0.00 +0.00] φ=[+0.00 +0.01 -0.01]
-σ₂  разброс   6.730e-5 м  HIGH    ρ=[+0.04 +0.00 +0.00] φ=[+0.00 +0.00 +0.17]
-σ₃  разброс   9.356e-5 м  HIGH    ρ=[+0.00 -0.01 +0.99] φ=[-0.02 +0.00 +0.00]
-σ₄  разброс   9.517e-5 м  HIGH    ρ=[+0.00 +0.11 +0.12] φ=[+0.17 +0.00 +0.00]
-σ₅  разброс   5.911e-4 м  HIGH    ρ=[-0.18 +0.00 +0.00] φ=[+0.00 +0.17 +0.00]
-σ₆  разброс   3.000e-3 м  MEDIUM  ρ=[+0.00 +1.00 +0.00] φ=[+0.00 +0.00 +0.00]
+RMSE: 0.00120 m   Correspondences: 34361   Iterations: 50
+
+Condition number: 45.5
+
+σ₁  spread   6.590e-5 m  HIGH    ρ=[+0.99 +0.00 +0.00] φ=[+0.00 +0.01 -0.01]
+
+σ₂  spread   6.730e-5 m  HIGH    ρ=[+0.04 +0.00 +0.00] φ=[+0.00 +0.00 +0.17]
+
+σ₃  spread   9.356e-5 m  HIGH    ρ=[+0.00 -0.01 +0.99] φ=[-0.02 +0.00 +0.00]
+
+σ₄  spread   9.517e-5 m  HIGH    ρ=[+0.00 +0.11 +0.12] φ=[+0.17 +0.00 +0.00]
+
+σ₅  spread   5.911e-4 m  HIGH    ρ=[-0.18 +0.00 +0.00] φ=[+0.00 +0.17 +0.00]
+
+σ₆  spread   3.000e-3 m  MEDIUM  ρ=[+0.00 +1.00 +0.00] φ=[+0.00 +0.00 +0.00]
+
 ```
 
 The true offset was `y = −0.0200`. It came back as `−0.0190` — a 1 mm error,
@@ -166,7 +174,7 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 | `rigidity-core` | Lie groups, ICP, TSQR, conditioning. Depends on `nalgebra`, `rayon`, `thiserror` — and nothing else, enforced in CI |
 | `rigidity-spatial` | kd-tree over `kiddo` |
 | `rigidity-scenes` | synthetic scenes with analytically known null spaces |
-| `rigidity-io` | PLY (own parser), LAS, CSV |
+| `rigidity-io` | PLY and PCD (own parsers), LAS/LAZ, E57, CSV — read and write |
 | `rigidity-pipeline` | file → surface → registration → report; the sequence every front end must run in the same order |
 | `rigidity-viz` | Rerun logging, behind the `rerun` feature |
 | `rigidity-cli` | the binary |

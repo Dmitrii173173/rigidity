@@ -76,3 +76,62 @@ pub fn read_las(path: &Path) -> Result<PointCloud, IoError> {
     }
     Ok(cloud)
 }
+
+/// Writes a cloud as LAS, or as LAZ when the path says so.
+///
+/// The scale is a millimetre. LAS stores coordinates as scaled integers
+/// about an offset, and the scale is the quantum: at a tenth of a
+/// millimetre a survey-sized extent overflows the thirty-two bits the
+/// format gives each axis, and at a centimetre the file is coarser than
+/// the instrument that made it. A millimetre reaches ±2000 km from the
+/// offset, which is more than any projected coordinate system needs.
+pub fn write_las(cloud: &PointCloud, path: &Path) -> Result<(), IoError> {
+    /// Metres per stored unit.
+    const SCALE: f64 = 0.001;
+
+    let origin = cloud.origin();
+    let mut header = las::Builder::from((1, 4));
+    header.transforms = las::Vector {
+        x: las::Transform {
+            scale: SCALE,
+            offset: origin.x,
+        },
+        y: las::Transform {
+            scale: SCALE,
+            offset: origin.y,
+        },
+        z: las::Transform {
+            scale: SCALE,
+            offset: origin.z,
+        },
+    };
+    // Compression is chosen by the extension, the same way the reader
+    // chooses it.
+    header.point_format.is_compressed = path
+        .extension()
+        .is_some_and(|extension| extension.eq_ignore_ascii_case("laz"));
+    let header = header
+        .into_header()
+        .map_err(|e| IoError::Las(e.to_string()))?;
+
+    let mut writer =
+        las::Writer::from_path(path, header).map_err(|e| IoError::Las(e.to_string()))?;
+    let intensity = cloud.attribute("intensity");
+    for index in 0..cloud.len() {
+        let point = cloud.point(index);
+        writer
+            .write_point(las::Point {
+                x: point.x,
+                y: point.y,
+                z: point.z,
+                intensity: match intensity.map(|attribute| &attribute.data) {
+                    Some(AttributeData::U16(values)) => values.get(index).copied().unwrap_or(0),
+                    _ => 0,
+                },
+                ..Default::default()
+            })
+            .map_err(|e| IoError::Las(e.to_string()))?;
+    }
+    writer.close().map_err(|e| IoError::Las(e.to_string()))?;
+    Ok(())
+}
