@@ -9736,6 +9736,7 @@ dependencies = [
  "rigidity-harness",
  "rigidity-io",
  "rigidity-pipeline",
+ "rigidity-scenes",
  "thiserror 2.0.20",
 ]
 

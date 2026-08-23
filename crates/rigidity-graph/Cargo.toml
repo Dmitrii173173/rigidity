@@ -40,6 +40,9 @@ rigidity-io.workspace       = true
 rigidity-pipeline.workspace = true
 # The sector crop, shared with M9's examples so that both cut alike.
 rigidity-harness.workspace  = true
+# The deterministic generator: an experiment that resamples an
+# initialisation has to resample the same one tomorrow.
+rigidity-scenes.workspace   = true
 
 [lints]
 workspace = true
