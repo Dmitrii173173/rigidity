@@ -136,12 +136,36 @@ model rather than of the scene. Pass `--calibration 17` on real data.
 
 ## What this does not do
 
-**It does not tell you whether you found the right minimum.** Conditioning
-describes the local shape of the cost function. Inside a wrong local minimum
-the surfaces agree just as tightly and the report looks just as confident. On
-the plain, 11 of 30 scan pairs converged to a wrong basin, and their
-conditioning was no worse than that of the successful ones — RMSE separates
-them, the spectrum does not.
+**Conditioning does not tell you whether you found the right minimum — but
+something else does.** Conditioning describes the local shape of the cost
+function. Inside a wrong local minimum the surfaces agree just as tightly and
+the spectrum looks just as confident: on the plain, 11 of 30 scan pairs
+converged to a wrong basin with condition numbers no worse than the successful
+ones, every one of them reporting six directions of six determined.
+
+The residuals do separate them, and `median_absolute_residual` is the test.
+At the right minimum the residuals that remain are the sensor's own, so half
+of them fall inside `σ`; at a wrong one they are the geometry's disagreement
+and they do not. **Suspect the registration when the median absolute residual
+exceeds the sensor noise** — no threshold to tune, and `rigidity register`
+prints the warning itself.
+
+Measured on four surveys of the ETH ASL data against theodolite truth — both
+scenes, at 360° and cropped to ±40° and ±90°, taking "wrong basin" to mean
+more than 0.10 m of translation error. It caught 62 of 64 wrong-basin edges,
+let two through (out by 0.14 m and 2.15 m), and raised 6 false alarms in 164
+sound edges — none at all on the two surveys where nothing had failed. The
+threshold was fixed on one survey; the rest is out of sample. Use it together
+with the conditioning report, not instead of it: one says whether this is the
+right place, the other what the geometry there determines.
+
+One qualification, measured afterwards and worth having: those counts come
+from surveys registered the way a survey walks, each scan against the last.
+Where overlap is deliberately reduced — the same scans cropped to a forward
+sector, each pair started from the answer the uncropped scans gave — the
+residuals grow for honest reasons and the test over-fires: on one such run it
+flagged 24 registrations of which 9 were really in a wrong basin. It remains a
+good warning and stops being a good filter when the view is narrow.
 
 **It is not a calibrated uncertainty.** `σ_noise/σ'ᵢ` is a conditioning
 diagnostic. The closed-form ICP covariance is known to understate real spread
@@ -153,10 +177,90 @@ data — not as an absolute error bar.
 **Rich geometry gains nothing.** In a furnished room or a forest, plain ICP
 works and this only adds cost.
 
+**It does not make a better pose-graph weight, and that was measured.** The
+idea `rigidity-graph` was built for was to weight a survey's edges by what
+each registration's geometry actually determined — dropping the directions
+whose predicted spread exceeded the accuracy the survey asked for, rather
+than trusting `JᵀWJ` along them. On scenes generated here it wins by 120×.
+On real surveys it never wins at all: across the two ETH ASL scenes, five
+fields of view from 360° down to ±30°, and six tolerances from 50 mm to
+1 mm — sixty combinations — it either equals `JᵀWJ` or loses to it, by up
+to 3.4×.
+
+The reason is measurable and is the useful part. The threshold needs the
+determined directions of an edge to be separated from the lost ones, and on
+these scans there is no separation to find: `σ_min/σ_max` came out between
+0.46 and 0.039 over every scene, field of view, voxel size and neighbourhood
+tried, so all six spreads of an edge sit inside one order of magnitude. Any
+threshold therefore keeps them all or drops them all. The four-order gap the
+synthetic gates relied on is a property of geometry given exactly, not of
+geometry that has been scanned — and it does not come back with better
+normals. Growing the neighbourhood improves them a great deal: measured
+against a plane fitted over half a metre, a normal's error falls from 12.5°
+to 0.8° between the smallest neighbourhood tried and the largest. The
+smallest singular value moves by a factor of two over that same range, and
+between 1.2 and 2 depending on the scene. Four orders are what a threshold
+would need.
+
+**And the deeper reason, which took five failures to find: `JᵀWJ` is
+already the right shape.** Registering the same pair two dozen times from
+different starts shows where an edge's error actually comes from. The runs
+land within half a millimetre of each other and seven millimetres from the
+truth: the error is a *bias*, fourteen to thirty times larger than the
+scatter around it. The closed form predicts that scatter correctly — 0.5 mm
+predicted against 0.5 mm measured — and is simply blind to the bias. The
+famous factor of seventeen is not an underestimated noise; it is the
+bias counted as noise, and it comes out at 16.3, 16.5 and 16.6 across three
+scenes.
+
+The bias cannot be fixed by a weight, because a covariance describes
+scatter and a bias is not scatter: inflating an edge only shifts trust to
+other edges, which are biased too. But it can be located. Measured against
+the geometry's own directions, the bias avoids the best-determined one on
+every scene tried — |cos| of 0.175 to 0.195 where a random direction in six
+dimensions gives 0.36. The error lives where the geometry is weak, which is
+exactly what `JᵀWJ`'s anisotropy says.
+
+So every attempt here to improve on `JᵀWJ` — a threshold, an additive
+floor, a probabilistic attenuation, a floor tied to the measured bias, and
+discarding the spectrum altogether — changed a shape that was already
+right, and each won only where that shape did not matter. Improving on
+`JᵀWJ` means subtracting the bias, not reweighting it, and that needs the
+bias *direction*, which nothing measured here predicts.
+
+`calibrated_information` accordingly no longer thresholds — and it is
+called that because it no longer weights: through 0.1.1 the same function
+was `weighted_information`, and 0.2.0 renames it rather than leave a name
+promising something that was measured and withdrawn. It leaves out a
+direction the geometry cannot see at all — an infinite spread contributes
+nothing, which is not the same as contributing very little — and everywhere
+else it is `JᵀWJ/σ²` restated in calibrated units. That restatement is worth
+something on its own: with the ×17 in the sigma, a sixteen-station survey
+admits 13.1 mm of spread where it is actually 16.0 mm out, and ±60° of view
+admits 113.4 mm where it is 114.2 mm out. Without the calibration the same
+survey claims 0.8 mm.
+
+What survived is the diagnosis. Which directions are weak is still worth
+reporting and still reported; turning that report into a binary weight is
+the part that did not hold up.
+
 ## Prior art
 
-Degeneracy-aware registration is not new, and the honest contribution here is a
-reproducible open implementation rather than the idea.
+Degeneracy-aware registration is not new. Thresholding the eigenvalues of the
+point-to-plane Hessian and restricting the update to the well-conditioned
+subspace is Zhang and Singh (2016); carrying that into a pose graph as a factor
+constraining only the non-degenerate directions is Hinduja, Bartlett and Kaess
+(IROS 2019). Replacing the threshold with a probability derived from a noise
+model is Hatleskog and Alexis (RA-L 2024), whose code is public. Learning the
+covariance from data instead of deriving it is CELLO-3D (Landry, Pomerleau and
+Giguère, 2019), and propagating the initialisation's uncertainty while
+accounting for ICP's bias is Brossard, Bonnabel and Barrau (2020).
+
+The contribution here is not the idea but the measurement: this repository
+runs those weightings against millimetre theodolite ground truth on whole
+surveys, which is a thing several of those papers could not do — the
+probabilistic method's own evaluation has ground truth in one of its four
+experiments. What that measurement says is above, and it is mostly negative.
 
 - Zhang, Kaess, Singh. *On Degeneracy of Optimization-based State Estimation
   Problems.* ICRA 2016.
@@ -195,7 +299,7 @@ three. Protocol and caveats: [`bench-external/`](bench-external/).
 | [`rigidity-scenes`](https://docs.rs/rigidity-scenes) | synthetic scenes with analytically known null spaces |
 | [`rigidity-io`](https://docs.rs/rigidity-io) | PLY and PCD (own parsers), LAS/LAZ, E57, delimited text (`.txt`, `.csv`) — read and write |
 | [`rigidity-pipeline`](https://docs.rs/rigidity-pipeline) | file → surface → registration → report; the sequence every front end must run in the same order |
-| [`rigidity-graph`](https://docs.rs/rigidity-graph) | pose graphs whose edge weights come from each registration's own conditioning |
+| [`rigidity-graph`](https://docs.rs/rigidity-graph) | pose graphs, with the calibration in each edge's information and a direction the geometry cannot see left out of it |
 | [`rigidity-viz`](https://docs.rs/rigidity-viz) | Rerun logging, behind the `rerun` feature |
 | [`rigidity-cli`](https://crates.io/crates/rigidity-cli) | the binary |
 
