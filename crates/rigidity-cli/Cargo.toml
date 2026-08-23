@@ -40,8 +40,8 @@ rayon.workspace           = true
 
 [features]
 default = []
-# Отладочная запись хода регистрации в Rerun. Выключена по умолчанию:
-# Rerun — крупная зависимость, а ядру она не нужна.
+# Recording the course of a registration into Rerun, for debugging. Off by
+# default: Rerun is a large dependency and the core has no use for it.
 viz = ["rigidity-viz/rerun"]
 
 [[example]]

@@ -13,8 +13,9 @@ categories.workspace   = true
 
 [features]
 default = []
-# Включается явно: `cargo run -p rigidity-cli --features rigidity-viz/rerun`.
-# Ядро о существовании rerun не знает.
+# Switched on explicitly:
+# `cargo run -p rigidity-cli --features rigidity-viz/rerun`.
+# The core does not know that rerun exists.
 rerun = ["dep:rerun"]
 
 [dependencies]

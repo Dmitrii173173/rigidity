@@ -20,13 +20,15 @@ rigidity-scenes   = { workspace = true, optional = true }
 rigidity-graph    = { workspace = true, optional = true }
 
 [features]
-# Тот путь, по которому приходят почти все: файл на диске → отчёт.
-# Кому нужно только ядро, отключает default и не платит за парсеры форматов.
+# The path almost everyone arrives by: a file on disk → a report. Anyone
+# who wants the core alone turns default off and does not pay for the
+# format parsers.
 default  = ["pipeline"]
 spatial  = ["dep:rigidity-spatial"]
 io       = ["dep:rigidity-io"]
-# `rigidity-pipeline` и так тянет io со spatial; включаем их явно, потому что
-# реэкспортировать можно только собственную зависимость, а не транзитивную.
+# `rigidity-pipeline` pulls io and spatial in anyway; they are enabled here
+# explicitly because a crate may only re-export its own dependency, never a
+# transitive one.
 pipeline = ["dep:rigidity-pipeline", "io", "spatial"]
 scenes   = ["dep:rigidity-scenes"]
 graph    = ["dep:rigidity-graph"]
