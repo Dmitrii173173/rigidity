@@ -1,17 +1,26 @@
-//! The gate: a loop with one leg that could not see along itself.
+//! A loop with one leg that could not see along itself — and what is left
+//! of the claim that used to be made about it.
 //!
 //! A survey walks a closed circuit and registers each scan against the last.
 //! One leg of it runs down a corridor, where the registration has nothing to
 //! measure along the corridor's axis and returns whatever it started with.
-//! Every pose-graph package takes that edge's `JᵀWJ` at face value, and
-//! `JᵀWJ` is not zero along the axis — it is merely small, and a small
-//! weight on an arbitrary number still drags the survey towards it.
+//! This file used to assert that weighting that edge by its conditioning
+//! left the survey a hundred and twenty times closer to the truth than
+//! `JᵀWJ` did — on this scene, which was built to have a four-order gap
+//! between the lost direction and the rest.
 //!
-//! Both halves of the comparison are built from the *same* correspondences.
-//! The only difference is what is made of them: `JᵀWJ` as it stands, or the
-//! spectrum with the directions the geometry did not determine removed. If
-//! the test rebuilt one of the two from different geometry it would be
-//! measuring the geometry.
+//! S6 measured the same comparison on the ETH ASL surveys and it lost every
+//! time, because real scans have no such gap: the six spreads of an edge sit
+//! within one order of magnitude, so a threshold either keeps all of them or
+//! drops all of them. The threshold is gone from
+//! [`calibrated_information`](rigidity_graph::calibrated_information), and what
+//! this file asserts now is what is true without it — which is a good deal
+//! less, and stated where the old claim used to be so that nobody has to
+//! find out from the git history.
+//!
+//! Both halves of the comparison are still built from the *same*
+//! correspondences. If the test rebuilt one of the two from different
+//! geometry it would be measuring the geometry.
 
 use rigidity_core::icp::{Kernel, point_to_plane_row};
 use rigidity_core::lie::{Se3, So3};
@@ -19,12 +28,15 @@ use rigidity_core::nalgebra::{Matrix6, Vector3, Vector6};
 use rigidity_core::observability::{
     Analysis, Conditioning, Correspondence, ObservabilityCriteria, analyse,
 };
-use rigidity_graph::{Edge, OptimiseParams, PoseGraph, weighted_information};
+use rigidity_graph::{Edge, OptimiseParams, PoseGraph, calibrated_information};
 
 /// How finely the end faces are sampled in the closed room.
 const CLOSED: usize = 60;
 /// And in the corridor: a few points at the far end, not none.
 const CORRIDOR_CAP: usize = 1;
+/// And in the corridor that is perfectly blind: nothing at the far end at
+/// all, so that the axis is not weakly determined but not determined.
+const BLIND: usize = 0;
 
 /// Measurement noise the scenes are analysed under, metres.
 const NOISE: f64 = 2e-3;
@@ -36,13 +48,6 @@ const NOISE: f64 = 2e-3;
 /// the spreads are 2.4e-5 … 1.4e-4 and then 1.4e-3, so the line falls in
 /// the gap rather than through the middle of a cluster.
 const TOLERANCE: f64 = 1e-3;
-
-fn criteria() -> ObservabilityCriteria {
-    ObservabilityCriteria {
-        noise_sigma: NOISE,
-        tolerance: TOLERANCE,
-    }
-}
 
 /// Points and normals on the faces of a box, in the scan's own frame.
 ///
@@ -122,7 +127,7 @@ fn conditioning_of(points: &[Correspondence]) -> Analysis {
 ///
 /// Divided by the noise variance so that it is an inverse covariance rather
 /// than a sum of squares, and therefore comparable in magnitude with what
-/// `weighted_information` produces. Without that the comparison would be
+/// `calibrated_information` produces. Without that the comparison would be
 /// between two matrices scaled differently, and the winner would be
 /// whichever happened to be larger.
 fn naive_information(points: &[Correspondence]) -> Matrix6<f64> {
@@ -184,8 +189,8 @@ fn loop_graph(weighted: bool, slip: f64, conditioning: &(Conditioning, Condition
 
     let capped_naive = naive_information(&room(CLOSED));
     let corridor_naive = naive_information(&room(CORRIDOR_CAP));
-    let capped_weighted = weighted_information(&conditioning.0, &criteria());
-    let corridor_weighted = weighted_information(&conditioning.1, &criteria());
+    let capped_weighted = calibrated_information(&conditioning.0, NOISE);
+    let corridor_weighted = calibrated_information(&conditioning.1, NOISE);
 
     // Every node starts at the truth, so that what the optimisation has to
     // undo is the corridor's slip and nothing else. A test that also
@@ -255,10 +260,38 @@ fn the_corridor_loses_exactly_one_direction() {
     );
 }
 
-/// The gate. Weighting by conditioning leaves the survey measurably closer
-/// to where it actually is.
+/// What the weighting actually is: `JᵀWJ/σ²`, rebuilt from its own
+/// spectrum.
+///
+/// This is the test that would have caught the overclaim. Without the
+/// threshold there is no direction left out of a scene like the corridor —
+/// its worst spread is 1.4e-3 m, large but finite — so the sum over the
+/// spectrum puts back exactly the matrix it was taken from. Asserting it
+/// here means the documentation cannot drift back towards promising
+/// something extra.
 #[test]
-fn the_weighted_loop_drifts_less_than_the_naive_one() {
+fn the_weighting_is_jtwj_in_calibrated_units() {
+    for cap in [CLOSED, CORRIDOR_CAP] {
+        let points = room(cap);
+        let weighted = calibrated_information(&conditioning_of(&points).conditioning, NOISE);
+        let naive = naive_information(&points);
+        let scale = naive.amax().max(weighted.amax());
+        let worst = (weighted - naive).amax() / scale;
+        assert!(
+            worst < 1e-9,
+            "at cap {cap} the two differ by {worst:e} of the largest entry"
+        );
+    }
+}
+
+/// And therefore the loop lands in the same place either way.
+///
+/// The old gate asserted a hundred and twenty fold here. It is kept as an
+/// equality rather than deleted: a future change that quietly reintroduces
+/// a threshold would move this number, and moving it is exactly what has to
+/// be argued for rather than merged.
+#[test]
+fn the_loop_drifts_the_same_either_way() {
     const SLIP: f64 = 0.40;
 
     let capped = conditioning_of(&room(CLOSED)).conditioning;
@@ -269,37 +302,115 @@ fn the_weighted_loop_drifts_less_than_the_naive_one() {
     let params = OptimiseParams::default();
 
     let mut naive = loop_graph(false, SLIP, &pair);
-    let naive_report = naive.optimise(&params).expect("the naive graph solves");
+    naive.optimise(&params).expect("the naive graph solves");
     let naive_drift = drift(naive.poses(), &truth);
 
     let mut weighted = loop_graph(true, SLIP, &pair);
-    let weighted_report = weighted
+    weighted
         .optimise(&params)
         .expect("the weighted graph solves");
     let weighted_drift = drift(weighted.poses(), &truth);
 
-    println!(
-        "slip {SLIP} m\n  naive:    drift {naive_drift:.6} m  \
-         ({} iterations, cost {:.3e} → {:.3e})\n  weighted: drift {weighted_drift:.6} m  \
-         ({} iterations, cost {:.3e} → {:.3e})",
-        naive_report.iterations,
-        naive_report.cost[0],
-        naive_report.cost[1],
-        weighted_report.iterations,
-        weighted_report.cost[0],
-        weighted_report.cost[1],
+    println!("naive {naive_drift:.9} m, weighted {weighted_drift:.9} m");
+    assert!(
+        (weighted_drift - naive_drift).abs() < 1e-6 * naive_drift.max(1e-9),
+        "the two weightings parted ways: {weighted_drift} m against {naive_drift} m"
+    );
+}
+
+/// The number the README quotes, kept runnable.
+///
+/// The claim is a pair and both halves matter: the weighting this project
+/// dropped wins by a hundred and twenty fold *on the scene built to show
+/// it*, and loses on every real survey it was tried on. The second half is
+/// measured in `eth_survey`; this is the first, and without it the README
+/// would quote a number that nothing here reproduces.
+///
+/// It is deliberately not a gate any more. Nothing is required to keep
+/// winning — what is required is that the contrast stays visible, because
+/// the contrast is the finding.
+#[test]
+fn the_threshold_still_wins_on_the_scene_that_was_built_for_it() {
+    use rigidity_harness::thresholded::thresholded_information;
+
+    const SLIP: f64 = 0.40;
+    let criteria = ObservabilityCriteria {
+        noise_sigma: NOISE,
+        tolerance: TOLERANCE,
+    };
+
+    let capped = conditioning_of(&room(CLOSED)).conditioning;
+    let corridor = conditioning_of(&room(CORRIDOR_CAP)).conditioning;
+    let truth = truth();
+    let params = OptimiseParams::default();
+
+    let mut naive = loop_graph(false, SLIP, &(capped.clone(), corridor.clone()));
+    naive.optimise(&params).expect("the naive graph solves");
+    let naive_drift = drift(naive.poses(), &truth);
+
+    let mut thresholded = PoseGraph::new(truth.clone());
+    let nodes = truth.len();
+    const CORRIDOR: usize = 2;
+    for from in 0..nodes {
+        let to = (from + 1) % nodes;
+        let exact = truth[from].inverse() * truth[to];
+        let is_corridor = from == CORRIDOR;
+        let measurement = if is_corridor {
+            Se3::exp(&Vector6::new(SLIP, 0.0, 0.0, 0.0, 0.0, 0.0)) * exact
+        } else {
+            exact
+        };
+        let information =
+            thresholded_information(if is_corridor { &corridor } else { &capped }, &criteria);
+        thresholded
+            .push(Edge {
+                from,
+                to,
+                measurement,
+                information,
+            })
+            .expect("the edge names real nodes");
+    }
+    thresholded
+        .optimise(&params)
+        .expect("the thresholded graph solves");
+    let thresholded_drift = drift(thresholded.poses(), &truth);
+
+    println!("naive {naive_drift:.6} m, thresholded {thresholded_drift:.6} m");
+    assert!(
+        thresholded_drift < 0.1 * naive_drift,
+        "on its own scene the threshold won by only {:.1}×",
+        naive_drift / thresholded_drift
+    );
+}
+
+/// A direction the geometry is blind to stays exactly absent.
+///
+/// This is the one thing the sum over the spectrum does that handing over
+/// `JᵀWJ` does not guarantee: a spread of infinity contributes nothing, and
+/// nothing is not "very little". The corridor with no far end at all has an
+/// exactly singular `JᵀWJ` too, so the two agree here as well — what is
+/// asserted is that rebuilding the matrix from its spectrum does not put a
+/// rounding error where the null direction was, which is what would let a
+/// damped solve invent a pose along it.
+#[test]
+fn a_blind_direction_stays_exactly_null() {
+    let blind = conditioning_of(&room(BLIND)).conditioning;
+    let information = calibrated_information(&blind, NOISE);
+
+    let along_corridor = Vector6::new(1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    let quadratic = (along_corridor.transpose() * information * along_corridor)[(0, 0)];
+    assert_eq!(
+        quadratic, 0.0,
+        "the blind axis carries {quadratic:e} of information"
     );
 
+    // And the scene really is blind, rather than merely poor: the smallest
+    // spread that is not infinite belongs to some other direction.
+    let spreads = blind.uncertainty(NOISE);
     assert!(
-        weighted_drift < naive_drift,
-        "weighting did not help: {weighted_drift} m against {naive_drift} m"
-    );
-    // "Measurably less" made a number: the naive survey should carry a
-    // sizeable part of the slip and the weighted one should not.
-    assert!(
-        weighted_drift < 0.1 * naive_drift,
-        "weighting helped, but only by {:.1}×",
-        naive_drift / weighted_drift
+        spreads.iter().filter(|spread| spread.is_infinite()).count() == 1,
+        "expected exactly one unbounded direction, got {spreads:?}"
     );
 }
 

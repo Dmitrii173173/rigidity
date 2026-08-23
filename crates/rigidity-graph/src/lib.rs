@@ -26,7 +26,7 @@
 //! here: the ICP updates its pose as `T ← exp(Δξ)·T` and builds its
 //! Jacobian rows from points in the target's frame, so `IcpResult::
 //! information` is already in those coordinates and
-//! [`weighted_information`] produces its replacement in the same ones. An
+//! [`calibrated_information`] produces its replacement in the same ones. An
 //! information matrix in the wrong frame does not fail loudly — it
 //! converges to a slightly wrong answer, which is the failure mode this
 //! paragraph is here to prevent.
@@ -44,7 +44,7 @@
 
 use rigidity_core::lie::{Se3, inverse_right_jacobian_se3};
 use rigidity_core::nalgebra::{DMatrix, DVector, Matrix3, Matrix6, Vector3, Vector6};
-use rigidity_core::observability::{Conditioning, Observability, ObservabilityCriteria};
+use rigidity_core::observability::Conditioning;
 
 /// One measured relative pose, and how much of it to believe.
 #[derive(Debug, Clone, Copy)]
@@ -57,8 +57,9 @@ pub struct Edge {
     pub measurement: Se3,
     /// The inverse covariance of `Z`, in scan `from`'s frame.
     ///
-    /// Either [`weighted_information`], which is the point of this crate,
-    /// or `IcpResult::information` for the naive comparison the gate makes.
+    /// Either [`calibrated_information`], which puts the project's calibration
+    /// into it and leaves out a direction the geometry is blind to, or
+    /// `IcpResult::information` as it comes.
     pub information: Matrix6<f64>,
 }
 
@@ -460,36 +461,65 @@ impl PoseGraph {
     }
 }
 
-/// The information an edge's own conditioning justifies.
-///
-/// This is the crate's reason to exist. `IcpResult::information` is
-/// `JᵀWJ`, which is a statement about how tightly the surfaces agreed; it
-/// says nothing about whether agreeing tightly *meant* anything, and on a
-/// corridor it does not. This builds the matrix again from the spectrum:
+/// `JᵀWJ` in calibrated units, with the directions the geometry cannot see
+/// at all left out.
 ///
 /// ```text
-/// Λ = Σ  vᵢ vᵢᵀ / spreadᵢ²      over the directions the geometry determined
+/// Λ = Σ  vᵢ vᵢᵀ / spreadᵢ²      over the directions with a finite spread
 /// ```
 ///
-/// and the directions it did not determine are simply absent from the sum.
-/// Not down-weighted — absent. A direction whose predicted spread exceeds
-/// the tolerance is one where the registration's answer is arbitrary, and
-/// an arbitrary number given a small weight still pulls a survey towards
-/// itself; given no weight it is what it is, which is no information.
+/// A direction the geometry does not constrain has `σ' = 0`, an infinite
+/// spread, and is absent from the sum rather than given a small weight. An
+/// arbitrary number with a small weight still pulls a survey towards
+/// itself; absent, it is what it is, which is no information. The rest of
+/// the spectrum is carried in full.
 ///
-/// Which directions those are comes from
+/// # What this is, stated plainly, because it used to claim more
+///
+/// Everywhere except an exactly blind direction this **equals `JᵀWJ/σ²`**.
+/// It is that matrix rebuilt from its own spectrum in calibrated units, not
+/// a different matrix. Nothing here is cleverer than what a pose-graph
+/// package is already handed; what it adds is the calibration in `σ` and a
+/// null direction that stays null instead of being damped into a number.
+/// The name says so: through 0.1.1 this was `weighted_information`, which
+/// promised a weighting by conditioning that has since been measured and
+/// withdrawn. Same function, honest name.
+///
+/// Until S6 this function dropped every direction whose predicted spread
+/// exceeded the survey's required accuracy — a threshold, and the crate's
+/// claim to exist. That was measured and did not survive. On the ETH ASL
+/// surveys, across two scenes, five fields of view and six tolerances, the
+/// thresholded version never once beat `JᵀWJ` and lost by up to 3.4×; and
+/// the reason is that on real scans the six spreads of an edge lie within
+/// one order of magnitude of each other — `σ_min/σ_max` measured between
+/// 0.46 and 0.039 over everything tried — so a threshold either keeps them
+/// all or drops them all. The gap the synthetic gates relied on, four
+/// orders wide, is a property of geometry that has been given exactly, not
+/// of geometry that has been scanned.
+///
+/// Five attempts have since been measured against theodolite truth — this
+/// threshold, an additive floor, a probabilistic attenuation from a noise
+/// model, a floor tied to the measured bias, and discarding the spectrum
+/// altogether — and all five lose. The reason is that an edge's error is a
+/// *bias* rather than scatter, fourteen to thirty times larger than the
+/// scatter the closed form correctly predicts, and that the bias lies away
+/// from the best-determined direction on every scene tried. `JᵀWJ` says
+/// exactly that: most uncertainty where the geometry is weakest. Its shape
+/// is right and only its scale is wrong, and a scale common to every edge
+/// does not move a survey. Each of the five changed the shape.
+///
+/// What survived that measurement is the diagnosis: *which* directions are
+/// weak is worth reporting, and
 /// [`Conditioning::classify`](rigidity_core::observability::Conditioning::classify)
-/// rather than from comparing the spread here, so that the graph and the
-/// report the user reads can never disagree about the same edge.
+/// still reports it. Turning that report into a binary weight is the part
+/// that did not.
 ///
-/// The calibration is the caller's business. On real data the predicted
-/// spread is optimistic — the project measured about seventeenfold — but
-/// the correction belongs to `criteria.noise_sigma`, where the rest of the
-/// project already applies it, and not to a constant buried in here.
-pub fn weighted_information(
-    conditioning: &Conditioning,
-    criteria: &ObservabilityCriteria,
-) -> Matrix6<f64> {
+/// The calibration is the caller's business, and it belongs in
+/// `noise_sigma`. On real data the predicted spread is optimistic — the
+/// project measured about seventeenfold — and passing an uncorrected sigma
+/// gives a survey that states an accuracy seventeen times better than it
+/// has.
+pub fn calibrated_information(conditioning: &Conditioning, noise_sigma: f64) -> Matrix6<f64> {
     // The spectrum lives in normalised coordinates and an edge lives in
     // world ones. `to_normalised` is the linear map between them; it is
     // applied to the six basis vectors rather than rebuilt from the centre
@@ -502,15 +532,10 @@ pub fn weighted_information(
         to_normalised.set_column(axis, &conditioning.to_normalised(basis));
     }
 
-    let spreads = conditioning.uncertainty(criteria.noise_sigma);
-    let observable = conditioning.classify(criteria);
+    let spreads = conditioning.uncertainty(noise_sigma);
     let mut normalised = Matrix6::zeros();
-    for index in 0..6 {
-        if observable[index] != Observability::High {
-            continue;
-        }
-        let spread = spreads[index];
-        if !(spread.is_finite() && spread > 0.0) {
+    for (index, spread) in spreads.iter().enumerate() {
+        if !(spread.is_finite() && *spread > 0.0) {
             continue;
         }
         let direction = conditioning.direction(index);

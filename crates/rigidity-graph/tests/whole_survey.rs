@@ -51,7 +51,7 @@ fn solid() -> Matrix6<f64> {
 
 /// A corridor running along `x`: every direction but that one.
 ///
-/// Zero and not merely small, which is what `weighted_information` produces
+/// Zero and not merely small, which is what `calibrated_information` produces
 /// for a direction whose predicted spread exceeds the tolerance. The whole
 /// question of this view is what such an edge looks like from above.
 fn corridor() -> Matrix6<f64> {
