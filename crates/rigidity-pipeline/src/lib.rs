@@ -402,6 +402,92 @@ pub fn analyse_registration(
     .ok_or(PipelineError::NoCorrespondences)
 }
 
+/// The median absolute point-to-plane residual at a pose, metres.
+///
+/// # What it is for
+///
+/// Conditioning answers "is the pose determined by the geometry here". It
+/// does not answer "is this the right place", and the project has measured
+/// that it cannot: registrations that converged to a wrong minimum came
+/// back with condition numbers of two to four, exactly like the ones that
+/// did not, and reported six directions of six determined. That failure
+/// sets the worst station of a survey and is the one thing a confident
+/// report can be most wrong about.
+///
+/// This is what does answer it. At the right minimum the residuals that
+/// remain are the sensor's own, so half of them fall inside `σ`; at a wrong
+/// one they are the geometry's disagreement, and they do not. **Suspect the
+/// registration when this exceeds the sensor's noise** — that is the whole
+/// rule, and it has no free parameter beyond the `σ` the pipeline is
+/// already told.
+///
+/// # What it was measured on
+///
+/// Four surveys of the ETH ASL Challenging Datasets against theodolite
+/// ground truth — both scenes, at 360° and cropped to ±40° and ±90°, 29 to
+/// 57 edges each. Taking "wrong basin" to mean more than 0.10 m of
+/// translation error against the theodolite:
+///
+/// | | |
+/// |---|---|
+/// | wrong-basin edges caught | 62 of 64 |
+/// | let through | 2, out by 0.14 m and 2.15 m |
+/// | false alarms | 6 of 164 sound edges |
+/// | false alarms on the two surveys where nothing failed | 0 of 57 |
+///
+/// The threshold was fixed on one survey and every other number above is
+/// out of sample. The one comparable alternative — an edge whose RMSE is
+/// more than one and a half times the survey's median — never raises a
+/// false alarm but misses more, and collapses outright when over half a
+/// survey is bad, because then the median is itself a failure. This one
+/// needs no survey around it and works on a single pair.
+///
+/// # Cost, and where this will live eventually
+///
+/// One extra pass over the moving cloud, with one nearest-neighbour query
+/// per point — about the price of a single ICP iteration. The ICP already
+/// computes every one of these residuals and throws them away; when there
+/// is next a reason to break `IcpResult`, this belongs in it, and this
+/// function becomes the way to ask the same question at a pose the
+/// registration did not stop at.
+///
+/// Returns `None` when nothing matched, which is its own answer.
+pub fn median_absolute_residual(
+    moving: &Prepared,
+    fixed: &Prepared,
+    pose: &Se3,
+    params: &RegisterParams,
+) -> Option<f64> {
+    // The same rejection rule as `analyse_registration`, deliberately: two
+    // functions that walk the same correspondences must agree about which
+    // ones there are, or a report and the warning beside it will one day
+    // describe different registrations.
+    let limit = params.max_distance * params.max_distance;
+    let mut residuals: Vec<f64> = Vec::new();
+    let mut found = Vec::with_capacity(1);
+    for index in 0..moving.cloud.len() {
+        let point = pose.transform_point(&moving.cloud.point(index));
+        fixed.tree.knn_into(&point, 1, &mut found);
+        let Some(nearest) = found.first() else {
+            continue;
+        };
+        if nearest.distance_squared > limit {
+            continue;
+        }
+        let matched = nearest.index as usize;
+        let normal = fixed.normals[matched];
+        residuals.push(normal.dot(&(point - fixed.cloud.point(matched))).abs());
+    }
+    if residuals.is_empty() {
+        return None;
+    }
+    // `select_nth_unstable_by` rather than a sort: the median is all that is
+    // wanted and the clouds here run to millions of points.
+    let middle = residuals.len() / 2;
+    let (_, median, _) = residuals.select_nth_unstable_by(middle, f64::total_cmp);
+    Some(*median)
+}
+
 /// What the numbers in a report are measured against.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct ReportParams {
@@ -453,4 +539,88 @@ pub fn transform_cloud(cloud: &PointCloud, pose: &Se3) -> PointCloud {
         moved.push(pose.transform_point(&cloud.point(index)));
     }
     moved
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rigidity_core::PointCloud;
+    use rigidity_core::lie::So3;
+    use rigidity_core::nalgebra::Vector6;
+
+    /// Two perpendicular walls. Enough geometry that no direction is free,
+    /// so a displaced pose is wrong in every sense and not merely
+    /// unobservable.
+    ///
+    /// The sampling is deliberately not a lattice. The first version of
+    /// this test used one at five centimetres, displaced the cloud by ten,
+    /// and measured a median residual of exactly zero — the grid had slid
+    /// into itself, every point landing on where another point had been.
+    /// A regular grid has translations that are invisible to any residual,
+    /// and a test built on one is measuring the sampling.
+    fn corner() -> PointCloud {
+        let mut cloud = PointCloud::new();
+        for i in 0..60 {
+            for j in 0..60 {
+                let jitter = ((i * 37 + j * 17) % 13) as f64 * 0.003;
+                let a = i as f64 * 0.05 + jitter;
+                let b = j as f64 * 0.05 - jitter;
+                cloud.push(Vector3::new(a, 0.0, b));
+                cloud.push(Vector3::new(0.0, b, a));
+            }
+        }
+        cloud
+    }
+
+    /// The property the detector rests on: at the pose that is right the
+    /// median residual is far under the sensor's noise, and at a pose in
+    /// the wrong place it is far over it. Both sides are asserted, because
+    /// a statistic that is always small or always large would pass a test
+    /// that only checked one.
+    #[test]
+    fn a_displaced_pose_shows_in_the_median_residual() {
+        const NOISE: f64 = 0.01;
+        let params = PrepareParams {
+            voxel: 0.0,
+            neighbours: 12,
+        };
+        let prepared = prepare_cloud(&corner(), &params).expect("the corner prepares");
+
+        let right = median_absolute_residual(
+            &prepared,
+            &prepared,
+            &Se3::identity(),
+            &RegisterParams::default(),
+        )
+        .expect("the cloud matches itself");
+        assert!(
+            right < 0.1 * NOISE,
+            "at the true pose the median residual is {right} m"
+        );
+
+        // Seven centimetres along the diagonal, so that both walls move off
+        // themselves rather than one sliding along itself: a real
+        // displacement, well under the correspondence cutoff, and nothing
+        // about the geometry that excuses it.
+        let displaced = Se3::exp(&Vector6::new(0.07, 0.07, 0.0, 0.0, 0.0, 0.0));
+        let wrong =
+            median_absolute_residual(&prepared, &prepared, &displaced, &RegisterParams::default())
+                .expect("the displaced cloud still matches");
+        assert!(
+            wrong > NOISE,
+            "displaced by 0.1 m the median residual is only {wrong} m"
+        );
+
+        // And a rotation, which moves the far end of the wall much further
+        // than the near one — the case an RMSE dominated by the near end
+        // can miss.
+        let turned = Se3::from_parts(So3::exp(&Vector3::new(0.0, 0.0, 0.02)), Vector3::zeros());
+        let turned =
+            median_absolute_residual(&prepared, &prepared, &turned, &RegisterParams::default())
+                .expect("the turned cloud still matches");
+        assert!(
+            turned > NOISE,
+            "turned by 0.02 rad the median residual is only {turned} m"
+        );
+    }
 }

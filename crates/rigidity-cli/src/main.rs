@@ -11,8 +11,8 @@ use clap::{Parser, Subcommand, ValueEnum};
 use rigidity_core::lie::Se3;
 use rigidity_core::observability::Analysis;
 use rigidity_pipeline::{
-    PrepareParams, RegisterParams, ReportParams, analyse_cloud, analyse_registration, prepare,
-    register_pair, transform_cloud,
+    PrepareParams, RegisterParams, ReportParams, analyse_cloud, analyse_registration,
+    median_absolute_residual, prepare, register_pair, transform_cloud,
 };
 use rigidity_scenes::{Scene, SceneKind, SceneParams};
 
@@ -254,6 +254,23 @@ fn run() -> Result<(), Box<dyn Error>> {
                 "RMSE: {:.5} m   correspondences: {}   iterations: {}   converged: {}\n",
                 result.rmse, result.correspondences, result.iterations, result.converged
             );
+
+            // Whether this is the right place, which the report below does
+            // not answer and cannot. The rule is the whole rule: at the
+            // right minimum half the residuals are inside the sensor's
+            // noise, and at a wrong one they are not.
+            if let Some(median) = median_absolute_residual(&moving, &fixed, &result.pose, &params) {
+                if median > common.noise {
+                    println!(
+                        "WRONG BASIN SUSPECTED: median residual {median:.4} m is past the \
+                         {:.4} m of sensor noise. The report below describes the shape of \
+                         this minimum, not whether it is the right one.\n",
+                        common.noise
+                    );
+                } else {
+                    println!("median residual: {median:.5} m, inside the sensor's noise\n");
+                }
+            }
 
             let analysis = analyse_registration(&moving, &fixed, &result.pose, &params)?;
             print_report(&analysis, &common);
