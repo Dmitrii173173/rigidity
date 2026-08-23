@@ -27,7 +27,7 @@
 //! | `io` | [`io`] | PLY, PCD, LAS/LAZ, E57, TXT/CSV |
 //! | `spatial` | [`spatial`] | the kd-tree |
 //! | `scenes` | [`scenes`] | synthetic scenes with known null spaces |
-//! | `graph` | [`graph`] | pose graphs whose edges are weighted by their own conditioning |
+//! | `graph` | [`graph`] | pose graphs, with the calibration in each edge's information |
 //!
 //! With `default-features = false` only the core remains: `nalgebra`,
 //! `rayon`, `thiserror` and nothing else.

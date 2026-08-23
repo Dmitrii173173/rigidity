@@ -1,17 +1,43 @@
-//! Pose-graph optimisation weighted by each edge's own conditioning.
+//! Pose-graph optimisation with each edge's information in calibrated
+//! units.
 //!
-//! Every pairwise registration already produces `JᵀWJ` at its solution, and
-//! every pose-graph package in this space takes that matrix at face value.
-//! The rest of this project exists to say why that is wrong: on a corridor,
-//! the matrix is confident about a direction the geometry never determined,
-//! and the residual agrees with it. An edge built from such a registration
-//! should carry no weight along the corridor — not a small weight, not one
-//! deflated by a fudge factor, *none* — and the conditioning analysis is
-//! what can say which direction that is.
+//! Nodes, edges, Gauss–Newton on `SE(3)`, an anchor — and
+//! [`calibrated_information`], which is where this crate differs from the
+//! ordinary machinery, though by much less than it once claimed.
 //!
-//! That is the whole content of this crate. Everything else here is the
-//! ordinary machinery a pose graph needs in order for the weighting to have
-//! somewhere to act: nodes, edges, Gauss–Newton on `SE(3)`, an anchor.
+//! # What this crate set out to do, and what measurement left of it
+//!
+//! Every pairwise registration produces `JᵀWJ` at its solution, and every
+//! pose-graph package in this space takes that matrix at face value. Until
+//! 0.1.1 this crate said that was wrong — that an edge down a corridor
+//! should carry *no* weight along the axis the geometry never determined,
+//! not a small one — and thresholded the spectrum accordingly. On scenes
+//! generated here that wins by 120×.
+//!
+//! It does not survive real data. Against theodolite ground truth on the
+//! ETH ASL surveys the threshold never once beat plain `JᵀWJ` and lost by
+//! as much as 3.4×, and four further ways of reshaping the matrix lost
+//! too. The reason is that an edge's error is a *bias* rather than
+//! scatter, and that the bias lies away from the best-determined
+//! direction — which is what the anisotropy of `JᵀWJ` already says. The
+//! shape was right; only the scale was wrong, and a scale common to every
+//! edge does not move a survey.
+//!
+//! So [`calibrated_information`] no longer thresholds. It puts the
+//! project's calibration into the matrix and leaves out a direction that
+//! is genuinely blind, and is otherwise `JᵀWJ/σ²`. Its documentation
+//! carries the numbers; `degenerate_leg` in this crate's tests carries the
+//! assertions, including the old comparison kept as an equality so that
+//! reintroducing a threshold quietly would move a number somebody has to
+//! argue for.
+//!
+//! What survived is the diagnosis rather than the weight: *which*
+//! directions are weak is worth reporting, and
+//! [`Conditioning::classify`](rigidity_core::observability::Conditioning::classify)
+//! still reports it for a single edge while [`PoseGraph::diagnose`] reports
+//! it for the survey. What conditioning cannot report at all is whether a
+//! registration landed in the right minimum; for that, see
+//! `rigidity_pipeline::median_absolute_residual`.
 //!
 //! # Frames, and the one thing that will go wrong if they are misread
 //!
@@ -26,7 +52,7 @@
 //! here: the ICP updates its pose as `T ← exp(Δξ)·T` and builds its
 //! Jacobian rows from points in the target's frame, so `IcpResult::
 //! information` is already in those coordinates and
-//! [`calibrated_information`] produces its replacement in the same ones. An
+//! [`calibrated_information`] restates it in the same ones. An
 //! information matrix in the wrong frame does not fail loudly — it
 //! converges to a slightly wrong answer, which is the failure mode this
 //! paragraph is here to prevent.
