@@ -32,6 +32,7 @@ use rigidity_core::lie::Se3;
 use rigidity_core::normals::estimate_normals;
 use rigidity_core::observability::{Correspondence, Observability, ObservabilityCriteria, analyse};
 use rigidity_core::voxel::voxel_downsample;
+use rigidity_harness::crop_sector;
 use rigidity_io::{read_csv, read_poses};
 use rigidity_spatial::KdTree;
 
@@ -63,33 +64,6 @@ fn scan_files(directory: &Path) -> Vec<PathBuf> {
             .unwrap_or(usize::MAX)
     });
     files
-}
-
-/// Keeps the points inside an angular sector of half-width `half_width`
-/// radians about azimuth `centre`.
-///
-/// This models a sensor with a limited field of view. The 360° view of a
-/// tripod-mounted scanner almost always yields full observability: both
-/// walls, the floor and the ends are all visible. Real degeneracy appears
-/// when the instrument looks one way — as a lidar on a robot in a tunnel
-/// does.
-fn crop_sector(cloud: &PointCloud, centre: f64, half_width: f64) -> PointCloud {
-    let mut result = PointCloud::with_origin(cloud.origin());
-    for index in 0..cloud.len() {
-        let local = cloud.local(index);
-        let azimuth = local.y.atan2(local.x);
-        let mut delta = azimuth - centre;
-        while delta > std::f64::consts::PI {
-            delta -= std::f64::consts::TAU;
-        }
-        while delta < -std::f64::consts::PI {
-            delta += std::f64::consts::TAU;
-        }
-        if delta.abs() <= half_width {
-            result.push(cloud.point(index));
-        }
-    }
-    result
 }
 
 fn prepare(path: &Path) -> (PointCloud, Vec<Vector3<f64>>, KdTree) {

@@ -9707,6 +9707,7 @@ dependencies = [
  "nalgebra",
  "rayon",
  "rigidity-core",
+ "rigidity-harness",
  "rigidity-io",
  "rigidity-pipeline",
  "rigidity-scenes",
@@ -9732,9 +9733,18 @@ version = "0.1.1"
 dependencies = [
  "approx",
  "rigidity-core",
+ "rigidity-harness",
  "rigidity-io",
  "rigidity-pipeline",
  "thiserror 2.0.20",
+]
+
+[[package]]
+name = "rigidity-harness"
+version = "0.1.1"
+dependencies = [
+ "rigidity-core",
+ "rigidity-pipeline",
 ]
 
 [[package]]

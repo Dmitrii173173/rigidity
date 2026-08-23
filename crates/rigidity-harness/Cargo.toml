@@ -1,0 +1,17 @@
+[package]
+name        = "rigidity-harness"
+description = "What the measurement examples share. Not published."
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+# Never goes to crates.io. It is not part of the library and has no
+# business being depended on by anybody outside this workspace.
+publish = false
+
+[dependencies]
+rigidity-core.workspace = true
+rigidity-pipeline.workspace = true
+
+[lints]
+workspace = true

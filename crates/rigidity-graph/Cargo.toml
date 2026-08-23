@@ -11,6 +11,19 @@ homepage.workspace     = true
 keywords.workspace     = true
 categories.workspace   = true
 
+# The examples that measure against the ETH ASL datasets are not shipped.
+# They need three gigabytes this tarball does not carry — `datasets/fetch.sh`
+# in the repository fetches it — and what they share, the sector crop and the
+# overlap measure, comes from `rigidity-harness`, a workspace crate that is
+# never published, so a reader who unpacked this would get examples that
+# cannot build. The repository is where they live; the README says so.
+exclude = [
+    "examples/eth_survey.rs",
+    "examples/basin.rs",
+    "examples/bias.rs",
+    "examples/closures.rs",
+]
+
 [dependencies]
 # The whole dependency list, and deliberately: this crate is mathematics
 # over `Se3` and `Conditioning`, and anything it needed beyond them would
@@ -25,6 +38,8 @@ approx.workspace = true
 # on. Nothing in `src/` may use these.
 rigidity-io.workspace       = true
 rigidity-pipeline.workspace = true
+# The sector crop, shared with M9's examples so that both cut alike.
+rigidity-harness.workspace  = true
 
 [lints]
 workspace = true

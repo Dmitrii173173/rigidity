@@ -52,6 +52,9 @@ rigidity-io      = { path = "crates/rigidity-io", version = "0.1.1" }
 rigidity-pipeline = { path = "crates/rigidity-pipeline", version = "0.1.1" }
 rigidity-spatial = { path = "crates/rigidity-spatial", version = "0.1.1" }
 rigidity-viz     = { path = "crates/rigidity-viz", version = "0.1.1" }
+# No version, deliberately: a dev-dependency without one is stripped from
+# the manifest `cargo package` writes, so this never reaches crates.io.
+rigidity-harness = { path = "crates/rigidity-harness" }
 
 [workspace.lints.rust]
 unsafe_code     = "forbid"
