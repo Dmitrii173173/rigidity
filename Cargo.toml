@@ -3,7 +3,7 @@ resolver = "3"
 members  = ["crates/*"]
 
 [workspace.package]
-version      = "0.1.1"
+version      = "0.2.0"
 edition      = "2024"
 # Совпадает с rust-toolchain.toml. Резолвер v3 учитывает это поле при
 # выборе версий зависимостей: заниженное значение отсекает свежие крейты.
@@ -45,13 +45,13 @@ approx    = "0.5"
 proptest  = "1.11"
 criterion = "0.8"
 # внутренние
-rigidity-core   = { path = "crates/rigidity-core", version = "0.1.1" }
-rigidity-graph  = { path = "crates/rigidity-graph", version = "0.1.1" }
-rigidity-scenes = { path = "crates/rigidity-scenes", version = "0.1.1" }
-rigidity-io      = { path = "crates/rigidity-io", version = "0.1.1" }
-rigidity-pipeline = { path = "crates/rigidity-pipeline", version = "0.1.1" }
-rigidity-spatial = { path = "crates/rigidity-spatial", version = "0.1.1" }
-rigidity-viz     = { path = "crates/rigidity-viz", version = "0.1.1" }
+rigidity-core   = { path = "crates/rigidity-core", version = "0.2.0" }
+rigidity-graph  = { path = "crates/rigidity-graph", version = "0.2.0" }
+rigidity-scenes = { path = "crates/rigidity-scenes", version = "0.2.0" }
+rigidity-io      = { path = "crates/rigidity-io", version = "0.2.0" }
+rigidity-pipeline = { path = "crates/rigidity-pipeline", version = "0.2.0" }
+rigidity-spatial = { path = "crates/rigidity-spatial", version = "0.2.0" }
+rigidity-viz     = { path = "crates/rigidity-viz", version = "0.2.0" }
 # No version, deliberately: a dev-dependency without one is stripped from
 # the manifest `cargo package` writes, so this never reaches crates.io.
 rigidity-harness = { path = "crates/rigidity-harness" }

@@ -1,6 +1,6 @@
 [package]
 name        = "rigidity-graph"
-description = "Pose-graph optimisation whose edge weights come from each registration's own conditioning."
+description = "Pose-graph optimisation: edge information in calibrated units, with the directions the geometry cannot see left out of it."
 version.workspace      = true
 edition.workspace      = true
 rust-version.workspace = true
