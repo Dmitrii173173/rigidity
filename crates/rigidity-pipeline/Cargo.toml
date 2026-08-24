@@ -15,6 +15,7 @@ categories.workspace   = true
 rigidity-core.workspace    = true
 rigidity-io.workspace      = true
 rigidity-spatial.workspace = true
+rayon.workspace            = true
 thiserror.workspace        = true
 
 [lints]

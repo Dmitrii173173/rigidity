@@ -85,6 +85,11 @@ pub enum Stage {
     Indexing,
     /// Estimating normals.
     Normals,
+    /// Trying the starting poses a global search laid out.
+    ///
+    /// `done` counts screened starts rather than points, so this stage's
+    /// total is small and its steps are large.
+    Searching,
 }
 
 impl Stage {
@@ -95,6 +100,7 @@ impl Stage {
             Self::Downsampling => "downsampling",
             Self::Indexing => "indexing",
             Self::Normals => "normals",
+            Self::Searching => "searching for a start",
         }
     }
 }
@@ -488,6 +494,236 @@ pub fn median_absolute_residual(
     Some(*median)
 }
 
+/// How wide a net [`register_globally`] casts.
+///
+/// The defaults are the configuration measured on the ETH ASL `stairs`
+/// survey, where they recovered every one of the ten edges a cold start
+/// had lost. They are a starting net, not a law: a survey whose stations
+/// are metres apart wants a larger `radius`, and one taken with a tilted
+/// sensor wants more than yaw.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct SearchParams {
+    /// How many rotations about the vertical to try, spread over a full
+    /// turn.
+    ///
+    /// Yaw alone, because a levelled scanner leaves roll and pitch to the
+    /// registration and only the heading genuinely unknown. This is the
+    /// search's main assumption and the first thing to question when it
+    /// fails: on a hand-held or a drone it does not hold.
+    pub yaws: usize,
+    /// Half-width of the grid of horizontal offsets, metres.
+    ///
+    /// Three positions per axis — `-radius`, zero, `+radius` — so the net
+    /// is `yaws × 9` starts wide.
+    pub radius: f64,
+    /// How the clouds are prepared for the screening pass.
+    ///
+    /// Deliberately coarser than the caller's own preparation. Screening
+    /// does not have to finish any start, only to rank them, and a cloud
+    /// at four times the voxel is sixteen times cheaper to walk.
+    pub screen: PrepareParams,
+    /// Iteration cap for the screening pass.
+    pub screen_iterations: usize,
+    /// How many of the screened starts are then refined in full.
+    pub refine: usize,
+}
+
+impl Default for SearchParams {
+    fn default() -> Self {
+        Self {
+            yaws: 12,
+            radius: 0.5,
+            screen: PrepareParams {
+                voxel: 0.20,
+                neighbours: 12,
+            },
+            screen_iterations: 12,
+            refine: 5,
+        }
+    }
+}
+
+/// What [`register_globally`] found, and what it is worth.
+#[derive(Debug, Clone)]
+pub struct Search {
+    /// The registration, refined at the caller's own resolution.
+    pub result: IcpResult,
+    /// Its median absolute residual, metres.
+    ///
+    /// **This is the number that decides whether to believe the answer**,
+    /// and the caller must look at it. A search always returns its best
+    /// candidate; whether the best of a bad set is worth anything is
+    /// settled by comparing this with the sensor's noise, exactly as
+    /// [`median_absolute_residual`] describes.
+    pub median_residual: f64,
+    /// How many starts were tried.
+    pub starts: usize,
+}
+
+/// Registers without being told where to start.
+///
+/// # The problem this solves
+///
+/// ICP needs a starting pose inside the right basin, and a survey normally
+/// has one: the previous leg. The first leg of a survey has none, and any
+/// pair opened on their own has none either. Started from the identity,
+/// ICP converges — reports `converged`, a small residual and a healthy
+/// spectrum — into whatever minimum happens to be nearest, which on the
+/// ETH ASL `stairs` survey was the wrong one for ten of fifty-nine edges,
+/// by as much as 0.46 m.
+///
+/// # How
+///
+/// Nothing is learned and nothing is described. `yaws × 9` starts are laid
+/// out — a turn about the vertical crossed with a coarse grid of
+/// horizontal offsets — every one is run to a short ICP on a deliberately
+/// coarse pair of clouds, and they are ranked. Only [`SearchParams::refine`]
+/// of them are then registered properly, at the caller's own resolution.
+/// The coarse screen is the whole reason this is interactive: it turned 38
+/// seconds into 2 on the measurement below, before any threads.
+///
+/// # What ranks them, and why it has to be this
+///
+/// The median absolute residual, not the RMSE. Picking the candidate whose
+/// surfaces agree most tightly is precisely the mistake this project spent
+/// its stage-three measurements documenting: a wrong minimum agrees
+/// tightly too, and the conditioning report is blind to the difference. The
+/// median residual is the one criterion here calibrated against theodolite
+/// truth, and a global search is only as honest as its selection rule.
+///
+/// # What it was measured on
+///
+/// The ETH ASL `stairs` survey, thirty-one stations, against theodolite
+/// ground truth. Ten of the fifty-nine edges were in a wrong basin from a
+/// cold start, out by 0.10 to 0.46 m. All ten come back within 12 mm, with
+/// a median residual inside the sensor's noise, in one to three seconds an
+/// edge before any parallelism. One survey is one survey.
+///
+/// # What it does not do
+///
+/// It does not promise to find the right minimum, and it must not be read
+/// as if it did. It returns the best candidate it saw, and
+/// [`Search::median_residual`] is how the caller finds out whether that
+/// candidate is worth anything: past the sensor's noise means the search
+/// failed and said so, which is a different thing from the search failing
+/// quietly.
+///
+/// Returns `None` when the clouds never matched at all, at any start.
+pub fn register_globally(
+    moving: &Prepared,
+    fixed: &Prepared,
+    params: &RegisterParams,
+    search: &SearchParams,
+) -> Option<Search> {
+    register_globally_observed(moving, fixed, params, search, |_, _| {
+        ControlFlow::Continue(())
+    })
+}
+
+/// The same, reporting progress and able to stop.
+///
+/// The observer is called from several threads at once, once per screened
+/// start, with the number finished and the number there are. Returning
+/// [`ControlFlow::Break`] abandons the search, which then returns `None`.
+pub fn register_globally_observed<F>(
+    moving: &Prepared,
+    fixed: &Prepared,
+    params: &RegisterParams,
+    search: &SearchParams,
+    observer: F,
+) -> Option<Search>
+where
+    F: Fn(usize, usize) -> ControlFlow<()> + Sync,
+{
+    use rayon::prelude::*;
+    use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+
+    let starts = laid_out_starts(search);
+    if starts.is_empty() {
+        return None;
+    }
+
+    // Coarse copies, made once and shared by every start.
+    let coarse_moving = prepare_cloud(&moving.cloud, &search.screen).ok()?;
+    let coarse_fixed = prepare_cloud(&fixed.cloud, &search.screen).ok()?;
+    let screen = RegisterParams {
+        max_iterations: search.screen_iterations,
+        ..*params
+    };
+
+    let done = AtomicUsize::new(0);
+    let stop = AtomicBool::new(false);
+    // `collect` into a vector preserves the order of `starts`, so the
+    // ranking below does not depend on which thread finished first. The
+    // ICP itself is already independent of the thread count.
+    let screened: Vec<Option<(f64, Se3)>> = starts
+        .par_iter()
+        .map(|start| {
+            if stop.load(Ordering::Relaxed) {
+                return None;
+            }
+            let found =
+                register_pair_observed(&coarse_moving, &coarse_fixed, *start, &screen, |_| {
+                    ControlFlow::Continue(())
+                });
+            let median =
+                median_absolute_residual(&coarse_moving, &coarse_fixed, &found.pose, &screen);
+            let finished = done.fetch_add(1, Ordering::Relaxed) + 1;
+            if observer(finished, starts.len()).is_break() {
+                stop.store(true, Ordering::Relaxed);
+            }
+            median.map(|median| (median, found.pose))
+        })
+        .collect();
+    if stop.load(Ordering::Relaxed) {
+        return None;
+    }
+
+    let mut ranked: Vec<(f64, Se3)> = screened.into_iter().flatten().collect();
+    ranked.sort_by(|left, right| left.0.total_cmp(&right.0));
+
+    // Refine the survivors at the caller's own resolution, and let the same
+    // criterion choose between them again: a start that screened best on a
+    // twenty-centimetre voxel is not always the one that finishes best.
+    let mut best: Option<Search> = None;
+    for (_, start) in ranked.iter().take(search.refine) {
+        let result =
+            register_pair_observed(moving, fixed, *start, params, |_| ControlFlow::Continue(()));
+        let Some(median_residual) = median_absolute_residual(moving, fixed, &result.pose, params)
+        else {
+            continue;
+        };
+        if best
+            .as_ref()
+            .is_none_or(|found| median_residual < found.median_residual)
+        {
+            best = Some(Search {
+                result,
+                median_residual,
+                starts: starts.len(),
+            });
+        }
+    }
+    best
+}
+
+/// The net: a turn about the vertical crossed with a grid of offsets.
+fn laid_out_starts(search: &SearchParams) -> Vec<Se3> {
+    use rigidity_core::lie::So3;
+
+    let mut starts = Vec::with_capacity(search.yaws * 9);
+    for step in 0..search.yaws {
+        let yaw = step as f64 * std::f64::consts::TAU / search.yaws.max(1) as f64;
+        let turn = So3::exp(&Vector3::new(0.0, 0.0, yaw));
+        for x in [-search.radius, 0.0, search.radius] {
+            for y in [-search.radius, 0.0, search.radius] {
+                starts.push(Se3::from_parts(turn, Vector3::new(x, y, 0.0)));
+            }
+        }
+    }
+    starts
+}
+
 /// What the numbers in a report are measured against.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct ReportParams {
@@ -570,6 +806,121 @@ mod tests {
             }
         }
         cloud
+    }
+
+    /// A staircase, and one wall closing off one end of it.
+    ///
+    /// A staircase is the shape this search exists for: shifted by one
+    /// step it lies almost on top of itself, so ICP started anywhere near
+    /// has a wrong minimum to fall into. The wall is what makes the right
+    /// answer unique — an unbounded flight of steps has no right answer,
+    /// and a test on one would be measuring an ambiguity rather than a
+    /// search.
+    ///
+    /// Sampled with a jitter, for the reason recorded above: a regular
+    /// lattice slides into itself and every residual on it measures the
+    /// sampling.
+    fn staircase() -> PointCloud {
+        const STEPS: usize = 12;
+        const TREAD: f64 = 0.30;
+        const RISE: f64 = 0.17;
+        let mut cloud = PointCloud::new();
+        for step in 0..STEPS {
+            let x0 = step as f64 * TREAD;
+            let z0 = step as f64 * RISE;
+            for i in 0..24 {
+                for j in 0..24 {
+                    let jitter = ((i * 31 + j * 13 + step * 7) % 11) as f64 * 0.002;
+                    let across = j as f64 * 0.05 + jitter;
+                    // The tread, and the riser that climbs to the next one.
+                    cloud.push(Vector3::new(x0 + i as f64 * TREAD / 24.0, across, z0));
+                    cloud.push(Vector3::new(
+                        x0 + TREAD,
+                        across,
+                        z0 + i as f64 * RISE / 24.0,
+                    ));
+                }
+            }
+        }
+        // The wall across the top, which no shift along the flight maps
+        // onto itself.
+        for i in 0..40 {
+            for j in 0..40 {
+                let jitter = ((i * 17 + j * 29) % 7) as f64 * 0.003;
+                cloud.push(Vector3::new(
+                    STEPS as f64 * TREAD,
+                    j as f64 * 0.03 + jitter,
+                    STEPS as f64 * RISE + i as f64 * 0.05,
+                ));
+            }
+        }
+        cloud
+    }
+
+    /// The search finds the basin that a cold start misses.
+    ///
+    /// Both halves are asserted, and the first is not a formality: if ICP
+    /// from the identity happened to land correctly, the second assertion
+    /// would pass while testing nothing at all.
+    #[test]
+    fn the_search_finds_a_basin_a_cold_start_misses() {
+        const NOISE: f64 = 0.01;
+        let params = PrepareParams {
+            voxel: 0.03,
+            neighbours: 12,
+        };
+        let fixed = prepare_cloud(&staircase(), &params).expect("the staircase prepares");
+        // A heading nobody told the registration about: fifty degrees, and
+        // a step and a half up the flight with it. Fifty rather than a
+        // multiple of thirty on purpose — the search's net is twelve yaws,
+        // so the nearest start is ten degrees away and the ICP has to close
+        // the rest. A truth sitting exactly on a start would test nothing.
+        let truth = Se3::from_parts(
+            rigidity_core::lie::So3::exp(&Vector3::new(0.0, 0.0, 50f64.to_radians())),
+            Vector3::new(0.45, 0.0, 0.255),
+        );
+        let moved = transform_cloud(&staircase(), &truth.inverse());
+        let moving = prepare_cloud(&moved, &params).expect("the moved staircase prepares");
+
+        let register = RegisterParams::default();
+        let error = |pose: &Se3| (pose.translation() - truth.translation()).norm();
+
+        let cold = register_pair_observed(&moving, &fixed, Se3::identity(), &register, |_| {
+            ControlFlow::Continue(())
+        });
+        let cold_median = median_absolute_residual(&moving, &fixed, &cold.pose, &register)
+            .expect("the cold start matched something");
+        assert!(
+            error(&cold.pose) > 0.10,
+            "the cold start already landed correctly, at {} m — this scene no longer has \
+             the failure the search is for",
+            error(&cold.pose)
+        );
+        assert!(
+            cold_median > NOISE,
+            "the cold start is wrong and its median residual does not say so: {cold_median} m"
+        );
+
+        let search = SearchParams {
+            radius: 0.4,
+            screen: PrepareParams {
+                voxel: 0.12,
+                neighbours: 10,
+            },
+            ..SearchParams::default()
+        };
+        let found = register_globally(&moving, &fixed, &register, &search).expect("a candidate");
+        assert!(
+            error(&found.result.pose) < 0.02,
+            "the search landed {} m from the truth",
+            error(&found.result.pose)
+        );
+        assert!(
+            found.median_residual <= NOISE,
+            "the search's own verdict on itself is {} m, past the noise",
+            found.median_residual
+        );
+        assert_eq!(found.starts, search.yaws * 9);
     }
 
     /// The property the detector rests on: at the pose that is right the

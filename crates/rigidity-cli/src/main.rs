@@ -11,8 +11,9 @@ use clap::{Parser, Subcommand, ValueEnum};
 use rigidity_core::lie::Se3;
 use rigidity_core::observability::Analysis;
 use rigidity_pipeline::{
-    PrepareParams, RegisterParams, ReportParams, analyse_cloud, analyse_registration,
-    median_absolute_residual, prepare, register_pair, transform_cloud,
+    PipelineError, PrepareParams, RegisterParams, ReportParams, SearchParams, analyse_cloud,
+    analyse_registration, median_absolute_residual, prepare, register_globally, register_pair,
+    transform_cloud,
 };
 use rigidity_scenes::{Scene, SceneKind, SceneParams};
 
@@ -82,6 +83,18 @@ enum Command {
         /// Threshold of the robust Huber kernel, metres.
         #[arg(long, default_value_t = 0.1)]
         huber: f64,
+        /// Search for the starting pose instead of assuming the identity.
+        ///
+        /// ICP needs to begin inside the right basin. A survey has the
+        /// previous leg to begin from; a pair on its own has nothing, and
+        /// from the identity the registration settles into whatever
+        /// minimum is nearest — reporting `converged`, a small residual and
+        /// a healthy spectrum from the wrong place. This lays out starts
+        /// over a turn about the vertical and a grid of offsets, screens
+        /// them on a coarse pair of clouds, and keeps the candidate whose
+        /// median residual is smallest. Seconds rather than milliseconds.
+        #[arg(long)]
+        global: bool,
         /// Where to write the transformed source.
         #[arg(long)]
         out: Option<PathBuf>,
@@ -221,6 +234,7 @@ fn run() -> Result<(), Box<dyn Error>> {
             common,
             max_distance,
             huber,
+            global,
             out,
         } => {
             let moving = prepare(&source, &common.prepare())?;
@@ -236,7 +250,18 @@ fn run() -> Result<(), Box<dyn Error>> {
                 huber,
                 ..RegisterParams::default()
             };
-            let result = register_pair(&moving, &fixed, &params);
+            let result = if global {
+                let search = SearchParams::default();
+                let found = register_globally(&moving, &fixed, &params, &search)
+                    .ok_or(PipelineError::NoCorrespondences)?;
+                println!(
+                    "searched {} starting poses, kept the one with the smallest median residual\n",
+                    found.starts
+                );
+                found.result
+            } else {
+                register_pair(&moving, &fixed, &params)
+            };
 
             let translation = result.pose.translation();
             let rotation = result.pose.rotation().log();
