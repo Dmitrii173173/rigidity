@@ -31,7 +31,7 @@ use rigidity_core::nalgebra::Vector3;
 use rigidity_core::normals::estimate_normals_observed;
 use rigidity_core::observability::{Analysis, Correspondence, ObservabilityCriteria, analyse};
 use rigidity_core::voxel::voxel_downsample_observed;
-use rigidity_core::{NeighborSearch, PointCloud};
+use rigidity_core::{Attribute, AttributeData, NeighborSearch, PointCloud};
 use rigidity_spatial::KdTree;
 
 /// Anything that can go wrong between a file and a report.
@@ -777,6 +777,93 @@ pub fn transform_cloud(cloud: &PointCloud, pose: &Se3) -> PointCloud {
     moved
 }
 
+/// Several placed clouds written as one.
+///
+/// Each cloud is carried into a common frame by the pose beside it, and
+/// the result is the union — what a viewer showing them all is drawing,
+/// as a single file. The pairwise case is the useful one: registration
+/// answers *where* the second scan goes, and this is what turns that
+/// answer into something another program can open.
+///
+/// # The frame, and why it is the first cloud's
+///
+/// The result takes the origin of the first cloud given. Coordinates are
+/// held as `f32` offsets from a cloud's origin, so an origin thrown away —
+/// zero, say — costs precision in proportion to how far the survey sits
+/// from it: at four million metres, a `f32` step is a quarter of a metre.
+/// Keeping the first cloud's origin means a merge is exact where the
+/// clouds are, which is the only place it has to be.
+///
+/// # Attributes
+///
+/// A column survives only if **every** cloud has one of that name and the
+/// same type; the rest are dropped. Intensity from one scan and nothing
+/// from the next is not a column, and inventing values to fill the gap
+/// would put numbers in a file that no instrument measured.
+pub fn merge(placed: &[(&PointCloud, Se3)]) -> PointCloud {
+    let Some((first, _)) = placed.first() else {
+        return PointCloud::new();
+    };
+    let total: usize = placed.iter().map(|(cloud, _)| cloud.len()).sum();
+    // Room for all of it up front: a survey merge is tens of millions of
+    // points, and growing into that a doubling at a time copies most of it
+    // several times over. `rebase` on an empty cloud only sets the origin.
+    let mut merged = PointCloud::with_capacity(total);
+    merged.rebase(first.origin());
+    for (cloud, pose) in placed {
+        for index in 0..cloud.len() {
+            merged.push(pose.transform_point(&cloud.point(index)));
+        }
+    }
+
+    // The columns every cloud has, in the first cloud's order. Order rather
+    // than a set, so that merging the same clouds twice writes the same
+    // file.
+    for column in first.attributes() {
+        let mut gathered = match &column.data {
+            AttributeData::F32(_) => AttributeData::F32(Vec::with_capacity(total)),
+            AttributeData::F64(_) => AttributeData::F64(Vec::with_capacity(total)),
+            AttributeData::U8(_) => AttributeData::U8(Vec::with_capacity(total)),
+            AttributeData::U16(_) => AttributeData::U16(Vec::with_capacity(total)),
+            AttributeData::U32(_) => AttributeData::U32(Vec::with_capacity(total)),
+            AttributeData::I32(_) => AttributeData::I32(Vec::with_capacity(total)),
+        };
+        let complete = placed.iter().all(|(cloud, _)| {
+            cloud
+                .attribute(&column.name)
+                .is_some_and(|found| extend(&mut gathered, &found.data))
+        });
+        if !complete || gathered.len() != total {
+            continue;
+        }
+        // The only way this fails is a length disagreement, which the line
+        // above has just ruled out.
+        let _ = merged.push_attribute(Attribute {
+            name: column.name.clone(),
+            data: gathered,
+        });
+    }
+    merged
+}
+
+/// Appends one column to another, if the two are the same kind.
+///
+/// Returns whether it was: a mismatch means the name is shared and the
+/// meaning is not, and a column of intensities appended to a column of
+/// return numbers would be worse than no column at all.
+fn extend(into: &mut AttributeData, from: &AttributeData) -> bool {
+    match (into, from) {
+        (AttributeData::F32(into), AttributeData::F32(from)) => into.extend_from_slice(from),
+        (AttributeData::F64(into), AttributeData::F64(from)) => into.extend_from_slice(from),
+        (AttributeData::U8(into), AttributeData::U8(from)) => into.extend_from_slice(from),
+        (AttributeData::U16(into), AttributeData::U16(from)) => into.extend_from_slice(from),
+        (AttributeData::U32(into), AttributeData::U32(from)) => into.extend_from_slice(from),
+        (AttributeData::I32(into), AttributeData::I32(from)) => into.extend_from_slice(from),
+        _ => return false,
+    }
+    true
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -806,6 +893,65 @@ mod tests {
             }
         }
         cloud
+    }
+
+    /// A merge places every cloud, keeps the columns they share, and drops
+    /// the ones they do not.
+    ///
+    /// Three things are asserted because three things can go wrong quietly.
+    /// The pose must be *applied* — a merge that concatenates raw
+    /// coordinates produces a file that opens, looks like two scans side by
+    /// side, and is wrong. A column present in both must survive with its
+    /// values in the same order as the points. And a column present in only
+    /// one must vanish rather than be padded, since a padded column is a
+    /// measurement nobody made.
+    #[test]
+    fn a_merge_places_the_clouds_and_keeps_only_shared_columns() {
+        let mut first = PointCloud::new();
+        first.push(Vector3::new(1.0, 0.0, 0.0));
+        first.push(Vector3::new(2.0, 0.0, 0.0));
+        first
+            .push_attribute(Attribute {
+                name: "intensity".to_owned(),
+                data: AttributeData::U16(vec![10, 20]),
+            })
+            .expect("two values for two points");
+        first
+            .push_attribute(Attribute {
+                name: "returns".to_owned(),
+                data: AttributeData::U8(vec![1, 1]),
+            })
+            .expect("two values for two points");
+
+        let mut second = PointCloud::new();
+        second.push(Vector3::new(0.0, 0.0, 0.0));
+        second
+            .push_attribute(Attribute {
+                name: "intensity".to_owned(),
+                data: AttributeData::U16(vec![30]),
+            })
+            .expect("one value for one point");
+
+        let shift = Se3::from_parts(
+            rigidity_core::lie::So3::identity(),
+            Vector3::new(0.0, 5.0, 0.0),
+        );
+        let merged = merge(&[(&first, Se3::identity()), (&second, shift)]);
+
+        assert_eq!(merged.len(), 3);
+        assert!(
+            (merged.point(2) - Vector3::new(0.0, 5.0, 0.0)).norm() < 1e-6,
+            "the second cloud was written where it lay rather than where it was placed: {:?}",
+            merged.point(2)
+        );
+        match merged.attribute("intensity").map(|column| &column.data) {
+            Some(AttributeData::U16(values)) => assert_eq!(values, &[10, 20, 30]),
+            other => panic!("intensity did not survive the merge: {other:?}"),
+        }
+        assert!(
+            merged.attribute("returns").is_none(),
+            "a column only one cloud had was carried into the merge"
+        );
     }
 
     /// A staircase, and one wall closing off one end of it.
