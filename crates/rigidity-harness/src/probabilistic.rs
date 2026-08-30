@@ -140,8 +140,20 @@ pub fn probabilistic_information(
             continue;
         }
 
+        // `√w`, so that `contribution contributionᵀ` is `w·vvᵀ` and the sum
+        // is `JᵀWJ`. It was `w` here, which made the sum `JᵀW²J`: every
+        // eigenvalue too small, and by a different factor per direction
+        // because the weights are not uniform.
+        //
+        // The error was found by running the authors' own code
+        // (github.com/ntnu-arl/drpm) on the same correspondences through
+        // `bench-external/drpm_bridge.cpp`. With `w` the two spectra
+        // disagreed by five to twenty per cent; with `√w` they agree to
+        // every digit either program prints. The same convention is what
+        // `icp::lm` and `observability::analyse` have always used, so this
+        // was the one place in the project that squared the weight.
         let row = point_to_plane_row(&point, &normal);
-        let contribution = row * weight;
+        let contribution = row * weight.sqrt();
         hessian += contribution * contribution.transpose();
         residual_square += weight * residual * residual;
 
@@ -164,7 +176,10 @@ pub fn probabilistic_information(
         source
             .fixed_view_mut::<3, 3>(3, 3)
             .copy_from(&normal_covariance[matched]);
-        let covariance = perturbation * source * perturbation.transpose() * (weight * weight);
+        // `w` and not `w²`, for the same reason and from the same place:
+        // this covariance is the noise on a contribution that is itself
+        // weighted once, and `ComputeNoiseEstimate` scales it once.
+        let covariance = perturbation * source * perturbation.transpose() * weight;
 
         noise_sum += covariance;
         rows.push((contribution, covariance));

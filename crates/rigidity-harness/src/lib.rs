@@ -23,9 +23,19 @@ use rigidity_core::PointCloud;
 ///
 /// `half_width` is measured in radians from `centre`, about the sensor's
 /// own vertical axis — a point's azimuth is `atan2(y, x)` in the cloud's
-/// local frame — so the result is the scan as a sensor with that field of
-/// view would have recorded it. A ±40° crop of a corridor scan is a
-/// forward-looking lidar on a robot; the same scan uncropped is a tripod.
+/// **absolute** frame, where the sensor stands at the coordinate origin —
+/// so the result is the scan as a sensor with that field of view would
+/// have recorded it. A ±40° crop of a corridor scan is a forward-looking
+/// lidar on a robot; the same scan uncropped is a tripod.
+///
+/// The frame is the whole of it, and reading `local()` here was wrong.
+/// [`PointCloud::local`] is relative to the cloud's origin, and
+/// `read_csv` puts that origin at the centre of the bounding box so that
+/// global coordinates survive `f32` storage. Azimuth taken there is
+/// measured from an arbitrary point in the room rather than from the
+/// scanner: on the ETH ASL `apartment` a ±40° crop kept 1490 points of
+/// 370277 instead of 50368, on `stairs` it emptied some scans outright,
+/// and in neither case was what it kept a sector of anything.
 ///
 /// The difference is not cosmetic, and it is why this function exists. On
 /// the ETH ASL corridor the uncropped scans are not degenerate at all —
@@ -37,8 +47,8 @@ use rigidity_core::PointCloud;
 pub fn crop_sector(cloud: &PointCloud, centre: f64, half_width: f64) -> PointCloud {
     let mut result = PointCloud::with_origin(cloud.origin());
     for index in 0..cloud.len() {
-        let local = cloud.local(index);
-        let azimuth = local.y.atan2(local.x);
+        let point = cloud.point(index);
+        let azimuth = point.y.atan2(point.x);
         let mut delta = azimuth - centre;
         while delta > std::f64::consts::PI {
             delta -= std::f64::consts::TAU;
@@ -118,6 +128,46 @@ mod tests {
             let point = seam.point(index);
             let off = (point.y.atan2(point.x).abs() - std::f64::consts::PI).abs();
             assert!(off <= 0.1 + 1e-12, "kept a point {off:.3} rad off the seam");
+        }
+    }
+
+    /// The same ring, stored against an origin somewhere else, is the same
+    /// ring — a sector is a property of where the sensor stood, not of the
+    /// number a reader subtracted to make the coordinates fit `f32`.
+    ///
+    /// The test above cannot see the difference: it builds its cloud with
+    /// `PointCloud::new()`, whose origin is zero, and there `local` and
+    /// `point` are the same vector. `read_csv` puts the origin at the
+    /// centre of the bounding box, and every real scan this project crops
+    /// arrives that way.
+    #[test]
+    fn a_sector_does_not_depend_on_where_the_cloud_stores_its_origin() {
+        const COUNT: usize = 360;
+        let ring = |origin: Vector3<f64>| {
+            let mut cloud = PointCloud::with_origin(origin);
+            for step in 0..COUNT {
+                let angle = step as f64 * std::f64::consts::TAU / COUNT as f64;
+                cloud.push(Vector3::new(angle.cos(), angle.sin(), 0.0));
+            }
+            crop_sector(&cloud, 0.0, std::f64::consts::FRAC_PI_4)
+        };
+
+        let centred = ring(Vector3::zeros());
+        let offset = ring(Vector3::new(37.0, -11.0, 4.0));
+        assert_eq!(
+            centred.len(),
+            offset.len(),
+            "the same sector kept {} points about the origin and {} about (37, -11, 4)",
+            centred.len(),
+            offset.len()
+        );
+        for index in 0..offset.len() {
+            let point = offset.point(index);
+            let azimuth = point.y.atan2(point.x);
+            assert!(
+                azimuth.abs() <= std::f64::consts::FRAC_PI_4 + 1e-6,
+                "kept a point at {azimuth:.3} rad"
+            );
         }
     }
 }

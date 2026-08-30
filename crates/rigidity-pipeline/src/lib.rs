@@ -512,10 +512,19 @@ pub struct SearchParams {
     /// fails: on a hand-held or a drone it does not hold.
     pub yaws: usize,
     /// Half-width of the grid of horizontal offsets, metres.
-    ///
-    /// Three positions per axis — `-radius`, zero, `+radius` — so the net
-    /// is `yaws × 9` starts wide.
     pub radius: f64,
+    /// Positions per axis across that half-width, so the net is
+    /// `yaws × grid²` starts wide.
+    ///
+    /// Three is the default and lays the offsets at `-radius`, zero and
+    /// `+radius`. It is a knob rather than a constant because of what the
+    /// survey measurement found: of the edges the search lost without
+    /// saying so, some are unresolvable — the wrong place fits as well as
+    /// the right one, and no criterion on residuals could choose — while
+    /// the rest are edges the net simply never reached. Only the first kind
+    /// is a limit. Widening the net is how the second kind is told from the
+    /// first, and it cannot be done from the outside without this.
+    pub grid: usize,
     /// How the clouds are prepared for the screening pass.
     ///
     /// Deliberately coarser than the caller's own preparation. Screening
@@ -533,6 +542,7 @@ impl Default for SearchParams {
         Self {
             yaws: 12,
             radius: 0.5,
+            grid: 3,
             screen: PrepareParams {
                 voxel: 0.20,
                 neighbours: 12,
@@ -574,7 +584,7 @@ pub struct Search {
 ///
 /// # How
 ///
-/// Nothing is learned and nothing is described. `yaws × 9` starts are laid
+/// Nothing is learned and nothing is described. `yaws × grid²` starts are laid
 /// out — a turn about the vertical crossed with a coarse grid of
 /// horizontal offsets — every one is run to a short ICP on a deliberately
 /// coarse pair of clouds, and they are ranked. Only [`SearchParams::refine`]
@@ -711,12 +721,24 @@ where
 fn laid_out_starts(search: &SearchParams) -> Vec<Se3> {
     use rigidity_core::lie::So3;
 
-    let mut starts = Vec::with_capacity(search.yaws * 9);
+    // Offsets spread evenly across the full width, so `grid = 3` is exactly
+    // the `-radius`, zero, `+radius` this laid out before the count became a
+    // parameter, and a single position is the centre rather than an edge.
+    let grid = search.grid.max(1);
+    let offsets: Vec<f64> = if grid == 1 {
+        vec![0.0]
+    } else {
+        (0..grid)
+            .map(|i| -search.radius + 2.0 * search.radius * i as f64 / (grid - 1) as f64)
+            .collect()
+    };
+
+    let mut starts = Vec::with_capacity(search.yaws * grid * grid);
     for step in 0..search.yaws {
         let yaw = step as f64 * std::f64::consts::TAU / search.yaws.max(1) as f64;
         let turn = So3::exp(&Vector3::new(0.0, 0.0, yaw));
-        for x in [-search.radius, 0.0, search.radius] {
-            for y in [-search.radius, 0.0, search.radius] {
+        for &x in &offsets {
+            for &y in &offsets {
                 starts.push(Se3::from_parts(turn, Vector3::new(x, y, 0.0)));
             }
         }
