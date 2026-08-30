@@ -37,10 +37,10 @@
 //!   residual is inside the sensor noise. At the right minimum the
 //!   residuals are the sensor's; at a wrong one they are the geometry's,
 //!   and the shape differs even where the RMSE does not.
-//! - **restart spread**: register again from six perturbed starts and take
+//! - **restart spread**: register again from nine perturbed starts and take
 //!   the largest disagreement. This asks the question directly rather than
-//!   by proxy — a minimum that six pushes all fall back into is a wide one.
-//!   It costs six extra registrations per edge and is the only candidate
+//!   by proxy — a minimum that nine pushes all fall back into is a wide one.
+//!   It costs nine extra registrations per edge and is the only candidate
 //!   here that does.
 //! - **cycle error**: the survey has triangles — `i→i+1`, `i+1→i+2` and the
 //!   skip-one `i→i+2` — and composing the two legs should return the third.
@@ -418,9 +418,12 @@ fn measure(
         std::ops::ControlFlow::Continue(())
     });
 
-    // The restarts. Six pushes, three in translation and three in rotation,
-    // applied on the left in the target's frame — the same side the ICP
-    // updates on, so a push of PUSH metres is PUSH metres of the answer.
+    // The restarts. Nine pushes: both signs along each translation axis and
+    // one about each rotation axis, applied on the left in the target's
+    // frame — the same side the ICP updates on, so a push of PUSH metres is
+    // PUSH metres of the answer. Nine and not six; the count is the whole
+    // cost of this detector and the reason to prefer the residual when it
+    // cannot be paid, so it is worth stating correctly.
     let mut restart: f64 = 0.0;
     for axis in 0..6 {
         for sign in [1.0, -1.0] {
