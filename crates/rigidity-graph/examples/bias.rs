@@ -38,6 +38,7 @@
 //! ```text
 //! cargo run --release -p rigidity-graph --example bias -- <directory> [pairs]
 //! RIGIDITY_INIT_SIGMA=0.10 …   # how far the initialisations are thrown
+//! RIGIDITY_ALL_PAIRS=1 …       # every combination of stations, not the legs
 //! ```
 
 use std::path::{Path, PathBuf};
@@ -75,6 +76,23 @@ fn main() {
         .and_then(|text| text.parse::<f64>().ok())
         .unwrap_or(INIT_TRANSLATION);
 
+    // Which pairs to register. A walked survey has legs: station i to
+    // station i + 1, and stations further apart share too little of a room
+    // to be registered at all. A set of terrestrial scans is not walked —
+    // the ETH TLS stations stand around one office, and the benchmark ships
+    // a reference for every one of the ten combinations of its five, which
+    // is what its own `pairs.txt` names as the pairs to register. Taking
+    // only the four consecutive ones there discards six pairs whose truth
+    // is already on disk, and six pairs is the difference between an
+    // anecdote and a sample.
+    let legs: Vec<(usize, usize)> = if std::env::var("RIGIDITY_ALL_PAIRS").is_ok() {
+        (0..=pairs)
+            .flat_map(|from| (from + 1..=pairs).map(move |to| (from, to)))
+            .collect()
+    } else {
+        (0..pairs).map(|index| (index, index + 1)).collect()
+    };
+
     let truth = read_truth(&directory.join("pose_scanner_leica.csv"), pairs + 1);
     let prepared = read_scans(&directory, pairs + 1);
     let params = RegisterParams::default();
@@ -92,9 +110,11 @@ fn main() {
         "\n pair    bias    scatter   ratio   predicted   rmse   overlap  median    κ     step"
     );
     let mut rows: Vec<[f64; 11]> = Vec::new();
-    for index in 0..pairs {
-        let exact = truth[index].inverse() * truth[index + 1];
-        let mut rng = Rng::new(0x5EED + index as u64);
+    for (place, &(from, to)) in legs.iter().enumerate() {
+        let exact = truth[from].inverse() * truth[to];
+        // Seeded by position, which in the walked case is the leg index, so
+        // the draws are the ones the earlier tables were measured from.
+        let mut rng = Rng::new(0x5EED + place as u64);
 
         let mut errors: Vec<Vector6<f64>> = Vec::new();
         for _ in 0..DRAWS {
@@ -105,8 +125,8 @@ fn main() {
             }
             let start = Se3::exp(&twist) * exact;
             let result = register_pair_observed(
-                &prepared[index + 1],
-                &prepared[index],
+                &prepared[to],
+                &prepared[from],
                 start,
                 &params,
                 quiet,
@@ -122,15 +142,15 @@ fn main() {
         // What the project would have predicted, and what a system without
         // truth can see about this pair.
         let settled = register_pair_observed(
-            &prepared[index + 1],
-            &prepared[index],
+            &prepared[to],
+            &prepared[from],
             exact,
             &params,
             quiet,
         );
         let analysis = analyse_registration(
-            &prepared[index + 1],
-            &prepared[index],
+            &prepared[to],
+            &prepared[from],
             &settled.pose,
             &params,
         )
@@ -166,6 +186,34 @@ fn main() {
         let strongest = (0..6)
             .min_by(|a, b| spreads[*a].total_cmp(&spreads[*b]))
             .expect("six");
+
+        // `RIGIDITY_DUMP_RUNS` writes the individual draws instead of only
+        // the two numbers they reduce to. A mean and a standard deviation
+        // cannot show that twenty-four starts landed on top of each other
+        // in the wrong place, and that is the whole claim.
+        //
+        // The plane is the two least-determined directions, and the
+        // coordinates are theirs: the prediction is diagonal in this basis,
+        // so an ellipse drawn from `spreads` is axis-aligned and needs no
+        // covariance anyone has to trust. `component` and `uncertainty`
+        // both return metres at the radius of gyration, so the cluster and
+        // the ellipse are in the same units.
+        if std::env::var("RIGIDITY_DUMP_RUNS").is_ok() {
+            let mut order: Vec<usize> = (0..6).collect();
+            order.sort_by(|a, b| spreads[*b].total_cmp(&spreads[*a]));
+            let (first, second) = (order[0], order[1]);
+            println!(
+                "PLANE,{place},{first},{second},{:.9},{:.9}",
+                spreads[first], spreads[second]
+            );
+            for error in &errors {
+                println!(
+                    "DRAW,{place},{:.9},{:.9}",
+                    analysis.conditioning.component(first, *error),
+                    analysis.conditioning.component(second, *error)
+                );
+            }
+        }
         let along_weak = unit.dot(&analysis.conditioning.direction(weakest)).abs();
         let along_strong = unit.dot(&analysis.conditioning.direction(strongest)).abs();
         let travel = {
@@ -190,14 +238,14 @@ fn main() {
             .iter()
             .fold(0.0f64, |worst, spread| worst.max(*spread));
         let shared = overlap(
-            &prepared[index + 1],
-            &prepared[index],
+            &prepared[to],
+            &prepared[from],
             &settled.pose,
             &params,
         );
         let median = median_absolute_residual(
-            &prepared[index + 1],
-            &prepared[index],
+            &prepared[to],
+            &prepared[from],
             &settled.pose,
             &params,
         )
@@ -206,7 +254,8 @@ fn main() {
         let step = exact.translation().norm();
 
         println!(
-            "  {index:2}   {bias:.4}   {scatter:.4}   {:5.1}   {predicted:.4}    {:.3}  {shared:.3}   {median:.4}  {condition:5.2}  {step:.3}",
+            " {:>5}   {bias:.4}   {scatter:.4}   {:5.1}   {predicted:.4}    {:.3}  {shared:.3}   {median:.4}  {condition:5.2}  {step:.3}",
+            format!("{from}-{to}"),
             bias / scatter.max(1e-9),
             settled.rmse
         );
@@ -243,8 +292,16 @@ fn main() {
     );
 
     // Where it points, which decides whether it can be corrected at all.
-    // A direction drawn at random in six dimensions has |cos| ≈ 0.36
-    // against any fixed axis; anything near that is no alignment.
+    // The six directions are columns of a singular-vector matrix, so they
+    // are orthonormal and the null is the plain one. One direction drawn at
+    // random in six dimensions has a median |cos| of 0.309 against a fixed
+    // axis — but that is not the figure to read the lines below against.
+    // What is printed is `values[n / 2]`, the upper of the two middle order
+    // statistics, which sits above the median it estimates: its null is
+    // 0.337 over twelve pairs and 0.343 over ten, with a standard deviation
+    // near 0.10 in both. Two million draws give those. Anything within a
+    // deviation of them is no alignment, and the pairs of one sequence are
+    // not independent besides — consecutive pairs share a scan.
     println!("\nthe bias direction, |cos| against something the geometry names:");
     for (offset, name) in [
         (8usize, "the weakest direction"),
@@ -343,7 +400,13 @@ fn read_scans(directory: &Path, count: usize) -> Vec<Prepared> {
     println!("reading {count} scans");
     (0..count)
         .map(|index| {
-            let path = directory.join(format!("Hokuyo_{index}.csv"));
+            // `RIGIDITY_SCAN_EXT` because a second sensor writes a second
+            // format: the ETH ASL scans are CSV and the ETH TLS scans are
+            // binary PLY, and `rigidity_io::read` already dispatches on the
+            // extension. The name stays `Hokuyo_<i>` for both, which is a
+            // small lie about the instrument and a large saving in code.
+            let extension = std::env::var("RIGIDITY_SCAN_EXT").unwrap_or_else(|_| "csv".into());
+            let path = directory.join(format!("Hokuyo_{index}.{extension}"));
             let raw = rigidity_io::read(&path).unwrap_or_else(|error| {
                 eprintln!("{}: {error}", path.display());
                 std::process::exit(1);
