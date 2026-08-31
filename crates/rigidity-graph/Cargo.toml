@@ -13,15 +13,25 @@ categories.workspace   = true
 
 # The examples that measure against the ETH ASL datasets are not shipped.
 # They need three gigabytes this tarball does not carry — `datasets/fetch.sh`
-# in the repository fetches it — and what they share, the sector crop and the
-# overlap measure, comes from `rigidity-harness`, a workspace crate that is
-# never published, so a reader who unpacked this would get examples that
-# cannot build. The repository is where they live; the README says so.
+# in the repository fetches it — so a reader who unpacked this would get
+# examples with nothing to run them on. Some of them would not even build:
+# what several share, the sector crop and the overlap measure, comes from
+# `rigidity-harness`, a workspace crate that is never published, and a
+# dev-dependency without a version is cut out of the packaged manifest.
+# The repository is where they live; the README says so.
+#
+# Every example added here has to be added to this list too. That is not a
+# convention anybody remembers: `drpm_dump`, `global` and `residuals` each
+# arrived without it, and the tarball carried all three until the line in
+# RELEASING.md that counts them was run again.
 exclude = [
     "examples/eth_survey.rs",
     "examples/basin.rs",
     "examples/bias.rs",
     "examples/closures.rs",
+    "examples/drpm_dump.rs",
+    "examples/global.rs",
+    "examples/residuals.rs",
 ]
 
 [dependencies]
