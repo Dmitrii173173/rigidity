@@ -58,7 +58,8 @@ use rigidity_core::nalgebra::{Matrix3, Matrix4, Vector3, Vector6};
 use rigidity_core::neighbors::NeighborSearch;
 use rigidity_harness::crop_sector;
 use rigidity_pipeline::{
-    PrepareParams, Prepared, RegisterParams, prepare_cloud, register_pair_observed,
+    PrepareParams, Prepared, RegisterParams, median_absolute_residual, prepare_cloud,
+    register_pair_observed,
 };
 
 /// Sensor noise along the normal, metres. The Hokuyo UTM-30LX, as M9 took it.
@@ -88,6 +89,14 @@ struct EdgeCase {
     rmse: f64,
     overlap: f64,
     inlier: f64,
+    /// The median absolute point-to-plane residual at the pose found.
+    ///
+    /// The cheap rule, and the one the paper reports beside the restart: at
+    /// the right minimum half the residuals fall inside the sensor's own
+    /// error, at a wrong one they do not. It costs one pass where the
+    /// restart costs nine registrations, and it was measured here only
+    /// after the table that compares the two was written without it.
+    median: f64,
     restart: f64,
     cycle: f64,
 }
@@ -153,10 +162,12 @@ fn main() {
         far.iter().filter(|flag| **flag).count(),
     );
 
-    println!("\n  edge   error     rmse   rmse/med  overlap  inliers  restart   cycle   basin");
+    println!(
+        "\n  edge   error     rmse   rmse/med  overlap  inliers   median  restart   cycle   basin"
+    );
     for (case, flag) in cases.iter().zip(&lost) {
         println!(
-            "  {:2}→{:2}  {:7.4}  {:7.4}  {:7.2}  {:7.3}  {:7.3}  {:7.4}  {:6.4}   {}",
+            "  {:2}→{:2}  {:7.4}  {:7.4}  {:7.2}  {:7.3}  {:7.3}  {:7.4}  {:7.4}  {:6.4}   {}",
             case.from,
             case.to,
             case.error,
@@ -164,6 +175,7 @@ fn main() {
             case.rmse / median_rmse,
             case.overlap,
             case.inlier,
+            case.median,
             case.restart,
             case.cycle,
             if *flag { "LOST" } else { "" }
@@ -173,7 +185,7 @@ fn main() {
     // Each candidate swept as a detector. `higher_is_worse` says which side
     // of the threshold the suspicion lies on, and the sweep runs over the
     // observed values themselves so that no grid resolution is invented.
-    let detectors: [(&str, Vec<f64>, bool); 6] = [
+    let detectors: [(&str, Vec<f64>, bool); 7] = [
         (
             // What the viewer already does. It was never measured against
             // the truth, and the point of the list below is that it now is.
@@ -195,6 +207,11 @@ fn main() {
             "inlier share",
             cases.iter().map(|case| case.inlier).collect(),
             false,
+        ),
+        (
+            "median residual",
+            cases.iter().map(|case| case.median).collect(),
+            true,
         ),
         (
             "restart spread",
@@ -322,7 +339,7 @@ fn main() {
 /// Read off the plain at 360° with sixteen stations, rounded into the
 /// middle of the gap that survey shows, and then left alone. A threshold
 /// tuned on the run it is reported on is not a measurement.
-const FIXED: [f64; 6] = [3.0 * NOISE, 1.50, 0.960, 0.500, 0.050, 0.050];
+const FIXED: [f64; 7] = [3.0 * NOISE, 1.50, 0.960, 0.500, NOISE, 0.050, 0.050];
 
 /// The interval one class occupies, or `None` if the class is empty.
 fn range(values: &[f64], lost: &[bool], want_lost: bool) -> Option<(f64, f64)> {
@@ -442,6 +459,8 @@ fn measure(
     }
 
     let (overlap, inlier) = residual_shape(&prepared[to], &prepared[from], &result.pose, params);
+    let median = median_absolute_residual(&prepared[to], &prepared[from], &result.pose, params)
+        .unwrap_or(f64::INFINITY);
     let expected = truth[from].inverse() * truth[to];
     EdgeCase {
         from,
@@ -451,6 +470,7 @@ fn measure(
         rmse: result.rmse,
         overlap,
         inlier,
+        median,
         restart,
         cycle: 0.0,
     }
