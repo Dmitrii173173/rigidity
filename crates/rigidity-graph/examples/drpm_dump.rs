@@ -83,8 +83,19 @@ fn main() {
         let c = covariances[matched];
         println!(
             "{:.9},{:.9},{:.9},{:.9},{:.9},{:.9},{:.9},{:.12},{:.12},{:.12},{:.12},{:.12},{:.12}",
-            point.x, point.y, point.z, normal.x, normal.y, normal.z, weight,
-            c[(0, 0)], c[(0, 1)], c[(0, 2)], c[(1, 1)], c[(1, 2)], c[(2, 2)]
+            point.x,
+            point.y,
+            point.z,
+            normal.x,
+            normal.y,
+            normal.z,
+            weight,
+            c[(0, 0)],
+            c[(0, 1)],
+            c[(0, 2)],
+            c[(1, 1)],
+            c[(1, 2)],
+            c[(2, 2)]
         );
         kept += 1;
     }

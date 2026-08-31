@@ -124,13 +124,8 @@ fn main() {
                 twist[axis + 3] = rng.normal(INIT_ROTATION);
             }
             let start = Se3::exp(&twist) * exact;
-            let result = register_pair_observed(
-                &prepared[to],
-                &prepared[from],
-                start,
-                &params,
-                quiet,
-            );
+            let result =
+                register_pair_observed(&prepared[to], &prepared[from], start, &params, quiet);
             errors.push((exact.inverse() * result.pose).log());
         }
 
@@ -141,20 +136,9 @@ fn main() {
 
         // What the project would have predicted, and what a system without
         // truth can see about this pair.
-        let settled = register_pair_observed(
-            &prepared[to],
-            &prepared[from],
-            exact,
-            &params,
-            quiet,
-        );
-        let analysis = analyse_registration(
-            &prepared[to],
-            &prepared[from],
-            &settled.pose,
-            &params,
-        )
-        .expect("the pair analyses");
+        let settled = register_pair_observed(&prepared[to], &prepared[from], exact, &params, quiet);
+        let analysis = analyse_registration(&prepared[to], &prepared[from], &settled.pose, &params)
+            .expect("the pair analyses");
 
         // Bias and scatter are taken in the coordinates the spread lives in
         // — metres of point displacement at the radius of gyration — so
@@ -237,19 +221,10 @@ fn main() {
             .uncertainty(criteria.noise_sigma)
             .iter()
             .fold(0.0f64, |worst, spread| worst.max(*spread));
-        let shared = overlap(
-            &prepared[to],
-            &prepared[from],
-            &settled.pose,
-            &params,
-        );
-        let median = median_absolute_residual(
-            &prepared[to],
-            &prepared[from],
-            &settled.pose,
-            &params,
-        )
-        .unwrap_or(f64::NAN);
+        let shared = overlap(&prepared[to], &prepared[from], &settled.pose, &params);
+        let median =
+            median_absolute_residual(&prepared[to], &prepared[from], &settled.pose, &params)
+                .unwrap_or(f64::NAN);
         let condition = analysis.conditioning.condition_number();
         let step = exact.translation().norm();
 
