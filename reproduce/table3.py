@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
-"""Свёртка логов eth_survey в Table III статьи."""
+"""Fold the eth_survey logs into Table 3 of the paper.
+
+A win is an improvement of the worst station by more than MARGIN. The paper
+states 15 per cent and the caption of Table 3 says so; the bench itself counts
+any improvement at all, which counts arithmetic noise, and that count is kept
+here as a second column so the difference stays visible. Pass another margin as
+the second argument to recompute all five rows.
+"""
 import re, os, sys
 RES = sys.argv[1]
+MARGIN = float(sys.argv[2]) if len(sys.argv) > 2 else 0.15   # Table 3 of the paper
 SEQS=["apartment","hauptgebaude","plain","stairs","gazebo_summer","gazebo_winter","wood_summer","wood_autumn"]
 FOVS=[360,90,60,40,30]
 WORST=re.compile(r"^\s*([^:]{1,24}):\s+worst\s+([\d.]+) m", re.M)
@@ -41,13 +49,18 @@ for s in SEQS:
 names={"threshold":"Threshold on predicted spread","floor":"Additive floor",
        "probabilistic":"Probabilistic attenuation","s11":"Floor from the measured bias",
        "no_spectrum":"Discard the spectrum"}
-paper={"threshold":(97,16),"floor":(360,52),"probabilistic":(40,14),"s11":(40,18),"no_spectrum":(40,10)}
-print(f"{'':<32}{'сравн.':>7}{'лучше':>7}{'best':>7}{'worst':>8}   {'в статье':>12}")
+# comparisons and wins at MARGIN=0.15, as Table 3 prints them
+paper={"threshold":(98,3),"floor":(360,0),"probabilistic":(40,5),"s11":(40,0),"no_spectrum":(40,0)}
+print(f"a win is an improvement of the worst station by more than {MARGIN:.0%}\n")
+print(f"{'':<32}{'compar.':>8}{'wins':>6}{'any':>5}{'best':>7}{'worst':>8}   {'paper':>9}")
 TC=TB=0
 for k in ["threshold","floor","probabilistic","s11","no_spectrum"]:
-    v=rows[k]; n=len(v); b=sum(1 for r in v if r<0.9995); pn,pb=paper[k]
+    v=rows[k]; n=len(v)
+    b=sum(1 for r in v if r < 1.0 - MARGIN)          # wins at the stated margin
+    any_=sum(1 for r in v if r < 0.9995)             # what the bench itself would call better
+    pn,pb=paper[k]
     mk="✓" if (n,b)==(pn,pb) else ("~" if n==pn else "≠")
-    print(f"{names[k]:<32}{n:>7}{b:>7}{min(v):>7.2f}{max(v):>8.1f}   {pn:>5}/{pb}  {mk}")
+    print(f"{names[k]:<32}{n:>8}{b:>6}{any_:>5}{min(v):>7.2f}{max(v):>8.1f}   {pn:>4}/{pb}  {mk}")
     TC+=n; TB+=b
-print(f"{'ИТОГО':<32}{TC:>7}{TB:>7}   {'577/110':>12}")
-print(f"ячеек порога {cells}, не сравнения {notcomp}")
+print(f"{'total':<32}{TC:>8}{TB:>6}   {'578/8':>21}")
+print(f"threshold cells {cells}, not comparisons {notcomp}")

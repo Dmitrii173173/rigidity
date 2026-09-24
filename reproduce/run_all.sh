@@ -1,10 +1,12 @@
 #!/bin/sh
-# Полный пересчёт четырёх стендов на восьми последовательностях ETH ASL.
-# Условия взяты из подписей к таблицам статьи:
-#   Table III  eth_survey  30 станций, пять полей зрения
-#   Table IV   basin       30 станций, три поля зрения (360, ±90, ±40)
-#   Table V    global      все станции, 360°
-#   V-B        real_data   360°, поле зрения записано
+# Re-run the four benches over the eight ETH ASL sequences. The conditions are
+# the ones the table captions of the paper state:
+#   Table 3        eth_survey  30 stations, five fields of view
+#   Table 4        basin       30 stations, three fields of view (360, ±90, ±40)
+#   Table 5        global      every station, 360°
+#   Section 5.2    real_data   360°, the field of view recorded
+# Log names keep the tags the figure pipeline also reads: tIII_ is Table 3,
+# tIV_ is Table 4, tV_ is Table 5, vb_ is Section 5.2.
 set -u
 cd "$(dirname "$0")"
 R="$(pwd)/results"; mkdir -p "$R"
@@ -26,7 +28,7 @@ seq_dir() {
 }
 stations() { ls "$1"/Hokuyo_*.csv 2>/dev/null | wc -l | tr -d ' '; }
 
-run() { # имя_лога команда...
+run() { # log_name command...
   log="$R/$1.log"; shift
   start=$(date +%s)
   "$@" > "$log" 2>&1
@@ -36,26 +38,26 @@ run() { # имя_лога команда...
 
 SEQS="plain hauptgebaude apartment stairs gazebo_summer gazebo_winter wood_summer wood_autumn"
 
-echo "══ V-B (real_data), 360°, 30 пар ══"
-for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: НЕТ ДАННЫХ"; continue; }
+echo "══ Section 5.2 (real_data), 360°, 30 pairs ══"
+for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: NO DATA"; continue; }
   RIGIDITY_SECTOR= run "vb_$s" "$BIN/real_data" "$d" 30; done
 
-echo "══ Table IV (basin), 30 станций ══"
-for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: НЕТ ДАННЫХ"; continue; }
+echo "══ Table 4 (basin), 30 stations ══"
+for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: NO DATA"; continue; }
   for fov in 360 90 40; do
     if [ "$fov" = 360 ]; then unset RIGIDITY_SECTOR; else RIGIDITY_SECTOR=$fov; export RIGIDITY_SECTOR; fi
     run "tIV_${s}_${fov}" "$BIN/basin" "$d" 30
   done; unset RIGIDITY_SECTOR; done
 
-echo "══ Table III (eth_survey), 30 станций ══"
-for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: НЕТ ДАННЫХ"; continue; }
+echo "══ Table 3 (eth_survey), 30 stations ══"
+for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: NO DATA"; continue; }
   for fov in 360 90 60 40 30; do
     if [ "$fov" = 360 ]; then unset RIGIDITY_SECTOR; else RIGIDITY_SECTOR=$fov; export RIGIDITY_SECTOR; fi
     run "tIII_${s}_${fov}" "$BIN/eth_survey" "$d" 30
   done; unset RIGIDITY_SECTOR; done
 
-echo "══ Table V (global), все станции, 360° ══"
-for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: НЕТ ДАННЫХ"; continue; }
+echo "══ Table 5 (global), every station, 360° ══"
+for s in $SEQS; do d=$(seq_dir "$s"); [ -n "$d" ] || { echo "  $s: NO DATA"; continue; }
   run "tV_$s" "$BIN/global" "$d" "$(stations "$d")"; done
 
-echo "══ готово ══"
+echo "══ done ══"
