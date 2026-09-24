@@ -1,0 +1,98 @@
+[
+ [
+  "OpenAlex",
+  "M main A AND B AND C",
+  "2026-09-23",
+  107
+ ],
+ [
+  "OpenAlex",
+  "S1 loop closure verification",
+  "2026-09-23",
+  3
+ ],
+ [
+  "OpenAlex",
+  "S2 registration failure",
+  "2026-09-23",
+  56
+ ],
+ [
+  "OpenAlex",
+  "S3 alignment verification",
+  "2026-09-23",
+  23
+ ],
+ [
+  "OpenAlex",
+  "S4 degeneracy detection",
+  "2026-09-23",
+  10
+ ],
+ [
+  "OpenAlex",
+  "S5 introspective",
+  "2026-09-23",
+  120
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor Censi 2007",
+  "2026-09-23",
+  "forward 224 (+1 via OpenCitations of 150), backward 13"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor Zhang 2016",
+  "2026-09-23",
+  "forward 278 (+3 via OpenCitations of 214), backward 26"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor CELLO-3D 2019",
+  "2026-09-23",
+  "forward 1 (+20 via OpenCitations of 44), backward 28"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor Brossard 2020",
+  "2026-09-23",
+  "forward 68 (+1 via OpenCitations of 62), backward 28"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor X-ICP 2024",
+  "2026-09-23",
+  "forward 134 (+2 via OpenCitations of 86), backward 59"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor OverlapNet 2020",
+  "2026-09-23",
+  "forward 234 (+2 via OpenCitations of 202), backward 26"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor TBV 2023",
+  "2026-09-23",
+  "forward 29 (+1 via OpenCitations of 24), backward 43"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor CorAl 2022",
+  "2026-09-23",
+  "forward 19 (+0 via OpenCitations of 17), backward 51"
+ ],
+ [
+  "OpenAlex+OpenCitations",
+  "anchor Iversen 2017",
+  "2026-09-23",
+  "forward 29 (+0 via OpenCitations of 20), backward 12"
+ ],
+ [
+  "arXiv",
+  "protocol string",
+  "2026-09-23",
+  8
+ ]
+]
