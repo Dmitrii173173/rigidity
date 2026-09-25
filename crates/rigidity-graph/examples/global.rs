@@ -329,7 +329,12 @@ fn read_scans(directory: &Path, stations: usize) -> Vec<Prepared> {
     println!("reading {stations} scans");
     (0..stations)
         .map(|index| {
-            let path = directory.join(format!("Hokuyo_{index}.csv"));
+            // `RIGIDITY_SCAN_EXT` as in `bias.rs`: the ETH TLS scans are
+            // binary PLY, laid out as `Hokuyo_<i>.ply` by
+            // `datasets/tls/prepare_tls.py`, and `rigidity_io::read`
+            // dispatches on the extension.
+            let extension = std::env::var("RIGIDITY_SCAN_EXT").unwrap_or_else(|_| "csv".into());
+            let path = directory.join(format!("Hokuyo_{index}.{extension}"));
             let raw = rigidity_io::read(&path).unwrap_or_else(|error| {
                 eprintln!("{}: {error}", path.display());
                 std::process::exit(1);

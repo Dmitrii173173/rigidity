@@ -4,9 +4,16 @@
 # Rerun recordings
 *.rrd
 
-# Datasets and generated demo data are not part of the repository
+# Datasets and generated demo data are not part of the repository; the scripts
+# that fetch and lay out the datasets are, since the paper and reproduce/ name them
 /data
-/datasets
+/datasets/*
+!/datasets/*.sh
+!/datasets/tls/
+/datasets/tls/*
+!/datasets/tls/*.sh
+!/datasets/tls/*.py
+!/datasets/tls/urls.txt
 /demo
 /bench-external/build
 /bench-external/data

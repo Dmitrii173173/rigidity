@@ -1,0 +1,1409 @@
+0	W2000969939	2010	F	
+1	W4389802948	2023	S5	
+2	W249260099	2013	F	(DCT-FY08) Target Detection Using Multiple Modality Airborne and Ground Based Sensors
+3	W2914921243	2019	B	1-Day Learning, 1-Year Localization: Long-Term LiDAR Localization Using Scan Context Image
+4	W4416650095	2025	F	3-D LiDAR-Aided GNSS NLOS Mitigation for Reliable GNSS-RTK Positioning in Urban Canyons
+5	W4398151456	2024	F	3-D LiDAR-Based Place Recognition Techniques: A Review of the Past Ten Years
+6	W187519708	2006	M	3D Content-Based Model Matching using Geometric Features
+7	W2533262511	2016	F	3D indoor modeling using a hand-held embedded system with multiple laser range scanners
+8	W2152864241	2011	B	3D is here: Point Cloud Library (PCL)
+9	W4406169074	2025	F	3D LiDAR SLAM for natural guided navigation of automated guided vehicles in unstructured scenes
+10	W4412171280	2025	F	3D LiDAR SLAM for Roadheader in Coal Mines
+11	W2953205834	2019	B	3D LiDAR-Based Global Localization Using Siamese Neural Network
+12	W4320038530	2023	F	3D LiDAR-Based Localization Methods: An Overview
+13	W4387641894	2016	F	3D mapping and path planning from range data
+14	W4392545523	2024	F	3D point cloud-based place recognition: a survey
+15	W1987234359	2014	F	3D semantic interpretation for robot perception inside office environments
+16	W4396512524	2024	F	3D ToF LiDAR for Mobile Robotics in Harsh Environments: A Review
+17	W4214762362	2022	F	3D-CSTM: A 3D continuous spatio-temporal mapping method
+18	W7154608350	2026	F	3D-IMB-APDR: Inertial-Geomagnetic-Barometric-Based Adaptive Infrastructure-Free 3D Pedestrian Dead Reckoning Method
+19	W7206191963	2026	F	4D Radar-Inertial Odometry for Orchard Environments
+20	W2396993951	2011	M	[Experimental study of three dimensional navigation assisted spinal surgery by multi-segment registration technology based on structured light scanning].
+21	W4392007243	2024	F	A 3D LiDAR-Inertial Tightly-Coupled SLAM for Mobile Robots on Indoor Environment
+22	W7207529710	2026	F	A Bayesian network framework based on Localization Risk Maps for anticipating and minimizing localization errors
+23	W2021851106	2012	B	A benchmark for the evaluation of RGB-D SLAM systems
+24	W1601609822	2015	B,F	A closed-form estimate of 3D ICP covariance
+25	W3138231199	2021	F	A Closed-Form Solution for Estimating the Accuracy of Circular Feature’ Pose for Object 2D-3D Pose Estimation System
+26	W4414581174	2025	M	A Coarse to Fine 3D LiDAR Localization with Deep Local Features for Long Term Robot Navigation in Large Environments
+27	arXiv:2505.18340v1	2025	X	A Coarse to Fine 3D LiDAR Localization with Deep Local Features for Long Term Robot Navigation in Large Environments
+28	W4401415738	2024	F	A Coarse-to-Fine Place Recognition Approach using Attention-guided Descriptors and Overlap Estimation
+29	W7124841623	2026	M	A Coarse‐to‐Fine 3D LiDAR Localization With Deep Local Features for Long‐Term Robot Navigation in Large Environments
+30	W3119294701	2020	F	A Collaborative Relative Localization Method for Vehicles using Vision and LiDAR Sensors
+31	W4200184406	2021	F	A Comparison of LiDAR Odometry and Mapping Techniques
+32	W2980344706	2019	M	A Convenient Pose Measurement Method of Mobile Robot Using Scan Matching and Eye-in-Hand Vision System
+33	W4223948219	2022	F	A Credible and Robust Approach to Ego-Motion Estimation Using an Automotive Radar
+34	W4401673423	2024	F	A cross-temporal multimodal fusion system based on deep learning for orthodontic monitoring
+35	W3002270926	2020	F	A Data-Driven Motion Prior for Continuous-Time Trajectory Estimation on SE(3)
+36	W7128060601	2026	F	A deep learning-based multi-modal approach to robust place recognition in challenging orchard environments
+37	W4409326405	2025	F	A Degeneracy-Aware LiDAR–Inertial—Visual SLAM for Degenerate Environments
+38	W4396666867	2024	F	A Differential Entropy-Based Method for Reverse Engineering Quality Assessment
+39	W4400679205	2024	F	A Dynamic Visual-Inertial-Wheel Odometry With Semantic Constraints and Denoised IMU-Odometer Prior for Autonomous Driving
+40	W7202249751	2026	F	A Factor Graph Optimization Method With Initial Velocity Bias Estimation for GINS Initial Alignment
+41	W3005754415	2019	B	A failure detection method for 3D LiDAR based localization
+42	W7128688876	2026	F	A fast and robust 3D LiDAR-based loop closure detection method using BEV images
+43	W4404294470	2024	F	A Fast and Robust Triangle Descriptor for Loop Closure Detection in 3D LiDAR SLAM
+44	W2213518912	2015	B	A fast histogram-based similarity measure for detecting loop closures in 3-D LIDAR data
+45	W7159836755	2025	F	A Fast Visual Triangle Descriptor for Multi-sensor Loop Closure Detection
+46	W7119860189	2026	M	A Fractional-Order Spatiotemporal Unified Energy Framework for Non-Repetitive LiDAR Point Cloud Registration
+47	W4394818665	2024	F	A framework for collaborative multi-robot mapping using spectral graph wavelets
+48	W4383109233	2023	F	A Framework for Simultaneous Workpiece Registration in Robotic Machining Applications
+49	W2977428143	2019	F	A framework of probabilistic 3D map fusion for collaborative robots
+50	W7129097357	2026	F	A Generalization of Iterative Closest Point Registration Algorithms Using a Local Reference Frame-Based SE(3) Augmentation
+51	W2135916547	2010	F	A generalization of the metric-based Iterative Closest Point technique for 3D scan matching
+52	W2998667477	2022	F	A generalized framework for autonomous calibration of wheeled mobile robots
+53	W2102595307	2010	S2	A Generative Model for Image Segmentation Based on Label Fusion
+54	W2186192426	2011	S2	A Generative Mold for Image Segmentation Based on Tag Union
+55	W4292548301	2022	F	A Global ArUco-Based Lidar Navigation System for UAV Navigation in GNSS-Denied Environments
+56	W4386159841	2023	F	A Graph-Based SLAM Method Assisted by Visual Marker in the Degenerate Scenes
+57	W7155746939	2026	F	A Hierarchical Plane-Quadric Surface Fitting Based Framework for Real-Time LiDAR Point Cloud Compression
+58	W1602658276	2007	B	A High-Accuracy Rotation Estimation Algorithm Based on 1D Phase-Only Correlation
+59	W4413096628	2025	M	A Hybrid 3D-2D Point Cloud Fusion Framework for Adaptive Localization in Warehouse Robot Navigation Systems
+60	W4364304248	2022	F	A Kalman-Particle Hybrid Filter For Improved Localization of AGV In Indoor Environment
+61	W4412431606	2025	F	A LiDAR Localization Method for Mobile Robots Based on Fast Search and Outlier Mitigation
+62	W4403590818	2024	F	A LiDAR SLAM Algorithm Considering Dynamic Extraction of Feature Points in Underground Coal Mine
+63	W4313017367	2022	F	A LiDAR-Based 3D Indoor Mapping Framework with Mismatch Detection and Optimization
+64	W4412405011	2025	F	A LiDAR-IMU Tightly Coupled SLAM in Subway Tunnel Environments
+65	W4400726797	2024	F	A LiDAR-Inertial Odometry by Fusing Adjacent Frames with Point Selection
+66	W7133202279	2026	F	A LiDAR-inertial SLAM system based on multi-line feature enhancement and tightly coupled optimization
+67	W4387717484	2023	F	A LiDAR-Inertial SLAM Tightly Coupled With Dropout-Tolerant GNSS Fusion for Autonomous Mine Service Vehicles
+68	W4380538284	2023	F	A LiDAR–Inertial SLAM Method Based on Virtual Inertial Navigation System
+69	W4413287007	2025	F	A Lightweight LiDAR–Visual Odometry Based on Centroid Distance in a Similar Indoor Environment
+70	W7126430147	2026	F	A line shape descriptor for LiDAR loop-closure detection
+71	W2892582983	2018	F	A Localizability Constraint-Based Path Planning Method for Autonomous Vehicles
+72	W2908363480	2018	F	A Localizability Constraint-Based Path Planning Method for Unmanned Aerial Vehicle
+73	W3197213363	2021	B	A Localizability Estimation Method for Mobile Robots Based on 3D Point Cloud Feature
+74	W7165727690	2026	F	A Localization Method for Warehouse Environment Based on Fusion of Scan Context Descriptors and Reflective Pillars
+75	W4379161745	2023	F	A low‐drift and real‐time localisation and mapping method for handheld hemispherical view LiDAR‐IMU integration system
+76	W7203727616	2026	F	A Measure-Theoretic Framework and Adaptive Stopping Method for Node-State Quality Monitoring in Dynamic Spatial Networks
+77	W2049981393	1992	B	A method for registration of 3-D shapes
+78	W4407367548	2025	F	A Methodological Approach for the Evaluation of Deformations in Additively Manufactured Lattice Structures
+79	W4405844968	2024	F	A Modular Loop Closure Detection Scheme for Autonomous Driving: A Loosely Coupled Approach
+80	W4309787584	2022	F	A Multi-Channel Descriptor for LiDAR-Based Loop Closure Detection and Its Application
+81	W4387192544	2023	F	A Multi-Sensor Fusion Localization Algorithm Via Dynamic Target Removal
+82	W2963653121	2019	F	A Multilevel Fusion System for Multirobot 3-D Mapping Using Heterogeneous Sensors
+83	W4387908573	2023	F	A Multimodal Robust Simultaneous Localization and Mapping Approach Driven by Geodesic Coordinates for Coal Mine Mobile Robots
+84	W2999751264	2020	B,F,anchor	A New Approach to 3D ICP Covariance Estimation
+85	W4413157361	2025	F	A New Approach to Real-Time Odometry Calibration Using an Adaptive Particle Filter Design
+86	W3207633900	2021	F	A New Framework for Registration of Semantic Point Clouds from Stereo and RGB-D Cameras
+87	W4255051228	2021	F	A new laser-based loop detection method for laneway environment 3D mapping
+88	W2121990344	2000	B	A new method for the nonlinear transformation of means and covariances in filters and estimators
+89	W2169113723	2003	S3	A new paradigm for recognizing 3-D objects from range data
+90	W2746974184	2017	M	A new star tracker concept for satellite attitude determination based on a multi-purpose panoramic camera
+91	W4402592730	2024	F	A New Wave in Robotics: Survey on Recent MmWave Radar Applications in Robotics
+92	W156288433	2012	M	A Non-contact Image-to-Patient Registration Method Using Kinect Sensor and WAP-ICP
+93	W3206505934	2021	B	A Normal Distribution Transform-Based Radar Odometry Designed For Scanning and Automotive Radars
+94	W2793954606	2017	F	A novel approach to register sonar data for underwater robot localization
+95	W1988899750	2014	F	A novel fusion method for robot indoor environment mapping
+96	W4404874276	2024	F	A novel global re-localization method for underground mining vehicles in haulage roadways: A case study of solid-state LiDAR-equipped load-haul-dump vehicles
+97	W2126381374	2005	M	A Novel Multifaceted Virtual Craniofacial Surgery Scheme Using Computer Vision
+98	W4384924268	2023	F	A Novel Spatial Position Prediction Navigation System Makes Surgery More Accurate
+99	W4392054028	2024	F	A Novel Topology Metric for Indoor Point Cloud SLAM Based on Plane Detection Optimization
+100	W7164837829	2026	F	A Panoramic Convolution and Cross Transformer Framework for LiDAR-Based Place Recognition
+101	W4281294155	2022	F	A PCA-aided EV-EGI Method for Registering Volumetric Datasets
+102	W3132558215	2020	F	A Point Cloud Registration Pipeline using Gaussian Process Regression for Bathymetric SLAM
+103	W2318086066	2015	S3	A Point Cloud-Based Method for Object Alignment Verification for Augmented Reality Applications
+104	W4401416828	2024	F	A Point-to-distribution Degeneracy Detection Factor for LiDAR SLAM using Local Geometric Models
+105	W4392940686	2023	F	A Pose Association Method for Multi-Agent System Based on LiDAR Pointcloud Registration Algorithm
+106	W2899777419	2018	F	A pose graph-based localization system for long-term navigation in CAD floor plans
+107	W3035274187	2020	B	A Prediction Method of Localizability Based on Deep Learning
+108	W2981874330	2019	B	A Quaternion-Based Certifiably Optimal Solution to the Wahba Problem With Outliers
+109	W4306950606	2022	F	A Real Time Adaptive Odometric System based on Variable Covariance Sensor Fusion
+110	W4407737925	2025	F	A Real-Time Degeneracy Sensing and Compensation Method for Enhanced LiDAR SLAM
+111	W4412346490	2025	F	A Real-Time Localization Method Using LiDAR Beacons
+112	W2162224443	2002	M	A registration aid
+113	W3124928558	2020	M	A Reliable Localization Architecture for Mobile Surveillance Robots
+114	W4388692155	2023	F	A Reliable Position Estimation Methodology Based on Multi-Source Information for Intelligent Vehicles in Unknown Environment
+115	W4360823144	2023	F	A review of high-definition map creation methods for autonomous driving
+116	W2271206385	2015	B	A Review of Point Cloud Registration Algorithms for Mobile Robotics
+117	W4300437862	2015	B	A Review of Point Cloud Registration Algorithms for Mobile Robotics
+118	W4408000594	2025	F	A Review of Research on SLAM Technology Based on the Fusion of LiDAR and Vision
+119	W4406800215	2025	F	A Review of Simultaneous Localization and Mapping for the Robotic-Based Nondestructive Evaluation of Infrastructures
+120	W7165186555	2026	F	A Review on Search and Rescue Robots in Complex Scenarios: Key Technologies of Simultaneous Localisation and Mapping
+121	W4408222531	2024	F	A Robot Localization Deviation Detection Method Based on ResNet
+122	W4224862621	2022	F	A Robust 2D Lidar SLAM Method in Complex Environment
+123	W7160103816	2026	F	A robust agricultural LiDAR-inertial SLAM system with heterogeneous registration and neural noise adaptation
+124	W4390749577	2024	F	A Robust and Fast GNSS-Inertial-LiDAR Odometry With INS-Centric Multiple Modalities by IESKF
+125	W4400733420	2024	S2	A Robust AR-DSNet Tracking Registration Method in Complex Scenarios
+126	W3165821964	2021	F	A Robust Framework for Simultaneous Localization and Mapping with Multiple Non-Repetitive Scanning Lidars
+127	W2025836747	2003	B	A robust incomplete factorization preconditioner for positive definite matrices
+128	W4416429367	2025	F	A Robust LiDAR Localization Method for Complex Underground Spaces Using Gaussian-Blurred Normal Distributions Transform Maps
+129	W4313409486	2022	F	A Robust LiDAR SLAM Method for Underground Coal Mine Robot with Degenerated Scene Compensation
+130	W4220899417	2022	M	A Robust Localization System Fusion Vision-CNN Relocalization and Progressive Scan Matching for Indoor Mobile Robots
+131	W4386821903	2023	F	A Robust Model Reconstruction Algorithm For Elevator Shaft
+132	W2029309217	2012	B	A robust RGB-D SLAM algorithm
+133	W7212325593	2026	F	A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments
+134	W4414413473	2025	S2	A Single-step Accurate Fingerprint Registration Method Based on Local Feature Matching
+135	W4304784018	2022	F	A SLAM Method Based on Multi-Robot Cooperation for Pipeline Environments Underground
+136	W4411949657	2025	F	A Slope-Based Targetless Extrinsic Calibration Method for LiDAR-IMU Systems on Ground Vehicles
+137	W2133066324	2002	B	A stable tracking control method for an autonomous mobile robot
+138	W7213348393	2026	M	A Study on an Autonomous Navigation System for Mobile Robots Based on Laser SLAM
+139	W3010743505	2020	F	A Study on Efficient LiDAR-based Localization with Initial Pose Estimation
+140	W2980844277	2019	B	A Submap per Perspective - Selecting Subsets for SuPer Mapping that Afford Superior Localization Quality
+141	W4392515775	2024	F	A Survey on Global LiDAR Localization: Challenges, Advances and Open Problems
+142	W4286373328	2022	F	A Survey on Map-Based Localization Techniques for Autonomous Vehicles
+143	W2961443823	2019	B	A symmetric objective function for ICP
+144	W4206707363	2022	F	A tightly coupled monocular visual lidar odometry with loop closure
+145	W4306760020	2022	F	A unified framework for automated registration of point clouds, mesh surfaces and 3D models by using planar surfaces
+146	W1969598406	1992	B	A. M. Lyapunov's stability theory—100 years on
+147	W4413925257	2025	F	A2DO: Adaptive Anti-Degradation Odometry with Deep Multi-Sensor Fusion for Autonomous Navigation
+148	W4394995446	2023	F	Absolute Localization in Feature-Poor Industrial Confined Spaces
+149	W7203478189	2026	S2	ACCREDIT: A Quality-Aware Agentic Engine for Cell-resolved Cross-modal Image Registration with Dynamic Iterative Tuning
+150	W2329667864	2015	S2	Accuracy Assessment of Intra- and Intervisit Fundus Image Registration for Diabetic Retinopathy Screening
+151	W4315486625	2023	F	Accuracy Evaluation and Branch Detection Method of 3D Modeling Using Backpack 3D Lidar SLAM and UAV-SfM for Peach Trees during the Pruning Period in Winter
+152	W2935043457	2019	S3	Accuracy of low‐dose proton CT image registration for pretreatment alignment verification in reference to planning proton CT
+153	W2103453923	2012	F	Accurate 3D maps from depth images and motion sensors via nonlinear Kalman filtering
+154	W2950807205	2012	F	Accurate 3D maps from depth images and motion sensors via nonlinear Kalman filtering
+155	W2129690990	2008	S2	Accurate and robust registration for in-hand modeling
+156	W4412692703	2025	F	Accurate and Robust Train Localization: Fusing Degeneracy-Aware LiDAR-Inertial Odometry and Visual Landmark Correction
+157	W4327808385	2023	F	Accurate Covariance Estimation for Pose Data From Iterative Closest Point Algorithm
+158	W3048190720	2020	M	Accurate LiDAR-based Localization in Glass-walled Environment
+159	W4414433246	2025	F	Accurate Pose Estimation Using Contact Manifold Sampling for Safe Peg-in-Hole Insertion of Complex Geometries
+160	W4310969418	2022	M	Accurate Pose Tracking of Mobile Robot Using Entropy-based TrimICP in Dynamic Environment
+161	W2155688623	2008	S2	Accurate registration and failure detection in tissue micro array images
+162	W4401416262	2024	F	Active Collision-Based Navigation for Wheeled Robots
+163	W2101230708	2014	F	Active global localization based on localizability for mobile robots
+164	W4309347192	2022	F	Active sensing control improving SLAM accuracy for a vehicle robot
+165	W2990048493	2019	F	Active SLAM for Autonomous Underwater Exploration
+166	W4413978801	2025	F,S4	AD-LIO, Robust Tightly Coupled LiDAR-inertial Odometry Based On The Adaptive Voxel Resolution Upgrade And Degeneracy Detection
+167	W7128504509	2026	F	AD-LIO: Adaptive Voxel LiDAR–Inertial Odometry Based on Scene Degradation Factor
+168	W4389722453	2023	F	Adaptive Choice of Process Noise Covariance in Kalman Filter Using Measurement Matrices
+169	W2946246968	2019	F	Adaptive covariance estimation of LiDAR‐based positioning errors for UAVs
+170	W7203597970	2026	F	Adaptive Degeneracy-Aware LiDAR-Inertial-Visual Odometry with Balanced Accuracy and Efficiency
+171	W4392172810	2024	F	Adaptive Denoising-Enhanced LiDAR Odometry for Degeneration Resilience in Diverse Terrains
+172	W4310137353	2022	F	Adaptive estimation of UAV altitude in complex indoor environments using degraded and time-delayed measurements with time-varying uncertainties
+173	W4407921668	2025	F	Adaptive Federated Kalman Filtering with Dimensional Isolation for Unmanned Aerial Vehicle Navigation in Degraded Industrial Environments
+174	W7133926081	2026	F	Adaptive Multi-Sensor Fusion Localization with Eigenvalue-Based Degradation Detection for Mobile Robots
+175	W7172308839	2026	F	Adaptive Point and Directional Constraint Sampling for Robust LiDAR Odometry in Narrow and Elongated Environments
+176	W4413917907	2025	F	Adaptive Thresholding for Sequence-Based Place Recognition
+177	W7168156027	2026	F	Adaptive Uncertainty-aware Pose Estimation for Intelligent Vehicles Based on Multi-Source Information
+178	W4405521076	2024	F	Adaptive-LIO: Enhancing Robustness and Precision Through Environmental Adaptation in LiDAR Inertial Odometry
+179	W7125689363	2026	S4	Adaptive-Weight LiDAR Localization for Degenerate Coal Mine Tunnels with Multi-residual Fusion
+180	W4411173723	2025	F	Adjustment of Odometry Measurements for Needs of SLAM in Mobile Robotics
+181	W7161675491	2026	F	ADR-LIO: Adaptive Degradation-Resilient LiDAR-Inertial Odometry for Urban Environments
+182	W4405786831	2024	F	Advancements in Radar Odometry
+183	W4404692224	2024	F	Advancements in Sensor Fusion for Underwater SLAM: A Review on Enhanced Navigation and Environmental Perception
+184	W7162258079	2026	F	Advances in Vision and Depth Sensing for Robotics and Drones: Emerging Technologies and Applications
+185	W2766094311	2017	F	Aerial and Ground-Based Collaborative Mapping: An Experimental Study
+186	W4312586525	2022	F	Aerial Field Robotics
+187	W3203267090	2022	F	AEROS: AdaptivE RObust Least-Squares for Graph-Based SLAM
+188	W4365506100	2023	F	AFLI-Calib: Robust LiDAR-IMU extrinsic self-calibration based on adaptive frame length LiDAR odometry
+189	W7155076544	2026	F	AGI-LO: Adaptive Geometric-Intensity LiDAR odometry for tunnel-like degraded environments
+190	W4398152769	2024	F	Agricultural Vehicle Automatic Navigation Positioning and Obstacle Avoidance Technology Based on ICP
+191	W7204254831	2026	S2	AI-AUGMENTED ROOT-CAUSE ANALYSIS WORKFLOWS FOR LARGE-SCALE FIXED BROADBAND FIBER ACCESS NETWORK OPERATIONS
+192	W4413823828	2025	M	AI-Enhanced Mixed Reality: Transforming Real-Time Medical Data Collaboration among Physicians and Trainees
+193	W7130951797	2026	S5	AI-Mediated Self-Knowledge: A Terminological Framework for Epistemic Self-Access Through Structured Dialogue with Artificial Interlocutors
+194	W7130977261	2026	S5	AI-Mediated Self-Knowledge: A Terminological Framework for Epistemic Self-Access Through Structured Dialogue with Artificial Interlocutors
+195	W4320007683	2023	F	Airflow-based odometry for MAVs using thermal anemometers
+196	W2169901455	2007	B,anchor	An accurate closed-form estimate of ICP's covariance
+197	W4413402796	2025	F	An accurate point cloud registration method based on adaptive weighting of point-pair distance and shape features for underground coal mines
+198	W4293811589	2022	F	An Adaptive Invariant EKF for Map-Aided Localization Using 3D Point Cloud
+199	W3197751789	2021	F	An adaptive scheme for degradation suppression in Lidar based SLAM
+200	W4289656238	2022	F	An AGV Positioning Algorithm for Reducing the Number of Reflectors
+201	W3157047494	2021	S3	An algorithm for random generation of admissible horizontal alignments for optimum layout design
+202	W2622246761	2017	S2	An automatic and robust point cloud registration framework based on view-invariant local feature descriptors and transformation consistency verification
+203	W4376108486	2023	M	An Enhanced Adaptive Monte Carlo Localization for Service Robots in Dynamic and Featureless Environments
+204	W4411844500	2025	F	An Enhanced Navigation System With Predictive Motion Planning for Unmanned Surface Vehicles in GNSS‐Attenuated Dynamic Urban Waterways
+205	W4405495701	2024	F	An Environment Recognition Algorithm for Staircase Climbing Robots
+206	W2278462819	2015	F	An Experimental Study of Robust Distributed Multi-robot Data Association from Arbitrary Poses
+207	W2130763585	2008	B	An ICP variant using a point-to-line metric
+208	W4391109832	2024	F	An improved iterative closest point algorithm based on the particle filter and K-means clustering for fine model matching
+209	W4210308049	2022	F	An improved Monte Carlo localization using optimized iterative closest point for mobile robots
+210	W3013258475	2019	F	An Improved ORB-SLAM2 With Refined Depth Estimation
+211	W7128711188	2026	F	An Indoor Mobile Robot Pose Estimation Method Using Deep Learning Models for IMU Error Calibration and LiDAR Measurement Noise Covariance Tuning
+212	W4285200012	2022	F	An Intensity-Augmented LiDAR-Inertial SLAM for Solid-State LiDARs in Degenerated Environments
+213	W4386122075	2023	F	An intensity-enhanced LiDAR SLAM for unstructured environments
+214	W2118877769	1981	B	An Iterative Image Registration Technique with an Application to Stereo Vision
+215	W2774206966	2017	B	An online multi-robot SLAM system for 3D LiDARs
+216	W4205336545	2021	F	An Outlier-Robust GNSS-inertial-LiDAR Localization System
+217	W206792372	2000	S5	Analysis of Module Interaction in an OMAC Controller | NIST
+218	W2773719926	2017	B	Analyzing the quality of matched 3D point clouds of objects
+219	W4410226485	2025	F	Anti-Degeneracy Scheme for Lidar SLAM Based on Particle Filter in Geometry Feature-Less Environments
+220	W2764255492	2017	B	ANYmal - toward legged robots for harsh environments
+221	W2131821152	2009	B	Appearance-based loop detection from 3D laser data using the normal distributions transform
+222	W2301814014	2013	B	Applied registration for robotics: Methodology and tools for ICP-like algorithms
+223	W1993168154	2015	F	Approximate surface reconstruction and registration for RGB-D SLAM
+224	W2150066425	2012	B	Are we ready for autonomous driving? The KITTI vision benchmark suite
+225	W4286543002	2022	B	Are We Ready for Radar to Replace Lidar in All-Weather Mapping and Localization?
+226	W4407638309	2025	F	Artemis: Contour-Guided 3-D Sensing and Localization With mmWave Radar for Infrastructure-Assisted Autonomous Vehicles
+227	W4402563836	2024	F	ASLAM-FD: a multi-sensor adaptive collaborative fusion SLAM framework based on degradation detection and deep reinforcement learning
+228	W3008206880	2020	B	Assessing Losses for Point Set Registration
+229	W21570645	2007	B	ASSESSING MAP QUALITY AND ERROR CAUSATION USING CONDITIONAL RANDOM FIELDS
+230	W2155653863	2014	B	Associating Uncertainty With Three-Dimensional Poses for Use in Estimation Problems
+231	W4409683675	2025	F	ATCM: Aerial–Terrestrial LiDAR-Based Collaborative Simultaneous Localization and Mapping
+232	W4403721820	2024	F	ATI-CTLO: Adaptive Temporal Interval-Based Continuous-Time LiDAR-Only Odometry
+233	W7203614471	2026	S5	Attractor Dynamics of Self-Description under Sustained Self-Referential Processing in Large Language Models
+234	W4367146871	2023	F	Augmented Kalman Filter Design in a Localization System Using Onboard Sensors With Intrinsic Delays
+235	W7117564733	2025	F	Augmented Ultra-Wideband Localization for Quadrotor UAV: Disturbance Rejection and Credibility Quantification
+236	W4405787357	2024	F	Augmenting Vision with Radar for All-weather Geo-localization without a Prior HD Map
+237	W419459907	2012	M	Automated Aerial Refueling Position Estimation Using a Scanning LiDAR
+238	W3035952341	2020	F	Automated Defect Quantification in Concrete Bridges Using Robotics and Deep Learning
+239	W1993141117	2007	M	Automated detection and segmentation of cylindrical fragments from calibrated C-arm images for long bone fracture reduction
+240	W7151753724	2026	S3	Automated LiDAR-based real-time alignment system for modular integrated construction
+241	W7160017793	2026	M	Automated Mid-Surface Mesh Generation Method for Automotive Plastic Parts Based on Deep Learning
+242	W1916032989	2014	F	Automatic Calibration of Spinning Actuated Lidar Internal Parameters
+243	W4311392022	2022	F	Automatic Correction of an Automated Guided Vehicle’s Course Using Measurements from a Laser Rangefinder
+244	W2756582548	2017	F	Automatic graph based spatiotemporal extrinsic calibration of multiple Kinect V2 ToF cameras
+245	W2095437113	2012	F	Automatic loop closure detection using multiple cameras for 3D indoor localization
+246	W2518453797	2016	S2	Automatic Parameter Selection for Intensity-Based Registration of Imagery to LiDAR Data
+247	W4385486101	2023	F	AutoMerge: A Framework for Map Assembling and Smoothing in City-Scale Environments
+248	W7134258410	2026	F	Autonomous Driving in Unstructured Off‐Road Environments: How Far Have We Come?
+249	W4389118059	2023	F	Autonomous GPU-based UAS for inspection of confined spaces: Application to marine vessel classification
+250	W2565685812	2016	F	Autonomous multi-story navigation for valet parking
+251	W2608018532	2017	F	Autonomous Navigation and Mapping for Inspection of Penstocks and Tunnels With MAVs
+252	W4412626761	2025	M	Autonomous navigation push material robot in ranch based on multisensor
+253	W2743032842	2017	F	Autonomous robotic exploration using a utility function based on Rényi’s general theory of entropy
+254	W3080195572	2020	F	Autonomous Search for Underground Mine Rescue Using Aerial Robots
+255	W2787197340	2017	F	Avoidance of singular localization environment using model predictive control for mobile robots
+256	W2013772997	2007	S5	Back to the future — The European Society of Thoracic Surgeons
+257	W3093373658	2020	F	BALM: Bundle Adjustment for Lidar Mapping
+258	W3133767727	2021	F	BALM: Bundle Adjustment for Lidar Mapping
+259	W7161037655	2026	F	Basic Research on Physical Intelligent System for Extreme Environment
+260	W4283760837	2022	F	Bayesian iterative closest point for mobile robot localization
+261	W2031406117	2013	M	Bayesian multi-hypothesis scan matching
+262	W4408374570	2025	F	Bayesian Radar Cosplace : Directly estimating location uncertainty in radar place recognition
+263	W4401416280	2024	F	Benchmarking Classical and Learning-Based Multibeam Point Cloud Registration
+264	W4416749574	2025	F	BEVDiffLoc: End-to-End LiDAR Global Localization in BEV View based on Diffusion Model
+265	W4411948482	2025	F	BEVPlace++: Fast, Robust, and Lightweight LiDAR Global Localization for Autonomous Ground Vehicles
+266	W4390873617	2023	F	BEVPlace: Learning LiDAR-based Place Recognition using Bird’s Eye View Images
+267	W7127560557	2026	S5	Beyond Treatment: Healing Spaces for Breast Cancer Human-Centered Design for Emotional and Physical Wellbeing
+268	W4404510718	2024	F	BFAR: improving radar odometry estimation using a bounded false alarm rate detector
+269	W2005756025	2014	B	BigBIRD: A large-scale 3D database of object instances
+270	W4384916349	2023	F	Binary Image Fingerprint: Stable Structure Identifier for 3D LiDAR Place Recognition
+271	W2054329862	2013	B	Bingham procrustean alignment for object detection in clutter
+272	W4414283196	2025	S2	Boosting robust multimodal point cloud registration via tightly-coupled framework of visual and geometric features
+273	W4327692895	2023	B	Boreas: A multi-season autonomous driving dataset
+274	W4309591753	2022	F	BoW3D: Bag of Words for Real-Time Loop Closing in 3D LiDAR SLAM
+275	W7203797809	2026	F	Bridging Biomedical Atlas Ecosystem: Cross-Atlas Alignment And Scalable Tissue Specimen Registration
+276	W4411558226	2025	F	BSPR-Net: Dual-Branch Feature Extraction Network for LiDAR Place Recognition in Unstructured Environments
+277	W7104376661	2025	S5	Building Bridges: The relationship between developmental attachment measures and the Epistemic Trust Mistrust and Credulity Questionnaire
+278	W3179694074	2021	F	BVMatch: Lidar-Based Place Recognition Using Bird's-Eye View Images
+279	W4400314601	2024	F	C2L-PR: Cross-Modal Camera-to-LiDAR Place Recognition via Modality Alignment and Orientation Voting
+280	W4415936284	2025	M	C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization
+281	arXiv:2511.00260v2	2025	X	C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization
+282	W2083946184	2013	F	Camera/Laser/GPS Fusion Method for Vehicle Positioning Under Extended NIS-Based Sensor Validation
+283	W7212442284	2026	S1	CASPER: A Design Study for a Clutter-Aware Semantic Perception Framework for LiDAR Odometry in Dynamic Industrial Warehouse Environments
+284	W7212450595	2026	S1	CASPER: A Design Study for a Clutter-Aware Semantic Perception Framework for LiDAR Odometry in Dynamic Industrial Warehouse Environments
+285	W4390872751	2023	F	CASSPR: Cross Attention Single Scan Place Recognition
+286	W7168123173	2026	F	CC-ICP: Cylinder-Constrained Iterative Closest Point for Robust Forest Point Cloud Registration
+287	W4404914417	2024	F	CCTNet: A Circular Convolutional Transformer Network for LiDAR-Based Place Recognition Handling Movable Objects Occlusion
+288	W2894612187	2019	F,anchor	CELLO-3D: Estimating the Covariance of ICP in the Real World
+289	W2042012466	2013	B,F	CELLO-EM: Adaptive sensor models without ground truth
+290	W2133352538	2013	B	CELLO: A fast algorithm for Covariance Estimation
+291	W4225669925	2022	F	CERBERUS: Autonomous Legged and Aerial Robotic Exploration in the Tunnel and Urban Circuits of the DARPA Subterranean Challenge
+292	W3202880795	2021	F	Certainty Aware Global Localisation Using 3D Point Correspondences
+293	W3157400318	2021	B	CFEAR Radarodometry - Conservative Filtering for Efficient and Accurate Radar Odometry
+294	W7117963466	2026	M	CGReg: Classification-Guided Point Cloud Registration via Equivariant Learning
+295	W2625696191	2017	S2	CH-Marker: A Color Marker Robust to Occlusion for Augmented Reality
+296	W1966790179	2012	B	Challenging data sets for point cloud registration algorithms
+297	W2963428125	2018	B	Characterization of a RS-LiDAR for 3D Perception
+298	W4385430565	2023	F	CHSEL: Producing Diverse Plausible Pose Estimates from Contact and Free Space Data
+299	W4403279443	2024	F	Circle Fit Matching: A Fast Analytical Laser Scan Matching Method for 2-D Laser Scanners
+300	W4413865197	2025	S3	Clinical implementation of a multifaceted quality assurance phantom for high-precision radiation therapy: an institutional experience
+301	W3199940834	2021	S5	Clinical Trials in India: Missing the Finish Line
+302	W4416748626	2025	F	CM-LIUW-Odometry: Robust and High-Precision LiDAR-Inertial-UWB-Wheel Odometry for Extreme Degradation Coal Mine Tunnels
+303	W3175761519	2021	F	Coarse-to-Fine Loosely-Coupled LiDAR-Inertial Odometry for Urban Positioning and Mapping
+304	W7202213398	2026	M	Coarse-to-Fine Registration of Jawbone CT and Intraoral Scan Data Using GeDi and ICP with Pseudo-IOS Ground Truth
+305	W7155042899	2026	F	Cognitive navigation
+306	W2907099694	2019	S5	Cognitive self-management requires the phenomenal registration of intrinsic state properties
+307	W4401415917	2024	F	COIN-LIO: Complementary Intensity-Augmented LiDAR Inertial Odometry
+308	W4388598822	2023	M	Collaborative diagnosis in mixed-reality using deep-learning networks and RE-WAPICP algorithm
+309	W4415626528	2025	F	Collaborative Sensing and Communication for Intelligent Connected Vehicles: A Comprehensive Survey
+310	W2789329550	2018	M	Collaborative strategies for autonomous localisation, 3D reconstruction and pathplanning.
+311	W2000343438	2013	F	Combined RGBD-inertial based state estimation for MAV in GPS-denied indoor environments
+312	W4391226513	2024	F	Communication-Aware Control of Large Data Transmissions via Centralized Cognition and 5G Networks for Multi-Robot Map merging
+313	W1953793983	2013	B	Comparing ICP variants on real-world data sets
+314	W3154749413	2021	F	Comparing Representations in Tracking for Event Camera-based SLAM
+315	W3179052737	2021	F	Comparing Representations in Tracking for Event Camera-based SLAM
+316	W3107044385	2020	F	Comparing Robust Cost Functions for Bathymetric Point Cloud Registration
+317	W3092218351	2020	B,F	Complementary Multi–Modal Sensor Fusion for Resilient Robot Pose Estimation in Subterranean Environments
+318	W4251391716	2008	B	Computational Geometry
+319	W4240473984	2017	F	Conclusions
+320	W2293984849	2010	F	Consistent data association in multi-robot systems with limited communications
+321	W4238916604	2011	F	Consistent Data Association in Multi-robot Systems with Limited Communications
+322	W3128687392	2021	F	Consistent decentralized cooperative localization for autonomous vehicles using LiDAR, GNSS, and HD maps
+323	W1669104078	1982	B	Constrained Optimization and Lagrange Multiplier Methods
+324	W4404820216	2024	F	Continuous SO(3) Equivariant Convolution for 3D Point Cloud Analysis
+325	W2018655096	2014	B	Continuous-Discrete Extended Kalman Filter on Matrix Lie Groups Using Concentrated Gaussian Distributions
+326	W3116679161	2020	F	Continuous-Time Laser Frames Associating and Mapping via Multilayer Optimization
+327	W4413267638	2025	F	Continuous-Time State Estimation Methods in Robotics: A Survey
+328	W4383097620	2023	F	Contour Context: Abstract Structural Distribution for 3D LiDAR Loop Detection and Metric Pose Estimation
+329	W3203661968	2021	B	Contrastive Learning for Unsupervised Radar Place Recognition
+330	W2787084047	2010	M	Contribution to Perception for Intelligent Vehicles
+331	W4401668947	2024	S3	Control of 3D Printing Parameters to Design the Response of Heating Polymers
+332	W4387123706	2023	F	Coordinated Multi-Robot Exploration With Next-Best-View Planning for Scene Reconstruction
+333	W3198975403	2021	F,S5	CorAl – Are the point clouds Correctly Aligned?
+334	W4229444507	2022	B,F,anchor	CorAl: Introspection for robust radar and lidar perception in diverse environments using differential entropy
+335	W3153260089	2021	F	COSEM: Collaborative Semantic Map Matching Framework for Autonomous Robots
+336	W7204200849	2026	F	Covariance Estimation for 3D Generalized ICP via Laplace Approximation with the Hessian Matrix
+337	W2775524366	2017	F	Covariance Estimation for GPS-LiDar Sensor Fusion for UAVs
+338	W7164384519	2026	F	Cramer–Rao lower bound analysis of pose estimation with point cloud registration and its application
+339	W3135374165	2021	F	Critical Design and Control Issues of Indoor Autonomous Mobile Robots: A Review
+340	W4391559297	2024	F	Cross Fusion of Point Cloud and Learned Image for Loop Closure Detection
+341	W7164344834	2025	M	Cross-Domain Few-Shot Adaptation of Siamese Networks for Robot Initial Localization
+342	W4405785999	2024	F	CRPlace: Camera-Radar Fusion with BEV Representation for Place Recognition
+343	W7128789791	2026	F	CT-FLO: Simple Yet Effective FMCW LiDAR Odometry Using an Linear Continuous-Time Trajectory
+344	W3203066970	2022	B,F	CT-ICP: Real-time Elastic LiDAR Odometry with Loop Closure
+345	W4406233946	2024	F	CT-MLO: Voxel-Based Multi-LiDAR Odometry Using Continuous-Time Kalman Filter
+346	W4407901406	2025	F	CTE-MLO: Continuous-Time and Efficient Multi-LiDAR Odometry With Localizability-Aware Point Cloud Sampling
+347	W4408401427	2024	F	CTF-LIOM: Coarse-to-Fine Loop Closure Detection in Lidar-Inertial Odometry and Mapping
+348	W4412988152	2025	F	Cyber-physical-human systems for mobile robots in energy asset management: Current practices and future opportunities
+349	W4312803601	2022	F	D-LC-Nets: Robust Denoising and Loop Closing Networks for LiDAR SLAM in Complicated Circumstances with Noisy Point Clouds
+350	W4407235937	2025	F	DALI-SLAM: Degeneracy-aware LiDAR-inertial SLAM with novel distortion correction and accurate multi-constraint pose graph optimization
+351	W4410610950	2025	F	DALO-SLAM: LiDAR-only SLAM based on dynamic removal and adaptive feature enhancement in GNSS-denial environment
+352	W3127209738	2021	F	DARE-SLAM: Degeneracy-Aware and Resilient Loop Closing in Perceptually-Degraded Environments
+353	W7160965069	2026	F	DB-LIO: Database-Driven LiDAR–Inertial Odometry for Memory-Bounded Persistent Mapping
+354	W2740924709	2017	B	DBSCAN Revisited, Revisited
+355	W4390758504	2023	F	DECI: A Differential Entropy-Based Compactness Index for Point Clouds Analysis: Method and Potential Applications
+356	W4238011427	2013	S5	Decision letter: Local GABA concentration is related to network-level resting functional connectivity
+357	W4285047694	2022	B,F	Deep Bayesian ICP Covariance Estimation
+358	W4388868619	2021	F	Deep convolutional features for sparse and dense registration in RGB-D SLAM
+359	W4413789810	2025	F	Deep feature-enhanced LiDAR-visual-inertial odometry for robotic inspection and mapping in degraded tunnel environments
+360	W4413790087	2025	F	Deep feature-enhanced LiDAR-visual-inertial odometry for robotic inspection and mapping in degraded tunnel environments
+361	W7128784214	2026	F	Deep feature-enhanced LiDAR-visual-inertial odometry for robust mapping in tunnel environment
+362	W2890955732	2018	B,F	Deep Inference for Covariance Estimation: Learning Gaussian Noise Models for State Estimation
+363	W7108710979	2025	S5	DEEP INTROSPECTION ADVANCED LEARNING (DIAL) A Unified Architecture for Advanced Artificial Intelligence Systems
+364	W7108724991	2025	S5	DEEP INTROSPECTION ADVANCED LEARNING (DIAL) A Unified Architecture for Advanced Artificial Intelligence Systems
+365	W3099636420	2022	S5	Deep learning for Alzheimer's disease: mapping large-scale histological tau protein for neuroimaging biomarker validation
+366	W4221056339	2021	S5	Deep learning for Alzheimer's disease: Mapping large-scale histological tau protein for neuroimaging biomarker validation
+367	W2956558654	2019	S5	Deep Learning for Alzheimer’s Disease: Mapping Large-scale Histological Tau Protein for Neuroimaging Biomarker Validation
+368	W7149588094	2020	F	Deep learning, inertial measurements units, and odometry : some modern prototyping techniques for navigation based on multi-sensor fusion
+369	W7161483426	2026	M	Deep Learning–Based Few-Shot Method for Detection and Evaluation of Tunnel Overbreak and Underbreak
+370	W3215144762	2021	F	Deep Measurement Updates for Bayes Filters
+371	W4405785639	2024	F	Deep Sensor Fusion with Constraint Safety Bounds for High Precision Localization
+372	W4416015645	2025	F	Deep spatial-frequency fusion for loop closure descriptor construction
+373	W7117296377	2025	F	Degeneracy Sensing Light Detection and Ranging‐Inertial Simultaneous Localization and Mapping with Dual‐Layer Resistant Odometry and Scan‐Context Loop‐Closure Detection Backend in Diverse Environments
+374	W3004052298	2019	B,F	Degeneracy-Aware Factors with Applications to Underwater SLAM
+375	W2974494712	2019	B,F	Degeneracy-Aware Imaging Sonar Simultaneous Localization and Mapping
+376	W7207516114	2026	F	Degeneracy-Aware Intensity-Assisted LiDAR–Inertial Odometry with Adaptive Photometric Weighting
+377	W4417027454	2025	F	Degeneracy-resilient registration and loop closure detection for a tumbling non-cooperative space target
+378	W7135058795	2026	S4	Degeneracy-Resilient Teach and Repeat for Geometrically Challenging Environments Using FMCW Lidar
+379	W7135157028	2026	S4	Degeneracy-Resilient Teach and Repeat for Geometrically Challenging Environments Using FMCW Lidar
+380	W4413525602	2025	F	Degeneracy‐Resistant LiDAR‐SLAM Algorithm Based on Geometric and Visual Features' Fusion
+381	W7203710033	2026	S4	Degenerate in Whose Frame? An Equivariance Condition for Degeneracy Detection in LiDAR Registration
+382	W3171403475	2021	F	Degeneration-Aware Localization with Arbitrary Global-Local Sensor Fusion
+383	W3213882986	2021	F	Degeneration-Aware Outlier Mitigation for Visual Inertial Integrated Navigation System in Urban Canyons
+384	W4411446287	2025	F	Degradation-Aware LiDAR-Thermal-Inertial SLAM
+385	W7204970351	2026	F	Degradation-Aware Perceptual Path Planning for Robust LiDAR Localization*
+386	W2892028890	2018	B	Delight: An Efficient Descriptor for Global Localisation Using LiDAR Intensities
+387	W4312735607	2022	F	Dense Normal Based Degeneration-Aware 2-D Lidar Odometry for Correlative Scan Matching
+388	W4403863414	2024	F	Depth-Visual-Inertial (DVI) Mapping System for Robust Indoor 3D Reconstruction
+389	W4213415085	2022	F	Design of Dual-LiDAR High Precision Natural Navigation System
+390	W7104473482	2016	S5	Design of Monitoring Framework for Malicious Hidden Process on CloudStack
+391	W7163151066	2026	F	Deskewed LiDAR Odometry for Quadruped Robots in Environments with Varying Elevation
+392	W2142135802	2009	S2	Detailed 3D mapping based on image edge-point ICP and recovery from registration failure
+393	W1982452847	2007	S5	Detecting Loop Closure with Scene Sequences
+394	W2132732015	2009	S2	Detecting registration failure
+395	W2793560929	2018	B,F	Detection and Compensation of Degeneracy Cases for IMU-Kinect Integrated Continuous SLAM with Plane Features
+396	W2566427421	2016	B,F	Detection and prediction of near-term state estimation degradation via online nonlinear observability analysis
+397	W2791637346	2017	M	Detection by registration
+398	W4226180932	2022	B	Detection of Localization Failures Using Markov Random Fields With Fully Connected Latent Variables for Safe LiDAR-Based Automated Driving
+399	W2945019228	2019	S2	Developing a MLC modifier program to improve fiducial detection for MV/kV imaging during hypofractionated prostate volumetric modulated arc therapy
+400	W3206634034	2021	F	Developing a slam-based backpack mobile mapping system for indoor mapping
+401	W3133464696	2021	S2	Development and characterization of a chest CT atlas
+402	W1964370303	2015	S2	Development of CBCT-based prostate setup correction strategies and impact of rectal distension
+403	W2406894723	2015	F	Development of Mobile Robots Using Off-the-Shelf Open-Source Hardware and Software Components for Motion and Pose Tracking
+404	W7166709970	2026	S5	dfeen87/AILEE-Mitigating-Risk-and-Sustaining-Growth-Software: Passive Trading Alerts v4
+405	W7128309077	2026	F	DG-KILO: A Kinematic-Inertial-LiDAR Odometry Based on Degradation Optimization and Ground Constraints for State Estimation of Legged Robots
+406	W7165058493	2026	F	DGMapping: Degeneration-Guided Adaptive Multisensor Fusion for Cost-Effective Mapping
+407	W3187858964	2021	S5	Digital Modernism Heritage Lexicon
+408	W2325969625	2013	S5	Dilemma with Matrix Effect in Bioanalysis – Perspectives from Bioavailability/Bioequivalence Studies for Product Registration?
+409	W2022512855	2012	B	DIMENSIONALITY BASED SCALE SELECTION IN 3D LIDAR POINT CLOUDS
+410	W4414054440	2025	F	Dimensionality-Aware GICP: 4D Hilbert Curve Approach Using Hellinger Distance
+411	W4383109468	2023	F	Direct LiDAR-Inertial Odometry: Lightweight LIO with Continuous-Time Motion Correction
+412	W4391768579	2023	F	Direction-Based Feature Selection for Efficient LiDAR Odometry in Urban Environment
+413	W7204257215	2026	F	Direction-Level Degeneracy-Aware Continuous Soft-Compensation for LiDAR-Inertial Odometry
+414	W3130266661	2021	F	DiSCO: Differentiable Scan Context With Orientation
+415	W4413423216	2025	M	DisorientLiDAR: Physical Attacks on LiDAR-based Localization
+416	W4415089935	2025	M	DisorientLiDAR: Physical Attacks on LiDAR-based Localization
+417	arXiv:2509.12595v1	2025	X	DisorientLiDAR: Physical Attacks on LiDAR-based Localization
+418	W2041657709	2013	B	Distraction suppression for vision-based pose estimation at city scales
+419	W2494813199	2015	F	Distributed Data Association
+420	W2062984148	2013	F	Distributed Data Association in Robotic Networks With Cameras and Limited Communications
+421	W1588018809	2013	F	Distributed map merging with consensus on common information
+422	W854355539	2015	S5	Divided Narratives, Unreliable Narrators, and the Sense of an Ending: Julian Barnes, Frank Kermode, and Ford Madox Ford
+423	W4387623775	2023	F	DMLL: Differential-Map-Aided LiDAR-Based Localization
+424	W2794030229	2018	B	DNSS: Dual-Normal-Space Sampling for 3-D ICP Registration
+425	W4403129857	2024	F	Domain Game: Disentangle Anatomical Feature for Single Domain Generalized Segmentation
+426	W7159627975	2025	F	DP-SLAM: A Tightly-Coupled SLAM Method with Degradation Perception
+427	W4404371110	2024	F	DR-SLAM: Vision-Inertial-Aided Degenerate-Robust LiDAR SLAM Based on Dual Confidence Ellipsoid Oblateness
+428	W7117483831	2025	F	DTD: Density Triangle Descriptor for 3D LiDAR Loop Closure Detection
+429	W7140098672	2026	F	DURAL: Degradation‐Resistant Robust Adaptive Localization by LiDAR‐Inertial‐UWB‐Wheel Fusion for Coal Mine Robots
+430	W3197054068	2021	F	DV-LOAM: Direct Visual LiDAR Odometry and Mapping
+431	W4389252691	2023	F	Dynamic Object-Aware LiDAR Odometry Aided by Joint Weightings Estimation in Urban Areas
+432	W7202363453	2026	M	Dynamic uncertainty evaluation of axial displacement of optical scanning coordinate measuring machine based on neural network
+433	W4414724226	2025	F	D² LIO: A Tightly-Coupled LiDAR-Inertial Odometry with Degeneracy Detection
+434	W4413980682	2025	F	EA2D-LSLAM: Environment Analysis-Based Adaptive Downsampling for Point Clouds in LiDAR SLAM
+435	W4390099864	2023	F	ECH: An Enhanced Cart Histogram for place recognition
+436	W2397837685	2001	S5	Editorial
+437	W2116149277	2012	S5	Effect of running therapy on depression (EFFORT-D). Design of a randomised controlled trial in adult patients [ISRCTN 1894]
+438	W4407457030	2024	S2	Effective and Robust Point Cloud Registration in Weak Texture Regions
+439	W4401416545	2024	F	Effectively Detecting Loop Closures using Point Cloud Density Maps
+440	W7129346412	2026	F	Efficient 3D LiDAR pattern feature extraction and descriptor computation for robust loop closure detection
+441	W4413849868	2025	F	Efficient and accurate 3D reconstruction in a featureless tunnel environment: a robust LiDAR-Inertial SLAM tightly coupled with wheel odometry
+442	W2890354344	2018	B	Efficient Continuous-Time SLAM for 3D Lidar-Based Online Mapping
+443	W4226182696	2021	B	Efficient Feature Extraction and Localizability Based Matching for Lidar SLAM
+444	W3154376645	2021	F	Efficient LiDAR Odometry for Autonomous Driving
+445	W2773391512	2017	F	Efficient path planning in belief space for safe navigation
+446	W4414229528	2025	F	Efficient Place Recognition With Complex Number Framework for Robust Environmental Description and Real-Time Performance
+447	W2168393172	1998	B	Efficient sparse LU factorization with partial pivoting on distributed memory architectures
+448	W2805521962	2018	B	Efficient Surfel-Based SLAM using 3D Laser Range Data in Urban Environments
+449	W2119851068	2002	B	Efficient variants of the ICP algorithm
+450	W7166044106	2026	F	Efficiently closing loops in LiDAR-based SLAM using point cloud density maps
+451	W3209386405	2021	F	EgoNN: Egocentric Neural Network for Point Cloud Based 6DoF Relocalization at the City Scale
+452	W3206894441	2021	F	EIL‐SLAM: Depth‐enhanced edge‐based infrared‐LiDAR SLAM
+453	W4225835048	2022	F	EKF-LOAM: An Adaptive Fusion of LiDAR SLAM With Wheel Odometry and Inertial Data for Confined Spaces With Few Geometric Features
+454	W2060977605	2010	F	EKF-SLAM for AUV navigation under probabilistic sonar scan-matching
+455	W2916453478	2018	S5	El impacto de internet en las publicaciones fotográficas protegidas por derechos de autor: visión constitucional e internacional-privatista en la era del «boom digital»
+456	W4391114552	2023	F	Electronic Sensor Multi-Modal Slam Algorithm Based on Information Fusion Technology
+457	W7212352327	2026	S5	Eliciting and Validating AI Self-Reports: A Phenomenologically Grounded Protocol
+458	W7213495743	2026	S5	Eliciting and Validating AI Self-Reports: A Phenomenologically Grounded Protocol
+459	W7161977492	2026	F	EllipseLIO: Adaptive LiDAR Inertial Odometry With an Ellipsoid Representation
+460	W4408633336	2025	F	Embodied navigation
+461	W7155717193	2026	S5	Emergent Deception in Large Language Models: A Conceptual Framework, Taxonomy, and Pre-Registered Empirical Protocol
+462	W7155681961	2026	S5	Emergent Deception in Large Language Models: A Regime-Dependent Taxonomy and Pre-Registered Protocol for Model Self-Report
+463	W7206213969	2026	S5	Emergent Deception in Large Language Models: A Regime-Dependent Taxonomy and Pre-Registered Protocol for Model Self-Report
+464	W2738970069	2017	F	Enabling aggressive motion estimation at low-drift and accurate mapping in real-time
+465	W4366999168	2023	F	Energy-and-perception-aware planning and navigation framework for unmanned aerial vehicles
+466	W4415225542	2025	S5	Enhance the Emotional Dimension of Caring
+467	W4406143125	2025	F	Enhanced detection of measurement anomalies in cartridge cases using 3D gray-level co-occurrence matrix
+468	W4409099234	2025	F	Enhanced Isolation Forest-Based Algorithm for Unsupervised Anomaly Detection in Lidar SLAM Localization
+469	W4413018601	2025	F	Enhanced LIO-Based Localization System with Online Map Update for Robust Mining Tunnel Operations
+470	W4401070281	2024	F	Enhanced Mobile Robot Odometry With Error Kalman Filtering Incorporating 3D Point Cloud Intensity
+471	W7213237064	2026	F	Enhancing loop closure detection with object semantic scan context
+472	W4391358374	2024	S5	Enhancing Psychotherapy Outcomes by Encouraging Patients to Regularly Self-Monitor, Reflect on, and Share Their Affective Responses Toward Their Therapist: Protocol for a Randomized Controlled Trial
+473	W4403977831	2024	F	Enhancing Underwater SLAM Navigation and Perception: A Comprehensive Review of Deep Learning Integration
+474	W7172386631	2026	F	Environment-Adaptive Solid-State LiDAR-Inertial Odometry
+475	W4412417261	2025	S3	Epitaxial metal halide perovskites by pulsed laser deposition
+476	W4413278326	2025	S5	EQUR: Equivariant Uncertainty Quantification and Refinement for Point Cloud Registration
+477	W4366438981	2023	F,M	Error Covariance Estimation of 3D Point Cloud Registration Considering Surrounding Environment
+478	W1504310440	2009	F	Error modeling and calibration of exteroceptive sensors for accurate mapping applications
+479	W2097792297	2009	B	Error propagations for local bundle adjustment
+480	W4285219418	2022	F	Errors
+481	W4390738530	2024	F	Essential Error Analysis of Self-Localization From Map Structure in Urban Environment
+482	W3093586603	2020	F	Estimación de la covarianza de ICP para la localización de un robot diferencial mediante odometrıa y escaneo láser
+483	W3016624477	2020	F	Estimating Motion Uncertainty with Bayesian ICP
+484	W2969022059	2019	B,F	Estimating the Localizability in Tunnel-like Environments using LiDAR and UWB
+485	W4238994376	2020	S5	Estimating the prevalence of transparency and reproducibility-related research practices in psychology (2014-2017)
+486	W1508385504	2012	S2	Estudo EXPO 2010: Excesso de Peso e Obesidade Infantil.
+487	W2464847390	2016	M	Evaluation of point cloud registration using Monte Carlo method
+488	W3195636432	2021	S2	Evaluation of quality assurance in the cytopathology laboratory of a tertiary care hospital in Eastern India
+489	W2036895101	2015	B	Evaluation of registration methods for sparse 3D laser scans
+490	W3016217770	2020	F	Evaluation of the ICP Algorithm in 3D Point Cloud Registration
+491	W4411799561	2025	F	Event-Based Visual-Inertial State Estimation for High-Speed Maneuvers
+492	W4389667570	2023	F	Exact Point Cloud Downsampling for Fast and Accurate Global Trajectory Optimization
+493	W3130287004	2020	F	Experience-Based Prediction of Unknown Environments for Enhanced Belief Space Planning
+494	W42886951	2009	M	Experimental Evaluation of a People Detection Algorithm in Dynamic Environments
+495	W4385627507	2023	F	Experimental Evaluation of Monocular Visual–Inertial SLAM Methods for Freight Railways
+496	W2119172516	2003	S5	Experimental Grid Access for Dynamic Discovery and Data Transfer in Distributed Interactive Simulation Systems
+497	W2896443456	2003	S5	Experimental grid access for dynamic discovery and data transfer in distributed interactive simulation systems
+498	W4405785425	2024	F	Explicit Interaction for Fusion-Based Place Recognition
+499	W2567520225	2016	F	Exploiting building information from publicly available maps in graph-based SLAM
+500	W7164317580	2026	M	Explore From Sketch: Accelerating UAV Exploration in Large-scale Environments with Prior Maps
+501	W7164614632	2026	M	Explore From Sketch: Accelerating UAV Exploration in Large-scale Environments with Prior Maps
+502	arXiv:2606.11708v1	2026	X	Explore From Sketch: Accelerating UAV Exploration in Large-scale Environments with Prior Maps
+503	W7202346903	2026	S2	Extracting deep learning based morphology segmentation footprint for boar sperm cells
+504	W7160874558	2026	F	Failure-Driven Enhancement of Loop Closure Acceptance in LVI-SAM for Ambiguous Indoor Scenes
+505	W1542690301	2010	F	Fast 2D laser scan matching algorithm based on curve mass centre correspondence
+506	W2781875377	2017	F	Fast and accurate 3D reconstruction using a moving depth camera and inertial sensor
+507	W4394564083	2024	F	Fast and Accurate Deep Loop Closing and Relocalization for Reliable LiDAR SLAM
+508	W2012502415	2012	B,F	Fast and accurate scan registration through minimization of the distance between compact 3D NDT representations
+509	W4417281774	2026	M	Fast and Robust Localization for Humanoid Soccer Robot via Iterative Landmark Matching
+510	W2565029242	2016	B	Fast range image-based segmentation of sparse 3D laser scans for online operation
+511	W4320027846	2022	F	Fast Relocalization and Loop Closing in Keyframe-Based 3D LiDAR SLAM
+512	W3126857668	2021	F	Fast Sequence-Matching Enhanced Viewpoint-Invariant 3-D Place Recognition
+513	W4382052446	2023	S3	Fast, Accurate Assembly-Level Physical Verification of 3DIC Packages
+514	W4411446190	2025	F	FAST-LIVO2 on Resource-Constrained Platforms: LiDAR-Inertial-Visual Odometry With Efficient Memory and Computation
+515	W4285102317	2022	B	Fast-MbyM: Leveraging Translational Invariance of the Fourier Transform for Efficient and Accurate Radar Odometry
+516	W2160650656	2006	B	Fault detection for mobile robots using redundant positioning systems
+517	W4391217344	2023	F	Feature Scan Context aided Lidar-IMU Simultaneously Localization and Mapping
+518	W2891194622	2018	F	Feature-Based SLAM for Imaging Sonar with Under-Constrained Landmarks
+519	W4411086655	2025	F	FI-SLAM: Feature Information-Based Robust and Efficient LiDAR SLAM
+520	W2500794097	2010	B	Field and Service Robotics
+521	W4298124947	2006	B	Field and Service Robotics
+522	W2972287291	2019	F	Field-hardened Robotic Autonomy for Subterranean Exploration
+523	W4394625620	2024	F	FinderNet: A Data Augmentation Free Canonicalization aided Loop Detection and Closure technique for Point clouds in 6-DOF separation
+524	W2120481125	2006	B	Finite-horizon robust Kalman filtering for uncertain discrete time-varying systems with uncertain-covariance white noises
+525	W7129030289	2026	F	FLASH: Fibonacci Lattice Spherical Harmonics for Semantic Place Recognition Using LiDAR
+526	W4407124502	2025	F	FlexPRNet: A Flexible and Effective Network for Place Recognition Using Different Sensor Modalities
+527	W1995963656	2011	B	Ford Campus vision and lidar data set
+528	W4413146613	2025	F	ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images
+529	W4413415037	2025	S5	Foreword The Politics of Land
+530	W4387957755	2023	F	Four years of multimodal odometry and mapping on the rail vehicles
+531	W2542611797	2016	S5	Framing occupational therapists’ knowledge and beliefs of alcohol misuse in physical health care settings
+532	W4413677544	2025	F	Frequency Domain Transformation-Aided LiDAR-Inertial Pose Estimation for Autonomous Vehicles Using Implicit Neural Map
+533	W7166834802	2026	S3	From final design to first alignment: advancements in the ELT Main Structure
+534	W4210792614	2022	F	From Perception to Navigation in Environments with Persons: An Indoor Evaluation of the State of the Art
+535	W4416749957	2025	F	From Satellite to Street: Semantic and Depth Information for Enhanced Geo-Localization
+536	W7167696513	2026	F	FS-DICP: A Fast and Simple Point-to-Point Iterative Closest Point Algorithm With Doppler Velocity
+537	W2157364958	2006	B	Fully Automatic Registration of 3D Point Clouds
+538	W7162078204	2026	F	Fuse only what matters: Degeneracy-aware multi-sensor fusion for LiDAR-Inertial-Visual SLAM
+539	W4416749804	2025	F	Fusion Scene Context: Robust and Efficient LiDAR Place Recognition Across Season
+540	W4412076630	2025	F	FusionGS-SLAM: Multiple Sensors Fusion for Localization and Real-Time Photorealistic Mapping
+541	W4205205600	2022	F	G3DOA: Generalizable 3D Descriptor With Overlap Attention for Point Cloud Registration
+542	W4413018272	2025	F	Gaussian Processes for 3D Covariance Estimation
+543	W4408235740	2024	F	Gaussian Splatting SLAM Based on Loop Closure Pose Optimization and Comprehensive Loss Function
+544	W4285102123	2022	F	GCLO: Ground Constrained LiDAR Odometry with Low-drifts for GPS-denied Indoor Environments
+545	W2960033181	2019	B	GCNv2: Efficient Correspondence Prediction for Real-Time SLAM
+546	W4405632362	2024	M	GDC-WED: A Novel Method for Featureless Point Cloud Registration Using Geometry Distance Constraints and Weighted Enhanced Distance
+547	W4408780442	2025	F	General Place Recognition Survey: Toward Real-World Autonomy
+548	W4226363413	2022	F	Generalized n-Dimensional Rigid Registration: Theory and Applications
+549	W4249866455	2009	B	Generalized-ICP
+550	W2613607504	2017	B	Generation of synthetic Kinect depth images based on empirical noise model
+551	W4404370924	2024	F	GenZ-ICP: Generalizable and Degeneracy-Robust LiDAR Odometry Using an Adaptive Weighting
+552	W7150820923	2026	F	Geometric and Information-Theoretic Evaluation of Multi-View Point Cloud Datasets
+553	W4417258396	2025	F	Geometric positioning accuracy improvement of Space-Borne SAR based on ICESAT-2 and DEM data
+554	W1736931297	2002	M	Geometrical Analysis of Two Sets of 3D Correspondence Data Patterns for the Registration of Free-Form Shapes
+555	W2103544971	2004	B	Geometrically stable sampling for the ICP algorithm
+556	W7162495334	2026	F	Geometry-Aware Articulation State Estimation under Structural Configuration Shift for Autonomous Towing
+557	W4416748430	2025	F	GFM-Planner: Perception-Aware Trajectory Planning with Geometric Feature Metric
+558	W7134850592	2026	F	GIF-LIO: Geometry-Intensity Fused LiDAR–Inertial Odometry With Degeneracy-Constrained State Estimation
+559	W7151243611	2026	F	GLINS: GNSS-LiDAR-INS Integrated Navigation System
+560	W4387609197	2023	F	GLIO: Tightly-Coupled GNSS/LiDAR/IMU Integration for Continuous and Drift-Free State Estimation of Intelligent Vehicles in Urban Areas
+561	W4393246020	2024	F	Global principal planes aided LiDAR-based mobile mapping method in artificial environments
+562	W3200806454	2021	F	Globally Consistent 3D LiDAR Mapping With GPU-Accelerated GICP Matching Cost Factors
+563	W4383097405	2023	F	GMM Registration: a Probabilistic scan matching approach for sonar-based AUV navigation
+564	W7202293319	2026	F	GNSS Precise Point Positioning Enhanced Mobile Laser Scanning Railway Point Cloud Registration
+565	W4225014995	2022	F	GNSS-IMU-assisted colored ICP for UAV-LiDAR point cloud registration of peach trees
+566	W4404317064	2024	S2	GOR-PCR: Graph-Based Outlier Removal via Global-to-Local Consistency for Point Cloud Registration
+567	W4284713000	2022	F	GoToNet: Fast Monocular Scene Exposure and Exploration
+568	W3005655766	2020	F	GP-SLAM: laser-based SLAM approach based on regionalized Gaussian process map reconstruction
+569	W2777742657	2017	F	GPS-LiDAR sensor fusion aided by 3D city models for UAVs
+570	W4406181164	2025	F	Gradient Enhancement Techniques and Motion Consistency Constraints for Moving Object Segmentation in 3D LiDAR Point Clouds
+571	W2973258311	2020	B	Graduated Non-Convexity for Robust Spatial Perception: From Non-Minimal Solvers to Global Outlier Rejection
+572	W4403485225	2024	F	Graph Matching for Underwater Simultaneous Localization and Mapping Using Multibeam Sonar Imaging
+573	W3191365169	2021	F	Graph SLAM Built over Point Clouds Matching for Robot Localization in Tunnels
+574	W4285102484	2022	B	Graph-based Multi-sensor Fusion for Consistent Localization of Autonomous Construction Robots
+575	W4400111252	2024	F	Graph-Based SLAM-Aware Exploration With Prior Topo-Metric Information
+576	W4312301512	2022	F	Gravity-constrained point cloud registration
+577	W3137486362	2021	F	Greedy-Based Feature Selection for Efficient LiDAR SLAM
+578	W3205084628	2021	F	Greedy-Based Feature Selection for Efficient LiDAR SLAM
+579	W2116922079	2006	M	Ground Object Recognition using Laser Radar Data Geometric Fitting, Performance Analysis, and Applications
+580	W3134160087	2021	F	Ground-SLAM: Ground Constrained LiDAR SLAM for Structured Multi-Floor Environments
+581	W7204096426	2026	F	GSSeq: Rendered-Reference Sequential Loop Verification for UAV 3D Gaussian Splatting SLAM
+582	W4391257605	2023	M	Guidance, Navigation and Control for the autonomous rendezvous and docking of cooperative targets
+583	W4413999027	2025	F	HARN-LiDAR: hybrid attention-regularized neural LiDAR novel view synthesis
+584	W3208004680	2021	F	HATSDF SLAM – Hardware-accelerated TSDF SLAM for Reconfigurable SoCs
+585	W2906152054	2018	B	Have I Seen This Place Before? A Fast and Robust Loop Detection and Correction Method for 3D Lidar SLAM
+586	W4413925811	2025	F	Helios: Heterogeneous Lidar Place Recognition via Overlap-Based Learning and Local Spherical Transformer
+587	W4393864935	2024	F	HeLiPR: Heterogeneous LiDAR dataset for inter-LiDAR place recognition under spatiotemporal variations
+588	W4411136809	2025	F	Heterogeneous LiDAR dataset for benchmarking robust localization in diverse degenerate scenarios
+589	W4403390117	2024	F	Hierarchical and Validated Branch-and-Bound Method for Global Point Cloud Registration
+590	W3207953086	2021	F	Hierarchical Object Map Estimation for Efficient and Robust Navigation
+591	W2888880178	2018	F	Hierarchical Probabilistic Fusion Framework for Matching and Merging of 3-D Occupancy Maps
+592	W7126072680	2025	M	Hierarchical Scan Matching for High Accuracy Localization for Kidnapped Robots
+593	W4200216640	2021	F	High Definition LiDAR mapping of Perth CBD
+594	W4234734119	2016	S3	High Precision Low Temperature Direct Wafer Bonding Technology for Wafer-Level 3D ICs Manufacturing
+595	W4407474091	2024	F	High-Definition 3D Point Cloud Mapping of the City of Subiaco in Western Australia
+596	W7162581763	2026	M	High-Precision 3D Reconstruction of Historic Buildings Using Multi-Source Data
+597	W2293047233	2009	B	Highly scalable appearance-only SLAM - FAB-MAP 2.0
+598	W4224875477	2022	F	HiTPR: Hierarchical Transformer for Place Recognition in Point Cloud
+599	W4417499101	2025	F	HK‐MEMS, a Multi‐Sensor Data Set With MEMS LiDAR on Degenerate and Dynamic Urban Scenarios
+600	W2967195559	2019	M	HoloLens-Based AR System with a Robust Point Set Registration Algorithm
+601	W4412414386	2025	S5	Hospital-based Oral Cancer Registry: A Promising Initiative and A Practical Networking Model
+602	W4392623958	2024	F	How Challenging is a Challenge? CEMS: a Challenge Evaluation Module for SLAM Visual Perception
+603	W1530790551	2011	S5	How fMRI Technology Contributes to the Advancement of Research in Mental Imagery: A Review
+604	W2926641111	2024	S5	How to Use Flipped Advising to Promote First Year Success
+605	W2130070032	2009	B	HSM3D: Feature-less global 6DOF scan-matching in the Hough/Radon domain
+606	W7203943559	2026	F	HT-LIO: Robust Hybrid Multiscale Planar and Thickness-Constrained LiDAR–Inertial Odometry for Pose Measurement
+607	W4408223159	2024	F	HTD: A Hybrid Triangle Descriptor Combining Geometry and Intensity Information for 3D Loop Detection
+608	W2330135227	2006	S3	Human face verification by robust three-dimensional surface alignment
+609	W4417276755	2025	F	HV-LIOM: Adaptive Hash-Voxel LiDAR–Inertial SLAM with Multi-Resolution Relocalization and Reinforcement Learning for Autonomous Exploration
+610	W3000065826	2020	M	Hybrid Maps Enhanced Localization System for Mobile Manipulator in Harsh Manufacturing Workshop
+611	W7204553530	2026	F	Hybrid Zero-Shot Interactive Navigation with LLMs: Path Planning Under Dual Constraints of Speech and Environment
+612	W7155061847	2026	F	HybridGLoc: Hybrid 2D-3D Cross-LiDAR Global Localization
+613	W2912142928	2018	F	Hybridisations Based on Visual Information for the Localisation of Self-Driving Cars
+614	W7212002698	2026	F	Hypergraph‐Guided Semantic and Geometric Collaborative Learning for Robust Low‐Overlap Point Cloud Registration
+615	W4417112966	2025	S5	I want to talk about climate change, but I wish I didn’t have to: A descriptive qualitative study of an intervention combining creative arts and philosophical inquiry to help elementary school students cope with climate change emotions
+616	W7111131839	2025	S5	I want to talk about climate change, but I wish I didn’t have to: A descriptive qualitative study of an intervention combining creative arts and philosophical inquiry to help elementary school students cope with climate change emotions
+617	W7111365235	2025	S5	I want to talk about climate change, but I wish I didn’t have to: A descriptive qualitative study of an intervention combining creative arts and philosophical inquiry to help elementary school students cope with climate change emotions
+618	W4389666494	2023	F	I2P-Rec: Recognizing Images on Large-Scale Point Cloud Maps Through Bird's Eye View Projections
+619	W7154328621	2026	F,S2	IaNDT-SLAM: intensity-augmented NDT for robust LiDAR-inertial SLAM in unstructured environments
+620	W2123782779	2014	F	ICE matching, robust and fast feature-based scan matching for an online operation
+621	W4380993773	2023	F	ICET Online Accuracy Characterization for Geometry-Based Laser Scan Matching
+622	W4399213625	2024	F	ICET Online Accuracy Characterization for Geometry-Based Laser Scan Matching
+623	W7201888047	2026	F	ICF-SLAM: Instance-guided loop closure and asynchronous historical correction for filter-based LiDAR–inertial SLAM
+624	W4411270197	2025	F	ICP Enhancement Algorithm for 6D Pose Tracking of Household Objects
+625	W2564361441	2016	B,F	ICP-based pose-graph SLAM
+626	W2022789665	2007	S2	Identifying Lens Distortions in Image Registration by Learning from Examples
+627	W4405785044	2024	F	IDF-MFL: Infrastructure-free and Drift-free Magnetic Field Localization for Mobile Robot
+628	W4402027501	2024	F	IGE-LIO: Intensity Gradient Enhanced Tightly Coupled LiDAR-Inertial Odometry
+629	W4416401216	2025	F	Improved A-LOAM Algorithm Based on Radius Filter
+630	W4391019594	2024	F	Improved Accuracy and Contact Stability in Robotic Contouring With Simultaneous Registration and Machining
+631	W4395661174	2024	F	Improved Factor Graph Algorithm for Adaptive Weight Function Based on Residual Adjustment
+632	W4410781509	2025	F	Improved Robot Localization and Mapping Using Adaptive Tuna Schooling Optimization With Sensor Fusion Techniques
+633	W4220838996	2022	F	Improved-UWB/LiDAR-SLAM Tightly Coupled Positioning System with NLOS Identification Using a LiDAR Point Cloud in GNSS-Denied Environments
+634	W1782428364	2015	B	Improvements to the Iterative Closest Point Algorithm for Shape Registration in Manufacturing
+635	W2766201361	2018	M	Improving 6D Pose Estimation of Objects in Clutter Via Physics-Aware Monte Carlo Tree Search
+636	arXiv:1710.08577v1	2017	X	Improving 6D Pose Estimation of Objects in Clutter via Physics-aware Monte Carlo Tree Search
+637	W4299397647	2017	M	Improving 6D Pose Estimation of Objects in Clutter via Physics-aware\n Monte Carlo Tree Search
+638	W4414433216	2025	F	Improving LiDAR Odometry with Hausdorff Distance-Based Variance Estimation
+639	W4316664329	2023	F	Improving Odometric Model Performance Based on LSTM Networks
+640	W4390086719	2023	F	Improving odometric sensor performance by real-time error processing and variable covariance
+641	W4319998008	2023	F	Improving Self-Consistency in Underwater Mapping Through Laser-Based Loop Closure
+642	W4401414874	2024	F	IMU Augment Tightly Coupled Lidar-Visual-Inertial Odometry for Agricultural Environments
+643	W4408897136	2024	M	IMU/ODO Pre-integration Based Tightly Coupled LiDAR SLAM in Degradation Scenarios
+644	W2772733639	2017	B	Incorporating ego-motion uncertainty estimates in range data registration
+645	W2032347636	2010	F	Incremental closed-form solution to globally consistent 2D range scan mapping with two-step pose estimation
+646	W4253032800	2019	S5	Index
+647	W7160615801	2026	S5	indigo-iam/iam: INDIGO Identity and Access Management v1.14.0
+648	W2348637884	2014	M	Indoor integrated navigation of micro aerial vehicle based on radar-scanner and inertial navigation system
+649	W1999210160	2010	F	Indoor localization and visualization using a human-operated backpack system
+650	W2170686019	2015	F	Indoor Slope and Edge Detection by Using Two-Dimensional EKF-SLAM with Orthogonal Assumption
+651	W4402484782	2024	M	Industry and artificial intelligence: industrial robot localization based on improved monte carlo algorithm
+652	W2991189189	2019	S2	InertialNet: Toward Robust SLAM via Visual Inertial Measurement
+653	W3167515158	2021	F	Inexact Loops in Robotics Problems
+654	W2161313337	2011	F	Inferring laser-scan matching uncertainty with conditional random fields
+655	W2103098797	2010	F	Inferring motion uncertainty from shape-Matching
+656	W4386879361	2023	F	InfoLa-SLAM: Efficient Lidar-Based Lightweight Simultaneous Localization and Mapping with Information-Based Keyframe Selection and Landmarks Assisted Relocalization
+657	W4410986253	2025	F	Informed, Constrained, Aligned: A Field Analysis on Degeneracy-Aware Point Cloud Registration in the Wild
+658	W4408017440	2025	F	ININ-LIO: Informer-Based Neural Inertial Network-Aided LiDAR–Inertial Odometry
+659	W4391687250	2024	S5	Initial Perspectives From Rural-Residing Adults on a Digital Cognitive Health Coaching Intervention: Exploratory Qualitative Analysis
+660	W4401808897	2024	F	Initial Position and Orientation Estimation of Scan Matching Based on the Height Feature Map
+661	W4413917656	2025	F	InsCMPR: Efficient Cross-Modal Place Recognition via Instance-Aware Hybrid Mamba-Transformer
+662	W7159577079	2026	S5	InsightSoftwareConsortium/ITK: ITK 5.4.6: Performance, Stability, and Security
+663	W12428211	2014	F	Inspection of Penstocks and Featureless Tunnel-like Environments Using Micro UAVs
+664	W1986172167	2012	F	Integrating depth and color cues for dense multi-resolution scene mapping using RGB-D cameras
+665	W1970032239	2014	M	Integrating elementary functions for autonomous navigation of a mobile robot
+666	W4313589113	2023	F	Intelligent Risk-Identification Algorithm with Vision and 3D LiDAR Patterns at Damaged Buildings
+667	W3193739400	2021	F	Intensity and Ambient Enhanced Lidar-Inertial SLAM for Unstructured Construction Environment
+668	W4395664458	2024	F	Intensity Augmented Solid-State-LiDAR-Inertial SLAM
+669	W7162029547	2026	F	Intensity-aided degeneracy-resilient LiDAR–inertial odometry for GNSS-denied pipeline inspection
+670	W7133122884	2026	F	Intensity-enhanced LiDAR-inertial odometry with gradient flow sampling for degraded environments
+671	W3127368595	2021	F	Intensity-SLAM: Intensity Assisted Localization and Mapping for Large Scale Environment
+672	W4402850791	2024	S2	Interactive 2D LiDAR SLAM for augmented mapping
+673	W7125005198	2025	S5	Intergenerational Learning Bonds (LIGA) - Intervention programme to combat ageism
+674	W4404952731	2024	F	Intermittent VIO-Assisted LiDAR SLAM Against Degeneracy: Recognition and Mitigation
+675	W4415317960	2025	S5	Introspection in Learned Semantic Scene Graph Localisation
+676	W4386918898	2023	F	Introspection of DNN-Based Perception Functions in Automated Driving Systems: State-of-the-Art and Open Research Challenges
+677	W4413917342	2025	F	Introspective Loop Closure for SLAM with 4D Imaging Radar
+678	W2289789856	2015	F	Invariant filtering for Pose EKF-SLAM aided by an IMU
+679	W2776443693	2017	B	Invariant Kalman Filtering
+680	W4390954490	2024	F	IS-CAT: Intensity–Spatial Cross-Attention Transformer for LiDAR-Based Place Recognition
+681	W7210610103	2017	S5	ISU Today- September 25, 2017
+682	W4283662462	2022	F	ISVD-Based Advanced Simultaneous Localization and Mapping (SLAM) Algorithm for Mobile Robots
+683	W2065601211	2007	S5	IT empowered anaesthesiologist
+684	W2118104180	1994	B	Iterative point matching for registration of free-form curves and surfaces
+685	W4415481605	2025	M	Iterative Similarity Perturbation Point Cloud Registration Based on Deformation-Resistant Region Detection
+686	W1532724348	1998	S5	Javabeans by Example
+687	W4389667509	2023	F	Joint On-Manifold Gravity and Accelerometer Intrinsics Estimation for Inertially Aligned Mapping
+688	W7168085734	2026	F	K-STAR: Knowledge-Guided Submap Tracking and Recovery for Monocular SLAM in Degraded Visual Conditions
+689	W3153700602	2020	F	Keyframe-Based Imaging Sonar Localization and Navigation using Elastic Windowed Optimization
+690	W3195006234	2021	F	Keypoint Matching for Point Cloud Registration Using Multiplex Dynamic Graph Attention Networks
+691	W3215849868	2022	M	Kilometer-Scale Autonomous Navigation in Subarctic Forests: Challenges and Lessons Learned
+692	W4286850093	2021	M	Kilometer-scale autonomous navigation in subarctic forests: challenges and lessons learned
+693	arXiv:2111.13981v2	2021	X	Kilometer-scale autonomous navigation in subarctic forests: challenges and lessons learned
+694	W4315778466	2023	B	KISS-ICP: In Defense of Point-to-Point ICP – Simple, Accurate, and Robust Registration If Done the Right Way
+695	W4313213824	2022	F	KPPR: Exploiting Momentum Contrast for Point Cloud-Based Place Recognition
+696	W3094265892	2020	B,F	kRadar++: Coarse-to-Fine FMCW Scanning Radar Localisation
+697	W4396798378	2024	M	L-PCM: Localization and Point Cloud Registration-Based Method for Pose Calibration of Mobile Robots
+698	W7128531261	2026	F	L2G-Net: Local-to-global feature enhancement via cluster tokens for 3D place recognition
+699	W2955544543	2019	B	L3-Net: Towards Learning Based LiDAR Localization for Autonomous Driving
+700	W4405786023	2024	F	LA-LIO: Robust Localizability-Aware LiDAR-Inertial Odometry for Challenging Scenes
+701	W2180077832	2015	B	Lagrangian duality in 3D SLAM: Verification techniques and optimal solutions
+702	W4285506552	2022	F	LAMP 2.0: A Robust Multi-Robot SLAM System for Operation in Challenging Large-Scale Underground Environments
+703	W2315928207	2016	F	Lane-Level Localization Using an AVM Camera for an Automated Driving Vehicle in Urban Environments
+704	W2975847968	2019	M	Large Scale 2D Laser SLAM using Truncated Signed Distance Functions
+705	W2938839210	2021	B,F	Large-Scale 3D Mapping of Subarctic Forests
+706	W2170472272	2005	M	Laser Based Personal Navigation System
+707	W2070314049	2012	F	Laser scan matching for self‐localization of a walking robot in man‐made environments
+708	W1994959326	2012	F	Laser-only road-vehicle localization with dual 2D push-broom LIDARS and 3D priors
+709	W2888422218	2018	F	Laser–visual–inertial odometry and mapping with high robustness and low drift
+710	W7164127078	2026	F	Leap-SLAM: Degeneracy-mitigated robust SLAM with leapfrogging multi-robot collaboration in tunnels
+711	W2783642447	2018	F	Learning a Bias Correction for Lidar-Only Motion Estimation
+712	W2462459321	2016	F	Learning a Context-Dependent Switching Strategy for Robust Visual Odometry
+713	W4226052415	2022	F	Learning a Novel LiDAR Submap-Based Observation Model for Global Positioning in Long-Term Changing Environments
+714	W3129252116	2020	F	Learning an Overlap-based Observation Model for 3D LiDAR Localization
+715	W4206578178	2021	F	Learning End-to-End Inertial-Wheel Odometry for Vehicle Ego-Motion Estimation
+716	W4396783611	2024	F	Learning Minimal Volume Uncertainty Ellipsoids
+717	W2772163732	2017	B	Learning to detect misaligned point clouds
+718	W2899117197	2020	B	Learning to Localize Using a LiDAR Intensity Map
+719	W4312662135	2022	F	Learning to Simulate Realistic LiDARs
+720	W4409366563	2025	F	Learning-based 3D human kinematics estimation using behavioral constraints from activity classification
+721	W4221153071	2022	F,S4	Learning-based Localizability Estimation for Robust LiDAR Localization
+722	W3006716140	2020	F	Least Squares Optimization: From Theory to Practice
+723	W3040033506	2020	F	Least squares optimization: From theory to practice
+724	W4413925467	2025	F	Leg Exoskeleton Odometry using a Limited FOV Depth Sensor
+725	W4390933031	2024	F	LeGO-LOAM-FN: An Improved Simultaneous Localization and Mapping Method Fusing LeGO-LOAM, Faster_GICP and NDT in Complex Orchard Environments
+726	W7160984721	2026	S5	lemonforest/mlehaptics: srmech-v0.1.0
+727	W4401415166	2024	F	Less is More: Physical-Enhanced Radar-Inertial Odometry
+728	W4405787080	2024	F	LF-3PM: a LiDAR-based Framework for Perception-aware Planning with Perturbation-induced Metric
+729	W2895016049	2019	B	Lidar Measurement Bias Estimation via Return Waveform Modelling in a Context of 3D Mapping
+730	W7117960953	2026	F	LiDAR Odometry Based on Wheel Encoder in Degenerate Environments
+731	W4391676180	2024	F	LiDAR odometry survey: recent advancements and remaining challenges
+732	W4392902057	2024	F	LiDAR Place Recognition Based on Range Image and Column-Shift-Invariant Attention
+733	W4408552806	2025	F	LiDAR, IMU, and camera fusion for simultaneous localization and mapping: a systematic review
+734	W4312346369	2022	F	LiDAR-Aided Visual-Inertial Localization with Semantic Maps
+735	W4406255970	2025	F	LiDAR-based 3D SLAM for autonomous navigation in stacked cage farming houses: An evaluation
+736	W4226275201	2022	F	LiDAR-Based Global Localization Using Histogram of Orientations of Principal Normals
+737	W3207483031	2021	F	LiDAR-Based Initial Global Localization Using Two-Dimensional (2D) Submap Projection Image (SPI)
+738	W4394622266	2024	F	LIDAR-based SLAM system for autonomous vehicles in degraded point cloud scenarios: dynamic obstacle removal
+739	W4407938583	2024	F	LiDAR-Driven Navigation in Dynamic Indoor Environments: Optimizing Performance and Reliability
+740	W7154564297	2026	F,M	Lidar-inertial odometry tightly coupled SLAM research based on scene degradation detection
+741	W4312985079	2022	B,F	Lidar-Level Localization With Radar? The CFEAR Approach to Accurate, Fast, and Robust Large-Scale Radar Odometry in Diverse Environments
+742	W7130589881	2026	F	LiDAR-VGGT: Cross-Modal Coarse-to-Fine Fusion for Globally Consistent and Metric-Scale Dense Mapping
+743	W3115298393	2020	B,F	Lidar/UWB Fusion Based SLAM With Anti-Degeneration Capability
+744	W4402093107	2024	F	LiDAR‐based place recognition for mobile robots in ground/water surface multiple scenes
+745	W3175829913	2021	F	LiDAR‐based robust localization for field autonomous vehicles in off‐road environments
+746	W4381327745	2023	F	LiDAR–Inertial Integration for Rail Vehicle Localization and Mapping in Tunnels
+747	W7131663540	2025	F	Life-Long LiDAR Localization Based on Incremental NDT in Industrial Environments
+748	W7204668499	2026	M	Lightweight Cross-Modal Channel Calibration and Controlled Evaluation of Candidate-Budget Effects for Image-to-Point Cloud Registration
+749	W3185790437	2021	F	Lightweight Semantic-Aided Localization With Spinning LiDAR Sensor
+750	W1486715499	1995	B	Linear Control System Analysis and Design: Conventional and Modern
+751	W2103420503	2004	B	Linear Least-Squares Optimization for Point-to-Plane ICP Surface Registration
+752	W4320002790	2023	F	LIO-Fusion: Reinforced LiDAR Inertial Odometry by Effective Fusion With GNSS/Relocalization and Wheel Odometry
+753	W3129245057	2020	B	LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping
+754	W3128630608	2021	F	LION: Lidar-Inertial Observability-Aware Navigator for Vision-Denied Environments
+755	W4405304287	2024	F	LIOP: Tightly Coupled LiDAR-Inertial Odometry and Prior Information System for Long-term Localization*
+756	W2908603664	2018	B	LIPS: LiDAR-Inertial 3D Plane SLAM
+757	W4390969496	2024	F	LIVER: A Tightly Coupled LiDAR-Inertial-Visual State Estimator With High Robustness for Underground Environments
+758	W7119090413	2025	F	LLS-SMGSC: A Lidar Localization System Based on Simplified Maps Integrated with Global Search Capabilities
+759	W4386617972	2023	F	Lmapping: tightly-coupled LiDAR-inertial odometry and mapping for degraded environments
+760	W2296228853	2014	B	LOAM: Lidar Odometry and Mapping in Real-time
+761	W2902610326	2019	B	Local Descriptor for Robust Place Recognition Using LiDAR Intensity
+762	W1995443731	2014	B	Local multi-resolution representation for 6D motion estimation and mapping with a continuously rotating 3D laser scanner
+763	W7148761958	2019	F	Localisation coopérative de véhicules autonomes communicants
+764	W3010028901	2020	B	Localising Faster: Efficient and precise lidar-based robot localisation in large-scale environments
+765	W4405646825	2024	F	Localizability based path planning on occupancy grid maps
+766	W4386745321	2023	F	Localizability estimation using correlation on occupancy grid maps
+767	W2410520351	2016	F	Localization accuracy estimation with application to perception design
+768	W4395029557	2024	F	Localization Fault Detection Method using 2D LiDAR and Fisheye Camera for an Autonomous Mobile Robot Control
+769	W7106030111	2025	F	LODESTAR: Degeneracy-Aware LiDAR-Inertial Odometry With Adaptive Schmidt-Kalman Filter and Data Exploitation
+770	W4390576785	2024	F	LodeStar: Maritime Radar Descriptor for Semi-Direct Radar Odometry
+771	W4401758393	2024	F	LOFF: LiDAR and Optical Flow Fusion Odometry
+772	W2284402572	2009	F	Looking Inside for Mapping the Outside: Introspective Simultaneous Localization and Mapping
+773	W3209959857	2022	F	Loop Closure Detection Using Local 3D Deep Descriptors
+774	W4285505354	2022	B,F	Loop Closure Prioritization for Efficient and Scalable Multi-Robot SLAM
+775	W3091136196	2020	F	Loop-box: Multi-Agent Direct SLAM Triggered by Single Loop Closure for Large-Scale Mapping
+776	W3097712187	2020	F	Loop-Box: Multiagent Direct SLAM Triggered by Single Loop Closure for Large-Scale Mapping
+777	W3169503372	2021	F	LoRa Backscatter Assisted State Estimator for Micro Aerial Vehicles with Online Initialization
+778	W4406121910	2025	S4	LP-ICP: General Localizability-Aware Point Cloud Registration for Robust Localization in Extreme Unstructured Environments
+779	W4390045266	2023	F	LprViT:An Efficient ViT for LiDAR-Based Place Recognition Using Range Image
+780	W3186380594	2022	F	LT-mapper: A Modular Framework for LiDAR-based Lifelong Mapping
+781	W4285102155	2022	F	LTSR: Long-term Semantic Relocalization based on HD Map for Autonomous Vehicles
+782	W7151352195	2026	F	LUNA: A Low-SNR Acoustic Localization and Orientation Framework for UAVs
+783	W3206845495	2021	F	LVI-SAM: Tightly-coupled Lidar-Visual-Inertial Odometry via Smoothing and Mapping
+784	W2565998037	2016	B	M2DP: A novel 3D point cloud descriptor and its application in loop closure detection
+785	W4410737956	2025	F	MAD-BA: 3D LiDAR Bundle Adjustment – From Uncertainty Modelling to Structure Optimization
+786	W4402350442	2024	F	MAD-ICP: It is All About Matching Data – Robust and Informed LiDAR Odometry
+787	W4387513993	2023	F	Mag-ODO: Motion speed estimation for indoor robots based on dual magnetometers
+788	W7211909826	2026	F	Manifold-Constrained Visual Odometry for Soft Worm-Inspired Robots in Pipe-Inspection Tasks
+789	W4206530715	2021	S5	Manpower and the Armies of the British Empire in the Two World Wars
+790	W4206705988	2021	S5	Manpower and the Armies of the British Empire in the Two World Wars
+791	W1976809435	2008	B	Map Matching and Data Association for Large-Scale Two-dimensional Laser Scan-based SLAM
+792	W2971338476	2019	M	Map Switching Monte Carlo LiDAR Localization for Automated Driving in Parking Garages
+793	W2984212216	2019	M	Map Switching Monte Carlo LiDAR Localization for Automated Driving in Parking Garages.
+794	W2756158950	2017	M	Map-based robust localization for indoor mobile robots
+795	W3202044876	2021	F	Map-less long-term localization in complex industrial environments
+796	W2991767878	2019	S2	Mapping and Semantic Modeling of Underground Parking Lots Using a Backpack LiDAR System
+797	W2008048044	2013	M	Mapping with synthetic 2D LIDAR in 3D urban environment
+798	W4387641162	2013	F	Mapping, planning and exploration with Pose SLAM
+799	W4413452482	2025	F	Maritime scene matching for inter-robot localization across surface and underwater domains
+800	W4307416562	2022	B	MAROAM: Map-based Radar SLAM through Two-step Feature Selection
+801	W3031624864	2019	B	Masking by Moving: Learning Distraction-Free Radar Odometry from Pose\n Information
+802	W4406856942	2025	F	Matched Filtering Based LiDAR Place Recognition for Urban and Natural Environments
+803	W3174443268	2021	S2	Mathematical Problems in Engineering Augmented Reality Method Based on Improved KCF
+804	W4229706427	2012	B	Matrix Analysis
+805	W2021506636	2010	F	Maximum likelihood mapping with spectral image registration
+806	W7212352825	2026	S5	mdaa_bench: simulation bench for blind identification of latent dynamical structure (MDAA)
+807	W7212398949	2026	S5	mdaa_bench: simulation bench for blind identification of latent dynamical structure (MDAA)
+808	W7212506616	2026	S5	mdaa_bench: simulation bench for blind identification of latent dynamical structure (MDAA)
+809	W7213524848	2026	S5	mdaa_bench: simulation bench for blind identification of latent dynamical structure (MDAA)
+810	W7155554048	2026	F	MDR-SLAM: multi-module degeneracy-resistant SLAM for robustness enhancement in diverse degenerate scenarios
+811	W2905944778	2018	M	Measuring asymmetry from high-density 3D surface scans: An application to human faces
+812	W1995586709	2003	S5	Medical professionals: a need for introspection
+813	W4402892311	2024	F	Mercator Descriptor: A Novel Global Descriptor for Loop Closure Detection in LiDAR SLAM
+814	W2083624955	1992	B	Method for registration of 3-D shapes
+815	W4213024295	2021	S5	METHODS OF EMPIRICAL TRANSLATION SCIENCE AND ITS APPLICATION IN EAST SLAVIC TRANSLATION RESEARCH: OBSERVATION, INTROSPECTION AND RETROSPECTION, SURVEY
+816	W2143924340	2006	B	Metric-based iterative closest point scan matching for sensor displacement estimation
+817	W2105319067	2006	B	Metric-Based Scan Matching Algorithms for Mobile Robot Displacement Estimation
+818	W2008557445	2009	F	Metric-topological maps from laser scans adjusted with incremental tree network optimizer
+819	W4413018526	2025	F	Metro-Rail-SLAM for Automated Inspection Vehicles with Path-Aided Constraints
+820	W4405488079	2024	F	MetroLoc: Metro Vehicle Mapping and Localization With LiDAR-Camera-Inertial Integration
+821	W4403249810	2024	F	Metrological integration and automation of surface topography measuring instruments on cobots
+822	W7135046264	2026	S2	MIFSO-Net: A 3D point cloud registration network using multilevel contextual feature interaction and saliency-Guided overlap enhancement
+823	W4312851330	2022	F	MIMOSA: A Multi-Modal SLAM Framework for Resilient Autonomy against Sensor Degradation
+824	W4200631299	2021	F	MinkLoc3D-SI: 3D LiDAR Place Recognition With Sparse Convolutions, Spherical Coordinates, and Intensity
+825	W4405056746	2024	F	ML-Based Fast and Precise Embedded Rack Detection Software for Docking and Transport of Autonomous Mobile Robots Using 2-D LiDAR
+826	W3128257079	2021	F	MLS: An MAE-Aware LiDAR Sampling Framework for On-Road Environments Using Spatio-Temporal Information
+827	W4399665678	2024	F	MM-LINS: A Multi-Map LiDAR-Inertial System for Over-Degenerate Environments
+828	W4411996390	2024	F	Mobile Robot Localization Failure Detection
+829	W4392607711	2024	F	Mobile-Seed: Joint Semantic Segmentation and Boundary Detection for Mobile Robots
+830	W4405786375	2024	F	ModaLink: Unifying Modalities for Efficient Image-to-PointCloud Place Recognition
+831	W2982133428	2019	F	Model Free Calibration of Wheeled Robots Using Gaussian Process
+832	W2185089559	2021	F	Model Learning and Real-Time Tracking Using Multi-Resolution Surfel Maps
+833	W2016285927	2012	B	Modeling Kinect Sensor Noise for Improved 3D Reconstruction and Tracking
+834	W2059759762	1997	B,M	Monte Carlo simulation and analysis of free-form surface registration
+835	W2518401284	2016	F	Motion-Based Calibration of Multimodal Sensor Extrinsics and Timing Offset Estimation
+836	W4389704426	2023	F	MR-MD:MULTI-ROBOT MAPPING WITH MANHATTAN DESCRIPTOR
+837	W4390939439	2024	F	MS-Mapper: A LiDAR Mapping System by Switching Between Mobile and Stationary Configurations
+838	W7133239768	2026	F	MS2-CL: Multi-Scale Self-Supervised Learning for Camera to LiDAR Cross-Modal Place Recognition
+839	W4408349761	2025	S5	Mulberry leaf extract combined with tryptophan improves sleep and post wake mood in adults with sleep complaints – A randomized cross-over study
+840	W3207826836	2021	F	MULLS: Versatile LiDAR SLAM via Multi-metric Linear Least Square
+841	W3091337047	2020	B	MulRan: Multimodal Range Dataset for Urban Place Recognition
+842	W4413146017	2025	F	Multi-Modal Aerial-Ground Cross-View Place Recognition with Neural ODEs
+843	W4390485868	2023	F	Multi-Modal SLAM for Accurate Localisation in Self-similar Environments
+844	W7169043765	2026	F	Multi-Modal Tightly Coupled Robust Pose Estimation for Mobile Robots in Complex Degraded Scenarios
+845	W3080300064	2020	F	Multi-modal Visual-Thermal Saliency-based Object Detection in Visually-degraded Environments
+846	W2049135383	2013	F	Multi-resolution surfel mapping and real-time pose tracking using a continuously rotating 2D laser scanner
+847	W1965851203	2013	F	Multi-resolution surfel maps for efficient dense 3D modeling and tracking
+848	W3182496594	2021	M	Multi-Robot 2.5D Localization and Mapping Using a Monte Carlo Algorithm on a Multi-Level Surface
+849	W2046918204	2014	F	Multi-robot pose graph localization and data association from unknown initial relative poses via expectation maximization
+850	W7172413268	2026	F	Multi-Robot SLAM System with Height-Based Hierarchical PCA-Enhanced Scan Context
+851	W4283791656	2022	F	Multi-Uncertainty Captured Multi-Robot Lidar Odometry and Mapping Framework for Large-Scale Environments
+852	W4285102281	2022	F	Multi-view object pose distribution tracking for pre-grasp planning on mobile robots
+853	W7118128365	2025	M	Multimodal 3D Fire and Smoke Localization in Complex Scenes via YOLOv7 and PointNet++ Integration
+854	W4295745621	2022	F	Multimodal Information Fusion for High-Robustness and Low-Drift State Estimation of UGVs in Diverse Scenes
+855	W4403106339	2024	F	Multiple and Gyro-Free Inertial Datasets
+856	W2033819227	2004	B	Multiple View Geometry in Computer Vision
+857	W2982534372	2021	F	Multivariate Uncertainty in Deep Learning
+858	W4392406118	2024	F	mVLINS: A Multilevel Visual-LiDAR-Inertial Navigation System With Completely Decoupled Odometry and Adaptive Environmental Mapping
+859	W4400487989	2024	F	MVSE-Net: A Multi-View Deep Network With Semantic Embedding for LiDAR Place Recognition
+860	W4401907662	2024	F	NA-LOAM: Normal-Based Adaptive LiDAR Odometry and Mapping
+861	W2531720778	2009	S2	NAVIGATED PLACEMENT OF SCAPHOID SCREWS WITH 3-D FLUOROSCOPY -TECHNIQUE AND FIRST LABORATORY RESULTS-
+862	W4414948645	2025	S5	NAVIGATING INDIAN TRADEMARK LAWS – AN INTROSPECTION OF WELL-KNOWN TRADEMARKS IN INDIA
+863	W3207344666	2021	F	NDT-Transformer: Large-Scale 3D Point Cloud Localisation using the Normal Distribution Transform Representation
+864	W4415168024	2024	F	Neural Error Covariance Estimation for Precise LiDAR Localization
+865	W4366826925	2023	F	NGLSFusion: Non-Use GPU Lightweight Indoor Semantic SLAM
+866	W2085280799	2012	B	Noise characterization of depth sensors for surface inspections
+867	W4366825286	2023	F	Noise covariance estimation via autocovariance least-squares with deadbeat filters
+868	W7162579221	2026	S2	Noise-Free Domain Adaptation for barely supervised 3D seismic fault detection
+869	W3160954918	2012	B	Nonlinear Control Systems
+870	W2998978941	2020	F	Nonparametric Continuous Sensor Registration
+871	W4409135939	2025	F	Novel Differential Entropy-Based Approach for Delaunay Mesh Quality Assessment
+872	W4390506280	2024	F	Novel Direct Multi-View Terrestrial Laser Scanner Data Registration Using Range, Polar and Azimuthal Angles Uncertainties
+873	W4399110981	2024	F	Novel Direct Multi-View Terrestrial Laser Scanner Data Registration Using Range, Polar and Azimuthal Angles Uncertainties
+874	W3197803082	2021	F	Novel Process Noise Model for GNSS Kalman Filter Based on Sensitivity Analysis of Covariance with Poor Satellite Geometry
+875	W4320800818	1997	B	Numerical Linear Algebra
+876	W2105737698	1980	B	Numerical mathematics and computing
+877	W2098754650	2006	B	Numerical optimization
+878	W203453735	2014	S5	OAuth 2.0 Profiles
+879	W4242695610	2019	S5	OAuth 2.0 Profiles
+880	W1883517952	2002	B	Object modeling by registration of multiple range images
+881	W2063549868	1992	B	Object modelling by registration of multiple range images
+882	W3188396335	2021	F	Object Position Estimation based on Dual Sight Perspective Configuration
+883	W4396542406	2024	F	Object Reconstruction and Localization in Indoor Environments Using Infrastructure Sensor Node
+884	W2602331221	2016	F	Object tracking and state estimation in outdoor scenes based on 3D laser scanner
+885	W2104910675	2013	B	Observability optimization for the nonholonomic integrator
+886	W2396572432	2014	F	Observability, Covariance and Uncertainty of ICP Scan Matching.
+887	W4229445880	2022	F	Observability-Aware Intrinsic and Extrinsic Calibration of LiDAR-IMU Systems
+888	W4377078819	2022	F	Obstacles Detection and Motion Estimation by Using Multiple Lidar Sensors Data
+889	W4401414465	2024	F	OCC-VO: Dense Mapping via 3D Occupancy-Based Visual Odometry for Autonomous Driving
+890	W4386838179	2023	F	ODLC_SAM: a novel LiDAR SLAM system towards open-air environments with loop closure
+891	W7204988970	2026	F	Odometry and Mapping for Complex Environment Perception Under Partial-View Sensing
+892	W4389666843	2023	F	Off the Radar: Uncertainty-Aware Radar Place Recognition with Introspective Querying and Map Maintenance
+893	W4403721790	2024	F	Offline Object Tracking With Joint Point Cloud Registration
+894	W7123360335	2026	F	OIF-PCR++: Point Cloud Registration via Progressive Distillation of Conditional Positional Encoding
+895	W2046293820	2012	S5	Oil and World Literature
+896	W2119321730	2006	M	Omnidirectional vision scan matching for robot localization in dynamic environments
+897	W2110816628	2009	B	On achievable accuracy for pose tracking
+898	W2137837705	2007	B,F	On achievable accuracy for range-finder localization
+899	W2006765201	2005	B	On actively closing loops in grid-based FastSLAM
+900	W2419212966	2016	B,anchor	On degeneracy of optimization-based state estimation problems
+901	W4403124187	2024	F	On Semidefinite Relaxations for Matrix-Weighted State-Estimation Problems in Robotics
+902	W2005809055	2010	M	On the closed-form covariance estimation for the pIC algorithm
+903	W2354819904	2016	B,F	On the covariance of ICP-based scan-matching techniques
+904	W1529454649	2014	F	On the covariance of scan-matching techniques for localization
+905	W3188123215	2021	F	On the descriptive power of LiDAR intensity images for segment-based loop closing in 3-D SLAM
+906	W2142075561	2014	F	On the Development of a Generic Multi-Sensor Fusion Framework for Robust Odometry Estimation
+907	W2496508257	2012	S5	On the Phenomenology of Introspection
+908	W3010505081	2018	B	On the uncertainty in active slam: representation, propagation and monotonicity
+909	W4283452670	2022	F	On-manifold probabilistic Iterative Closest Point: Application to underwater karst exploration
+910	W7203838975	2026	F	Onboard Reconfigurable Holographic Surface-Aided Simultaneous Localization, Mapping, and Moving Object Tracking for Low-Altitude Wireless Networks
+911	W4312942802	2022	F	One RING to Rule Them All: Radon Sinogram for Place Recognition, Orientation and Translation Estimation
+912	W4389976856	2023	F	One Robust Loosely Coupled 4D Millimeter-Wave Image Radar SLAM Method
+913	W4416749331	2025	F	One-shot Global Localization through Semantic Distribution Feature Retrieval and Semantic Topological Histogram Registration
+914	W3004070432	2020	F	Online LiDAR-SLAM for Legged Robots with Robust Registration and Deep-Learned Loop Closure
+915	W4385800772	2023	F	Online LiDAR-to-Vehicle Alignment Using Lane Markings and Traffic Signs
+916	W4298627153	2022	F	Online pole segmentation on range images for long-term LiDAR localization in urban environments
+917	W3195500508	2021	F	Online Range Image-based Pole Extractor for Long-term LiDAR Localization in Urban Environments
+918	W3141265109	2021	F	Online Robust Sliding-Windowed LiDAR SLAM in Natural Environments
+919	W2752776997	2017	S5	Ontario’s History of Tampering and Re-Tampering with Birth Registration Forms
+920	W4401878935	2024	F	OORD: The Oxford Offroad Radar Dataset
+921	W4399620815	2024	F	Open-RadVLAD: Fast and Robust Radar Place Recognition
+922	W4404096456	2024	F	Open-Vocabulary Instance Segmentation-Boundary IS-Goal
+923	W4220838781	2022	F	Optical metrology for digital manufacturing: a review
+924	W7164888101	2026	F	Optimized Deployment of HAPS Systems for GNSS Localization Enhancement in Urban Environments
+925	W2901991803	2018	F	Optimizing Sensor Placement: A Mixture Model Framework Using Stable Poses and Sparsely Precomputed Pose Uncertainty Predictions
+926	W4402172881	2024	F	ORB Visual and WiFi Online RSSI fusion SLAM
+927	W2535547924	2017	B	ORB-SLAM2: An Open-Source SLAM System for Monocular, Stereo, and RGB-D Cameras
+928	W3043971245	2021	B	ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual–Inertial, and Multimap SLAM
+929	W2994881679	2019	B	OREOS: Oriented Recognition of 3D Point Clouds in Outdoor Scenarios
+930	W196745762	2010	S2	Orphan drugs to be followed. Identifying and characterizing the development of follow-on Orphan Medicinal Products in Europe
+931	W2096878151	2008	F	Orthogonal wall correction for visual motion estimation
+932	W3192680689	2021	B,F	OverlapNet: a siamese network for computing LiDAR scan similarity with applications to loop closing and localization
+933	W3039808820	2020	anchor	OverlapNet: Loop Closing for LiDAR-based SLAM
+934	W4285147600	2022	F	OverlapTransformer: An Efficient and Yaw-Angle-Invariant Transformer Network for LiDAR-Based Place Recognition
+935	W4405778715	2024	F	P2d-DO: Degeneracy Optimization for LiDAR SLAM With Point-to-Distribution Detection Factors
+936	W4391462898	2024	F	PALoc: Advancing SLAM Benchmarking With Prior-Assisted 6-DoF Trajectory Generation and Uncertainty Estimation
+937	W7123598505	2026	S3	Parallel multi-focus femtosecond laser direct writing enabled by non-iterative phase regional segmentation and SVG guidance
+938	W2212012417	2015	F	Parametric covariance prediction for heteroscedastic noise
+939	W2765927786	2017	S5	Participación familiar en la disminución de riesgos de consumo de drogas en adolescentes de la cabecera parroquial de La Iberia.
+940	W2461937780	2016	B,F	Past, Present, and Future of Simultaneous Localization and Mapping: Toward the Robust-Perception Age
+941	W3124420883	2016	B,F	Past, present, and future of simultaneous localization and mapping: Toward the robust-perception age
+942	W4388795921	2023	F	PatchAugNet: Patch feature augmentation-based heterogeneous point cloud place recognition in large-scale street scenes
+943	W3214095120	2022	F	PatchGraph: In-hand tactile tracking with learned surface normals
+944	W4394063563	2024	F	Patchlpr: a multi-level feature fusion transformer network for LiDAR-based place recognition
+945	W2962742274	2018	F	PCR-Pro: 3D Sparse and Different Scale Point Clouds Registration and Robust Estimation of Information Matrix for Pose Graph SLAM
+946	W4405022848	2024	F	Ped-Mag-ODO: Indoor Pedestrian Motion Speed Estimation Method Based on Dual Magnetometers
+947	W7213288696	2026	S5	PelicanPlatform/pelican: v26.0.0-rc.0
+948	W7139993038	2026	S5	PelicanPlatform/pelican: v7.25.0-experimental.6
+949	W7170655794	2026	S5	PelicanPlatform/pelican: v7.27.0-rc.0
+950	W25890986	2003	S5	PERAN CAMAT SEBAGAI PEJABAT PEMBUAT AKTA TANAH (PPAT)SEMENTARA DALAM PROSES PENDAFTARAN TANAHDI KABUPATEN KARANGANYAR
+951	W7170366152	2026	S5	Perception, Minus the Narrator
+952	W7170731513	2026	S5	Perception, Minus the Narrator
+953	W4401414429	2024	F	Perception-and-Energy-aware Motion Planning for UAV using Learning-based Model under Heteroscedastic Uncertainty
+954	W4306147871	2022	F	Perception-aware Receding Horizon Path Planning for UAVs with LiDAR-based SLAM
+955	W3214018470	2021	F	Performance Analysis of Computer Vision Based Feature Detectors for 3D Laser Rasterized Images
+956	W7163061452	2026	F	Performance Evaluation of Different Laser SLAM Algorithms for Unmanned Mining Vehicles
+957	W7162284192	2026	S2	Persistence-Stable Observer Failure in Resolution-Limited Accessibility Systems
+958	W7162321975	2026	S2	Persistence-Stable Observer Failure in Resolution-Limited Accessibility Systems
+959	W26184657	1991	B	Perturbation Theory for the Solution of Systems of Linear Equations
+960	W2621054801	2017	F	Perzeption für robuste Fahrzeuglokalisierung
+961	W3090913682	2020	B	PhaRaO: Direct Radar Odometry using Phase Correlation
+962	W3127188503	2021	F	PHASER: A Robust and Correspondence-Free Global Pointcloud Registration
+963	W4379034017	2023	F	Photometric LiDAR and RGB-D Bundle Adjustment
+964	W7128737756	2026	F	Physics–Geometry Coupled LiDAR–Inertial Odometry under Concurrent Degeneracy
+965	W4391013390	2024	F	PIN-SLAM: LiDAR SLAM Using a Point-Based Implicit Neural Representation for Achieving Global Map Consistency
+966	W4400228262	2024	F	PIN-SLAM: LiDAR SLAM Using a Point-Based Implicit Neural Representation for Achieving Global Map Consistency
+967	W2963200201	2020	B	PL-SLAM: A Stereo SLAM System Through the Combination of Points and Line Segments
+968	W7131075006	2025	F	Place Recognition for Place: Toward Point Cloud Descriptor Stability Across Viewpoints
+969	W2105977269	2011	B	Place recognition in 3D scans using a combination of bag of words and point feature based relative pose estimation
+970	W4399287243	2024	F	Place Recognition through Multiple LiDAR Scans Based on the Hidden Markov Model
+971	W2101992557	2010	B	Place Recognition Using Regional Point Descriptors for 3D Mapping
+972	W4417131275	2025	F	Planar Marker Recognition-Based AMR Localization and Docking Method for Multirobot Cooperation in Indoor Factory Construction
+973	W4412571705	2025	S2	Plane-Assisted Indoor Lidar Slam
+974	W4416746442	2025	S2	Plane-assisted indoor Lidar SLAM
+975	W4405304640	2024	F	Plane-based Loop Correction for LiDAR Inertial SLAM
+976	W4413553354	2025	F	Plane-Based Stereo Visual Localization With a Prior LiDAR Map
+977	W2110985829	2010	B	Planning and control for cooperative manipulation and transportation with aerial robots
+978	W7117890383	2026	F	PLUE-SLAM: An RGB-D SLAM System Integrating Uncertainty Estimation of Point and Line Features
+979	W3136457107	2021	F	Point cloud registration algorithm based on curvature feature similarity
+980	W2947431802	2019	M	Point Cloud Registration Based on MCMC-SA ICP Algorithm
+981	W3010226298	2020	B,M	Point Set Registration for 3D Range Scans Using Fuzzy Cluster-Based Metric and Efficient Global Optimization
+982	W4225987324	2022	F	Point Wise or Feature Wise? A Benchmark Comparison of Publicly Available Lidar Odometry Algorithms in Urban Canyons
+983	W3154645419	2021	F	Point wise or Feature wise? Benchmark Comparison of Public Available LiDAR Odometry Algorithms in Urban Canyons
+984	W4322771606	2023	F	Point-based metric and topological localisation between lidar and overhead imagery
+985	W2137427265	2009	F	Point-to-line metric based Iterative Closest Point with bounded scale
+986	W2560609797	2017	B	PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation
+987	W3013131042	2020	F	PointNetKL: Deep Inference for GICP Covariance Estimation in Bathymetric SLAM
+988	W2798194297	2018	B	PointNetVLAD: Deep Point Cloud Based Retrieval for Large-Scale Place Recognition
+989	W7169775609	2026	F	PolarBEVPlace: Rotation-Robust LiDAR Place Recognition via Radial Distortion-Aware Polar Transform
+990	W4390722885	2024	M	PosDiffNet: Positional Neural Diffusion for Point Cloud Registration in a Large Field of View with Perturbations
+991	W4393158597	2024	M	PosDiffNet: Positional Neural Diffusion for Point Cloud Registration in a Large Field of View with Perturbations
+992	arXiv:2401.03167v1	2024	X	PosDiffNet: Positional Neural Diffusion for Point Cloud Registration in a Large Field of View with Perturbations
+993	W2970172820	2019	F	Pose and covariance matrix propagation issues in cooperative localization with LiDAR perception
+994	W4408039857	2025	F	Pose Estimation of Coil Workpieces by Automated Overhead Cranes Using an Improved Point Pair Features Algorithm
+995	W2911372914	2019	F	Position Estimation of Moving Objects: Practical Provable Approximation
+996	W7124994532	2026	F	Positioning Uncertainty Estimation of LiDAR SLAM Based on Multifault Hypothesis Solution Separation and Lie Group Theory
+997	W4409311133	2025	F	PPLIO: Plane-to-Plane LiDAR-Inertial Odometry With Multi-View Constraint in Real-Time
+998	W2890714858	2018	B	Precise Ego-Motion Estimation with Millimeter-Wave Radar Under Diverse and Challenging Conditions
+999	W4292793935	2022	M	Precise Repositioning of Robotic Ultrasound: Improving Registration-Based Motion Compensation Using Ultrasound Confidence Optimization
+1000	W7125915303	2026	M	Precise Target Point Localization in 2D SLAM Using Multi Maps
+1001	W2131684094	2005	B	Precision range image registration using a robust surface interpenetration measure and enhanced genetic algorithms
+1002	W4389206100	2023	F	Precision Robotic Machining: Modelling and Control Innovations for Improved Performance
+1003	W7135044278	2026	F	Predefined-Time Distributed State Estimation for Nonlinear Systems over Directed Networks
+1004	W2892358936	2018	B,F	Predicting Alignment Risk to Prevent Localization Failure
+1005	W1967814761	2012	M	Predicting target vessel location on robot-assisted coronary artery bypass graft using CT to ultrasound registration
+1006	W2767178917	2017	B,F,anchor	Prediction of ICP pose uncertainties using Monte Carlo simulation with synthetic depth images
+1007	W2918803465	2019	S2	Predictive Models to Determine Clinically Relevant Deviations in Delivered Dose for Head and Neck Cancer
+1008	W2255696880	2013	F	Predictive parameter estimation for Bayesian filtering
+1009	W4413925366	2025	F	Prepared for the Worst: Resilience Analysis of the ICP Algorithm via Learning-Based Worst-Case Adversarial Attacks
+1010	W4387682177	2023	B,F	Present and Future of SLAM in Extreme Environments: The DARPA SubT Challenge
+1011	W4405462187	2024	S5	Prevalence of transparency and reproducibility-related research practices in music psychology (2017–2022)
+1012	W4389665684	2023	F	Principled ICP Covariance Modelling in Perceptually Degraded Environments for the EELS Mission Concept
+1013	W2597622074	2017	M	Probabilistic 3D Sound Source Mapping System Based on Monte Carlo Localization Using Microphone Array and LIDAR
+1014	W4403571353	2024	S4	Probabilistic Degeneracy Detection for Point-to-Plane Error Minimization
+1015	W4403600987	2024	F,S4	Probabilistic Degeneracy Detection for Point-to-Plane Error Minimization
+1016	W2889794907	2018	F	Probabilistic Fusion Framework for Collaborative Robots 3D Mapping
+1017	W2336416123	2002	B	Probabilistic robotics
+1018	W2015864876	2010	F	Probabilistic sonar scan matching SLAM for underwater environment
+1019	W2412342236	2016	B	PROBE-GK: Predictive robust estimation using generalized kernels
+1020	W2201132991	2015	B	PROBE: Predictive robust estimation for visual-inertial navigation
+1021	W4235046330	2010	S5	Problem-Based Learning
+1022	W2393368747	2009	S5	Problems and Solutions of Chinese Futures Products Listing System——Introspection of two-year implementation of Regulation on the Administration of Futures Trading
+1023	W4230019300	2013	S5	Promoting Nursing Students' Understanding and Reflection on Cultural Awareness With Older Adults in Home Care
+1024	W4392903988	2024	F	Propagation of Error and Uncertainty in a Computer-Assisted Orthopedic Surgical System
+1025	W4407444661	2025	S5	Protocol for evaluation of iTEST, a novel blended intervention to enhance introspective accuracy in psychotic disorders
+1026	W7127179276	2026	S5	Psilocybin or Nicotine Patch for Smoking Cessation: A Pilot Randomized Clinical Trial
+1027	W4379142909	2023	S5	Psilocybin therapy: A novel approach to treating depression
+1028	W2121833483	2014	S5	Qualitative Feedback From a Text Messaging Intervention for Depression: Benefits, Drawbacks, and Cultural Differences
+1029	W4408504548	2025	F	R2SCAT-LPR: Rotation-Robust Network with Self- and Cross-Attention Transformers for LiDAR-Based Place Recognition
+1030	W4402570097	2024	F	RA-LIO: A Robust Adaptive Tightly-Coupled Lidar-Inertial Odometry
+1031	W7203621674	2026	F	RA-SIDO: Robust and Adaptive Sonar–Inertial–Depth Odometry for Consistent Underwater Acoustic 3D Mapping
+1032	W3174203047	2021	B	Radar Odometry Combining Probabilistic Estimation and Unsupervised Feature Learning
+1033	W78175635	2010	B	Radar Scan Matching SLAM Using the Fourier-Mellin Transform
+1034	W3155778944	2021	B	Radar SLAM: A Robust SLAM System for All Weather Conditions
+1035	W3127566502	2021	B,F	Radar-to-Lidar: Heterogeneous Place Recognition via Joint Learning
+1036	W4387427715	2023	F	RadaRays: Real-time Simulation of Rotating FMCW Radar for Mobile Robotics via Hardware-accelerated Ray Tracing
+1037	W4406610319	2025	F	RadaRays: Real-Time Simulation of Rotating FMCW Radar for Mobile Robotics via Hardware-Accelerated Ray Tracing
+1038	W4402352325	2024	F	RadarLCD: Learnable Radar-based Loop Closure Detection Pipeline
+1039	W4224315224	2022	B	RadarSLAM: A robust simultaneous localization and mapping system for all weather conditions
+1040	W3130465612	2020	B	RadarSLAM: Radar based Large-Scale SLAM in All Weathers
+1041	W3093042376	2020	B	RADIATE: A Radar Dataset for Automotive Perception.
+1042	W4409102120	2025	F	RaI-SLAM: Radar-Inertial SLAM for Autonomous Vehicles
+1043	W3215566167	2021	F	RailLoMer: Rail Vehicle Localization and Mapping with LiDAR-IMU-Odometer-GNSS Data Fusion
+1044	W4389665491	2023	F	RAL Papers Presented at IROS 2023
+1045	W4401416945	2024	F	RaLF: Flow-based Global and Metric Radar Localization in LiDAR Maps
+1046	W3086057802	2021	B	RaLL: End-to-End Radar Localization on Lidar Map Using Differentiable Measurement Model
+1047	W4405785728	2024	F	RaNDT SLAM: Radar SLAM Based on Intensity-Augmented Normal Distributions Transform
+1048	W4413018007	2025	F	Range and Bird's Eye View Fused Cross-Modal Visual Place Recognition
+1049	W3165312539	2021	F	Range Image-based LiDAR Localization for Autonomous Vehicles
+1050	W4392902014	2024	F	Range-Aided LiDAR Cooperative Localization and Mapping
+1051	W4391341747	2024	F	Range-Aided LiDAR-Inertial Multi-Vehicle Localization and Mapping in Degenerate Environments
+1052	W3003437478	2019	B	RangeNet ++: Fast and Accurate LiDAR Semantic Segmentation
+1053	W2084585296	2010	F	RANSAC matching: Simultaneous registration and segmentation
+1054	W4416750734	2025	F	RAVES-Calib: Robust, Accurate and Versatile Extrinsic Self Calibration Using Optimal Geometric Features
+1055	W3014496187	2020	S5	Reading the Criminal in the Austrian School of Criminology: Unveiling the Deviant Character Through Measurement and Intuitive Introspection
+1056	W1758624203	2012	F	Real time egomotion of a nonholonomic vehicle using LIDAR measurements
+1057	W2801497651	2018	S2	Real-time 3D scene reconstruction with dynamically moving object using a single depth camera
+1058	W3118330673	2021	M	Real-Time Autonomous Vehicle Localization Based on Particle and Unscented Kalman Filters
+1059	W2140881794	2009	B	Real-time correlative scan matching
+1060	W4320038060	2023	F	Real-Time Dense Visual Odometry for RGB-D Cameras
+1061	W1906051104	2015	S2	Real-time depth and inertial fusion for local SLAM on dynamic legged robots
+1062	W7159929036	2026	F	Real-Time Localization for Autonomous Vehicles via Fusion of Low-Rate LiDAR Poses and GNSS/IMU Data
+1063	W2970479183	2019	B	Real-Time Pose Graph SLAM based on Radar
+1064	W1563133525	2005	S2	Real-Time Quality Control of Tracked Ultrasound
+1065	W4407303435	2025	F	Recent advancements in loop closure detection methods for 3D LiDAR-based multi-robot SLAM: A comprehensive survey
+1066	W4412081542	2025	F	Recent Advances in SLAM for Degraded Environments: A Review
+1067	W4409507574	2005	S5	Recent Scenario of Criminal Negligence in India Doctor, Community & Apex Court
+1068	W4317383071	2022	F	Recognition of Degradation Scenarios for LiDAR SLAM Applications
+1069	W4412980466	2025	M	Reference data generation for evaluating pairwise registration algorithms
+1070	W7167463330	2026	S3	Reflective Lensless Through-Silicon Phase Imaging for Advanced Semiconductor Packaging Metrology
+1071	W7167473701	2026	S3	Reflective Lensless Through-Silicon Phase Imaging for Advanced Semiconductor Packaging Metrology
+1072	W7167476449	2026	S3	Reflective lensless through-silicon phase imaging for advanced semiconductor packaging metrology
+1073	W4417158960	2025	F	Registration Method for Partial Overlapping Point Cloud Data of Complex Workpieces Based on MFD Algorithm
+1074	W2887153274	2018	S2	Registration of dense matched point cloud from UAV-borne images
+1075	W1157730364	2015	F	Registration of non-uniform density 3D laser scans for mapping with micro aerial vehicles
+1076	W2196111060	2015	B	Registration with the Point Cloud Library: A Modular Framework for Aligning in 3-D
+1077	W7134230838	2026	S2	Registration-Based Analysis of the Three-Dimensional Shape of the Retinal Nerve Fiber Layer for Detection of Glaucomatous Defects
+1078	W2619147778	2017	F	Relative Topometric Localization in Globally Inconsistent Maps
+1079	W4415034938	2025	F	Relative Trajectory Identification and Prediction for Point Cloud Degradation Based on MIMO LiDAR
+1080	W4401415294	2024	F	RELEAD: Resilient Localization with Enhanced LiDAR Odometry in Adverse Environments
+1081	W2897459191	2018	B,F	Reliability Estimation of Vehicle Localization Result
+1082	W7169796854	2026	F	Reliability-aware multimodal fusion for robust information processing in uncertain industrial environments
+1083	W4405785675	2024	F	ReLoc-Aligner : Orientation-aware Scene Descriptor for Re-Localization within a 3D Point Cloud Map
+1084	W4389163840	2023	S5	Research development needs of pharmacists in the North of England: a cross-sectional survey
+1085	W7171998027	2026	M	Research on a Quick Response Code-Assisted Two-Stage Multi-Sensor Fusion Localization Method
+1086	W7163148073	2026	S1	Research on excavator environment perception and localization system based on multi-sensor data fusion
+1087	W4410295599	2025	M	Research on Mobile Robot Localization Method Based on Adaptive Motion Model and Double-Threshold Relocation Strategy
+1088	W4415471706	2025	F	Research on multimodal data enhanced SLAM algorithm for global mapping of underground coal mines
+1089	W4413325105	2025	M	Research on space laser 3D point cloud data registration technology
+1090	W7165389951	2026	M	Research on Spanning Tree Topology Optimization and Pyramid-Based Fine Alignment Algorithm for Multi-View Point Cloud Registration
+1091	W3194373435	2021	F	Research on the Development of 3D Laser SLAM Technology
+1092	W7159573519	2025	F	Research on the Integrated Navigation Method Combining Measurement Delay Compensation
+1093	W4413359462	2025	F	Research Progress on Collaborative Perception and Localization Technologies of Clustered Unmanned Systems in Underground Sheltered Spaces: A Survey
+1094	W3022126997	2009	M	RESEARCHING FOR THE SAMPLING METHOD ON CMM
+1095	W2057093411	2000	S5	Residency programs at the Canadian Memorial Chiropractic College
+1096	W7170517041	2026	F	Residual Reweighting With Scan Normalization for LiDAR-Inertial Odometry in Degenerate Environments
+1097	W3005369628	2019	F	Resilient Autonomous Exploration and Mapping of Underground Mines using Aerial Robots
+1098	W4417202903	2025	F	Resilient odometry via hierarchical adaptation
+1099	W4311722306	2022	F	Resilient Terrain Navigation with a 5 DOF Metal Detector Drone
+1100	W4383108312	2023	F	Resilient Terrain Navigation with a 5 DOF Metal Detector Drone
+1101	W4285102223	2022	F	Retriever: Point Cloud Retrieval in Compressed 3D Maps
+1102	W2379432048	2003	S5	Retrospection and Introspection of the Shifting of Peasant-workers in China
+1103	W4401702147	2024	F	Review on Security Range Perception Methods and Path-Planning Techniques for Substation Mobile Robots
+1104	W4200355487	2021	F	RF-LIO: Removal-First Tightly-coupled Lidar Inertial Odometry in High Dynamic Environments
+1105	W7128760290	2025	S2	RFID solutions evaluation in industrial container access control
+1106	W3127404104	2020	F	RGB-D Based Semantic SLAM Framework for Rescue Robot
+1107	W4407686138	2025	F	RID-LIO: robust and accurate intensity-assisted LiDAR-based SLAM for degenerated environments
+1108	W4387412844	2023	F	RID: LiDAR Range Image Descriptor for Fast and Efficient Loop Closure Detection in Indistinguishable Environments
+1109	W4211040010	2022	F	RINet: Efficient 3D Lidar-Based Place Recognition Using Rotation Invariant Neural Network
+1110	W4385975620	2023	F	RING++: Roto-Translation Invariant Gram for Global Localization on a Sparse Scan Map
+1111	W4389712682	2023	F	RMS: Redundancy-Minimizing Point Cloud Sampling for Real-Time Pose Estimation
+1112	W4394862961	2024	F	RMS: Redundancy-Minimizing Point Cloud Sampling for Real-Time Pose Estimation
+1113	W4396875943	2024	F	ROAMER: Robust Offroad Autonomy using Multimodal State Estimation with Radar Velocity Integration
+1114	W2980733065	2019	F	Robot Localisation in 3D Environments Using Sparse Range Measurements
+1115	W2023259872	2003	B	Robot localization based on scan-matching—estimating the covariance matrix for the IDC algorithm
+1116	W1991500602	2013	F	Robot mapping in large-scale mixed indoor and outdoor environments
+1117	W1489258026	1997	B	Robot Pose Estimation in Unknown Environments by Matching 2D Range Scans
+1118	W1635475619	1994	B	Robot pose estimation in unknown environments by matching 2D range scans
+1119	W4366492961	2023	F	Robot Proficiency Self-Assessment Using Assumption-Alignment Tracking
+1120	W4242073862	2010	B	Robotics: Science and Systems (RSS)
+1121	W2470235696	2009	B	Robotics: Science and Systems V
+1122	W7124981518	2025	F	Robust 3D LIDAR Point Cloud Registration Using Uncertainty-Aware Generalized Iterative Closest Point with Voxel-Based Efficiency
+1123	W2067603665	1995	B	Robust adaptive control
+1124	W234738007	2012	B	Robust Adaptive Control
+1125	W7140212717	2026	F	Robust and Accurate LiDAR SLAM in Complex Environments via Intensity-Enhanced Features
+1126	W4415068897	2025	M	Robust Filtering -- Novel Statistical Learning and Inference Algorithms with Applications
+1127	arXiv:2506.11530v1	2025	X	Robust Filtering -- Novel Statistical Learning and Inference Algorithms with Applications
+1128	W7118181139	2026	F	Robust Geometry–Hue Point Cloud Registration via Hybrid Adaptive Residual Optimization
+1129	W2920879222	2018	M	Robust Global Localization by Using Global Visual Features and Range Finders Data
+1130	W4403721627	2024	F	Robust High-Speed State Estimation for Off-Road Navigation Using Radar Velocity Factors
+1131	W7170069362	2026	F	Robust hybrid feature-driven on-the-fly mapping enables freehand 3D panoramic photoacoustic angiography
+1132	W3177095793	2021	F	Robust Inertial-aided Underwater Localization and Navigation based on Imaging Sonar Keyframes
+1133	W4214868979	2022	F	Robust Inertial-Aided Underwater Localization Based on Imaging Sonar Keyframes
+1134	W4415424159	2025	F	Robust LiDAR-IMU-GNSS fusion pose estimation with the point cloud registration uncertainty modeling
+1135	W4298146021	2022	F	Robust Lidar-Inertial Odometry with Ground Condition Perception and Optimization Algorithm for UGV
+1136	W4391307920	2023	F	Robust LiDAR-Visual-Inertial Fusion Odometry for Autonomous Vehicles
+1137	W2737100565	2017	B	Robust localization and localizability estimation with a rotating laser scanner
+1138	W4391678123	2024	F	Robust Localization Approach Using Hybrid Correspondence NDT and Real-Time Uncertainty Estimation
+1139	W4408696318	2024	F	Robust Localization for Autonomous Vehicles via Multisensor Fusion
+1140	W3122885952	2021	M	Robust Localization for Intelligent Vehicles Based on Pole-Like Features Using the Point Cloud
+1141	W2742107142	2017	F	Robust localization using 3D NDT scan matching with experimentally determined uncertainty and road marker matching
+1142	W4392173763	2024	F	Robust Loop-Closure Algorithm Based on GNSS Raw Data for Large-Scale and Complex Environments
+1143	W2109271936	2013	B	Robust map optimization using dynamic covariance scaling
+1144	W1973617039	2013	F	Robust Motion Estimation with RBG-D Cameras
+1145	W3096556319	2020	F	Robust Odometry and Mapping for Multi-LiDAR Systems with Online Extrinsic Calibration
+1146	W3171246200	2021	B,F	Robust Odometry and Mapping for Multi-LiDAR Systems With Online Extrinsic Calibration
+1147	W3206411252	2021	F	Robust Place Recognition using an Imaging Lidar
+1148	W4389890025	2023	S2	Robust Point Cloud Registration Network for Complex Conditions
+1149	W3191299065	2021	F	Robust Rank Deficient SLAM
+1150	W2004312117	2003	B	Robust registration of 2D and 3D point sets
+1151	W269302513	2006	B	Robust self-localization of mobile robots in dynamic environments using scan matching algorithms
+1152	W7202097010	2026	F	Robust SLAM for underground mines via anisotropic degeneracy perception and Cross-Modal consensus arbitration
+1153	W4408713690	2024	F	Robust Vehicle Localization and Tracking in Rain Using Street Maps
+1154	W3089501578	2020	M	ROI-cloud: A Key Region Extraction Method for LiDAR Odometry and Localization
+1155	W4406038308	2025	F	ROLO‐SLAM: Rotation‐Optimized LiDAR‐Only SLAM in Uneven Terrain With Ground Vehicle
+1156	W3095946098	2020	M	ROS Ekosistemi ile Robotik Uygulamalar için UWB, LiDAR ve Odometriye Dayalı Konumlandırma ve İlklendirme Algoritmaları
+1157	W4400228543	2024	F	ROSE: Covisibility Region Aware 3D-LiDAR SLAM Based on Generative Road Surface Model and Long-Term Association
+1158	W7165010854	2026	F	Rotation-Equivariant Feature Learning on Polar BEV for Robust LiDAR Place Recognition
+1159	W3205251654	2021	F	SA-LOAM: Semantic-aided LiDAR SLAM with Loop Closure
+1160	W4410949808	2025	F	Safety-Quantifiable Line Feature-Based Monocular Visual Localization With 3D Prior Map
+1161	W4403021940	2024	F	Safety-Quantifiable Planar-Feature-Based LiDAR Localization With a Prior Map for Intelligent Vehicles in Urban Scenarios
+1162	W4417249001	2025	F	Saliency-LOAM: Saliency-Based LiDAR Odometry and Mapping
+1163	W4385516747	2023	S3	Scalable Fiber-Array-to-Chip Interconnections with Sub-Micron Alignment Accuracy
+1164	W4392810816	2024	F	Scalable semantic 3D mapping of coral reefs with deep learning
+1165	W3211389689	2021	B	Scan Context++: Structural Place Recognition Robust to Rotation and Lateral Variations in Urban Environments
+1166	W2910489334	2018	B	Scan Context: Egocentric Spatial Descriptor for Place Recognition Within 3D Point Cloud Map
+1167	W4312248127	2022	M	Scan Matching and Probabilistic Stationary Global Localization in an Airport Environment
+1168	W1978791302	2013	F	Scan matching SLAM in underwater environments
+1169	W7110941558	2025	F	Scan matching validation scheme based on the neural network using Gaussian model input to improve robustness of graph SLAM
+1170	W2131439959	2007	B	Scan registration for autonomous mining vehicles using 3D‐NDT
+1171	W1509463039	2006	B	Scan-SLAM: Combining EKF-SLAM and Scan Correlation
+1172	W4249188019	2006	B	Scan-SLAM: Combining EKF-SLAM and Scan Correlation
+1173	W7170167498	2026	F	SCC-Loc: A Unified Semantic Cascade Consensus Framework for UAV Thermal Geo-Localization
+1174	W4388240444	2023	F	Scene Overlap Prediction for LiDAR-Based Place Recognition
+1175	W3013419435	2020	F	Scene-Aware Error Modeling of LiDAR/Visual Odometry for Fusion-based Vehicle Localization
+1176	W3130549426	2021	F	Scene-Aware Error Modeling of LiDAR/Visual Odometry for Fusion-Based Vehicle Localization
+1177	W4361204286	2023	S5	Scientific Reform and Visual Data Science: Retiring the EDA/CDA dichotomy
+1178	W2468974970	2003	S5	SCIOUSNESS AND CON-SCIOUSNESS: WILLIAM JAMES AND THE PRIME REALITY OF NON-DUAL EXPERIENCE
+1179	W7171244254	2026	F	Screw-based feature constraint model and degeneracy analysis for robotic state estimation: Theory and experiments
+1180	W4313171305	2022	F	SectionKey: 3-D Semantic Point Cloud Descriptor for Place Recognition
+1181	W7161235055	2026	F	SEED: Structure-Entropy and DCT Enhanced Descriptor for Robust 4D Radar Place Recognition
+1182	W2197415390	2015	S2	Segmentation automatique des images de tomographie conique pour la radiothérapie de la prostate
+1183	W4414432520	2025	F	SeGuE: Semantic Guided Exploration for Mobile Robots
+1184	W7128437526	2026	M	Selective Downsampling for Fast and Accurate 3D Global Registration with Applications in Medical Imaging
+1185	W2793630860	2018	F	Self-Calibration of Mobile Manipulator Kinematic and Sensor Extrinsic Parameters Through Contact-Based Interaction
+1186	W4283815720	2022	M	Self-Driving Vehicle Localization using Probabilistic Maps and Unscented-Kalman Filters
+1187	W3204193097	2021	B,F	Self-supervised learning for using overhead imagery as maps in outdoor range sensor localization
+1188	W4385416119	2023	F	Self-Supervised Lidar Place Recognition in Overhead Imagery Using Unpaired Data
+1189	W4385682149	2023	S5	SEM-GAT: Explainable Semantic Pose Estimation using Learned Graph Attention
+1190	W4391422901	2023	S5	SEM-GAT: Explainable Semantic Pose Estimation Using Learned Graph Attention
+1191	W3112454989	2020	F	Semantic RGB-D SLAM for Rescue Robot Navigation
+1192	W4225621014	2022	F	Semantic scan context: a novel semantic-based loop-closure method for LiDAR SLAM
+1193	W4317927140	2022	F	Semantic SLAM for Mobile Robot with Human-in-the-Loop
+1194	W7159810655	2026	F	Semantic SLAM with Multi-Modal Perception: Survey on Robust Long-Term Localization for Autonomous Vehicles
+1195	W4312272925	2022	F	Semantic Topological Descriptor for Loop Closure Detection within 3D Point Clouds In Outdoor Environment
+1196	W7165781419	2026	F	Semantic-Assisted Global Localization and Navigation for Mobile Robots
+1197	W2996045557	2019	B	Semantically Assisted Loop Closure in SLAM Using NDT Histograms
+1198	W4393379578	2024	F	SemanticCSLAM: Using Environment Landmarks for Cooperative Simultaneous Localization and Mapping
+1199	W3190102146	2021	F	SemSegMap – 3D Segment-based Semantic Localization
+1200	W4367172626	2023	M	Sensor Fusion of Light Detection and Ranging and iBeacon to Enhance Accuracy of Autonomous Mobile Robot in Hard Disk Drive Clean Room Production Line
+1201	W4312584283	2022	F	SeqOT: A Spatial–Temporal Transformer Network for Place Recognition Using Sequential LiDAR Data
+1202	W4293150268	2022	F	SeqPolar: Sequence Matching of Polarized LiDAR Map With HMM for Intelligent Vehicle Localization
+1203	W4286495528	2022	F	Sequence matching enhanced 3D place recognition using candidate rearrangement
+1204	W4408100728	2024	F	Sequential Semantic Descriptor from 3D Point Clouds for Place Recognition
+1205	W7154721278	2025	S5	Service Gaps in Occupational Therapy: Are We Creating Space for Role Substitution?
+1206	W3153475603	2021	S5	Seventy-Fifth Anniversary of Plastic and Reconstructive Surgery: How Evidence-Based Medicine Has Transformed Plastic Surgery
+1207	W4404498245	2024	F	SG-LPR: Semantic-Guided LiDAR-Based Place Recognition
+1208	W4403390395	2024	F	SGBA: Semantic Gaussian Mixture Model-Based LiDAR Bundle Adjustment
+1209	W7160891219	2026	F	SGMR-LPR: A Semantic-Guided Network Robust to Movable Objects for LiDAR-Based Place Recognition
+1210	W2228459732	2015	B,F	Shape Dependency of ICP Pose Uncertainties in the Context of Pose Estimation Systems
+1211	W2146370447	1996	B	Shape registration using optimization for mobile robot navigation
+1212	W3209605433	2021	F	Short-range Lidar SLAM utilizing localization data of monocular localization
+1213	W2171590421	1993	B	SIGNATURE VERIFICATION USING A “SIAMESE” TIME DELAY NEURAL NETWORK
+1214	W7123336547	2026	M	SilRef: Joint Visual Silhouette and Tactile Pose Optimization for Transparent Object Manipulation
+1215	W3207409390	2021	F	Simple loop closing for continuous 6DOF LIDAR&IMU graph SLAM with planar features for indoor environments
+1216	W4403677524	2024	F	Simulation Environment for the Evaluation of LiDAR Odometry Algorithms
+1217	W4391936695	2023	F	Simulator for omnidirectional robots equipped with 2D and 3D LiDAR sensors
+1218	W2062525513	2013	F	Simultaneous Calibration of Odometry and Sensor Parameters for Mobile Robots
+1219	W2990340368	2016	F	Simultaneous Localization and Mapping ( SLAM )
+1220	W4281393205	2022	F	Simultaneous Localization and Mapping Algorithm Based on the Asynchronous Fusion of Laser and Vision Sensors
+1221	W4405906785	2024	F	Simultaneous Localization and Mapping for Indoor Mobile Robots Using Synthetic Aperture Radar Images
+1222	W2146881125	2006	B	Simultaneous localization and mapping: part I
+1223	W4290043352	2022	F	Simultaneous Localization of Rail Vehicles and Mapping of Environment With Multiple LiDARs
+1224	W4285149456	2022	F	Simultaneous Localization of Rail Vehicles and Mapping of Surroundings With LiDAR-Inertial-GNSS Integration
+1225	W4395680824	2024	F	Simultaneous Location and Mapping
+1226	W2141778145	2008	F	Simultaneous maximum-likelihood calibration of odometry and sensor parameters
+1227	W2888874480	2018	F	Simultaneous pose and reliability estimation using convolutional neural network and Rao–Blackwellized particle filter
+1228	W4225847449	2022	F	Simultaneous Viewpoint- and Condition-Invariant Loop Closure Detection Based on LiDAR Descriptor for Outdoor Large-Scale Environments
+1229	W4399731685	2024	F	Single-Line LiDAR Localization via Contribution Sampling and Map Update Technology
+1230	W2170798597	2005	B	Singular Value Decomposition and Principal Component Analysis
+1231	W4413917088	2025	F	SLABIM: A SLAM-BIM Coupled Dataset in HKUST Main Building
+1232	W3169329286	2021	B	SLAM Algorithm: Overview and Evaluation in a Heterogeneous System
+1233	W2715794240	2017	F	SLAM Back-End
+1234	W4311053350	2022	F	SLAM Back-End Optimization Algorithm Based on Vision Fusion IPS
+1235	W2664846334	2017	F	SLAM Front-End
+1236	W4412943150	2025	F	Small but Mighty: A Lightweight Feature Enhancement Strategy for LiDAR Odometry in Challenging Environments
+1237	W2539314168	2007	S2	Small-animal PET registration method with intrinsic validation designed for large datasets
+1238	W7163164881	2026	S3	smsaut3344/WDF-Theory: Manuscript Alignment & 3D Multi-Grid SOR Simulation Baseline
+1239	W7164664082	2026	S3	smsaut3344/WDF-Theory: Manuscript Alignment & 3D Multi-Grid SOR Simulation Baseline
+1240	W7165191035	2026	S2	SOAR-3D: a fusion method of 3D target model and 2D thermal image
+1241	W4287854479	2022	F	Sole GNSS Sensor Extrinsic Calibration Methods for Mobile Mapping Systems
+1242	W4387713457	2023	F	Solid-State LiDAR SLAM System with Indoor Degradation Scene Compensation
+1243	W2135948001	2008	B	Solving quadratically constrained geometrical problems using lagrangian duality
+1244	W2049650637	2011	B	Some Relations Between Extended and Unscented Kalman Filters
+1245	W2225723228	2014	F	Sonar scan matching for simultaneous localization and mapping in confined underwater environments
+1246	W4415707468	2025	F	SPACE: 3D Spatial Co-Operation and Exploration Framework for Robust Mapping and Coverage With Multi-Robot Systems
+1247	W2107528150	2013	B	Sparse Iterative Closest Point
+1248	W7117576713	2025	F	Spatial Aware Feature Extraction for RADAR SLAM
+1249	W4321073112	2023	F	Special Issue on the 10th European Conference on Mobile Robots (ECMR 2021)
+1250	W4311414007	2022	F	SphereVLAD++: Attention-Based and Signal-Enhanced Viewpoint Invariant Descriptor
+1251	W3156212288	2021	F	Spherical Multi-Modal Place Recognition for Heterogeneous Sensor Systems
+1252	W4404996635	2024	F	Spherical scan context: a global descriptor in the form of a third-order tensor for loop closure detection
+1253	W4412924193	2025	F	Spike LPR: A Spiking Neural Network for Energy-Efficient LiDAR-Based Place Recognition via Spatiotemporal Sequential Fusion
+1254	W4402753535	2024	F	Spinning-Actuated LiDAR-Based SLAM for Robotic Mapping: A Concise Survey
+1255	W4390190981	2023	F	SpyroPose: SE(3) Pyramids for Object Pose Distribution Estimation
+1256	W7123750371	2026	S5	SRT Pre-registration 2026
+1257	W3177271542	2021	F	SSC: Semantic Scan Context for Large-Scale Place Recognition
+1258	W4383066341	2023	F	STD: Stable Triangle Descriptor for 3D place recognition
+1259	W2884371529	2018	F	STEAP: simultaneous trajectory estimation and planning
+1260	W3176325883	2021	F	Stein ICP for Uncertainty Estimation in Point Cloud Matching
+1261	W1511095061	2003	B	Stochastic Approximation and Rate-Distortion Analysis for Robust Structure and Motion Estimation
+1262	W4311802545	2022	F	Stochastic Poisson Surface Reconstruction
+1263	W1993524644	2012	S3	SU-E-J-180: A Characterization of the LAP Aquarius Phantom for External LAP Laser Alignment and MR Geometric Distortion Verification for the use of SRS Patient Simulation
+1264	W4413925271	2025	F	Submodular Optimization for Keyframe Selection & Usage in SLAM
+1265	W4407461410	2024	F	Subway Tunnel Mapping Based on Improved Point-LIO
+1266	W3003991701	2019	B	SuMa++: Efficient LiDAR-based Semantic SLAM
+1267	W4299609154	2022	M	SuperLine3D: Self-supervised Line Segmentation and Description for LiDAR Point Cloud
+1268	W4312460601	2022	M	SuperLine3D: Self-supervised Line Segmentation and Description for LiDAR Point Cloud
+1269	W4413925245	2025	F	SuperLoc: The Key to Robust Lidar-Inertial Localization Lies in Predicting Alignment Risks Superodometry.Com/SuperLoc
+1270	W4307028725	2022	S5	Supporting Human Dignity in a Collapsing Field: Gestalt Approach in the Social and Political Contexts
+1271	W7164862918	2026	M	SURE: Semantic- and uncertainty-aware registration network for robust outdoor LiDAR alignment
+1272	W4392596219	2024	F	Survey of Deep Learning-Based Methods for FMCW Radar Odometry and Ego-Localization
+1273	W1138937991	2015	S2	SU‐E‐J‐118: A Systematic Analysis of Rigid Image Registration Using Patient CTs and Simulated Setup Images with a Unique Gold Standard Registration
+1274	W4415003007	2025	F	SVN-ICP: Uncertainty Estimation of ICP-Based LiDAR Odometry Using Stein Variational Newton
+1275	W7168828016	2026	F	SVN-NDT: Extending Stein Variational Newton to Probabilistic LiDAR Registration for Surface Vehicle Localization
+1276	W4400228906	2024	F	Switch-SLAM: Switching-Based LiDAR-Inertial-Visual SLAM for Degenerate Environments
+1277	W1999399477	2012	B	Switchable constraints for robust pose graph SLAM
+1278	W7203576535	2026	S5	TaskTide - Backend-agnostic workflow orchestration system
+1279	W4316116310	2023	S5	TBV Radar SLAM -- trust but verify loop candidates
+1280	W4366148620	2023	F,S5,anchor	TBV Radar SLAM – Trust but Verify Loop Candidates
+1281	W4405180250	2024	F	TC-LTIO: Tightly-coupled LiDAR Thermal Inertial Odometry for LiDAR and Visual Odometry Degraded Environments
+1282	W4387088392	2023	F	Teach and Repeat and Wheel Calibration for LiDAR-Equipped Omnidirectional Drive Robots
+1283	W3111598592	2020	B	TEASER: Fast and Certifiable Point Cloud Registration
+1284	W4210966021	2020	F	Technical Background
+1285	W4408757869	2025	F	Terrain Saliency Quantification Method Based on PointNetMLP for Active Bathymetric SLAM
+1286	W3103087064	2020	F	Testing the Accuracy of the Modified ICP Algorithm with Multimodal Weighting Factors
+1287	W4405429468	2024	F	TextGeo-SLAM: A LiDAR SLAM With Text Semantics and Geometric-Constraint-Based Loop Closure
+1288	W4402917217	2024	F	TFNet: Exploiting Temporal Cues for Fast and Accurate LiDAR Semantic Segmentation
+1289	W4386883508	2023	F	The Accuracy Analysis of Tool Center Point Calibration via Condition Number and Minimum Eigenvalue
+1290	W4230909112	2012	B	The Banana Distribution is Gaussian: A Localization Study with Exponential Coordinates
+1291	W2359429701	2005	S5	The Chinese Urbanization Process since 1949: Review and Introspection
+1292	W4405779087	2024	S5	The Fifth Annual Meeting of the Indian Society for Heart and Lung Transplantation
+1293	W3200664388	2022	B	The Hilti SLAM Challenge Dataset
+1294	W1943808550	2016	B	The Invariant Extended Kalman Filter as a Stable Observer
+1295	W3132401233	2020	B	The Newer College Dataset: Handheld LiDAR, Inertial and Vision with Ground Truth
+1296	W1567242735	2004	B	The normal distributions transform: a new approach to laser scan matching
+1297	W2082418372	2007	S5	The Northern Irish Novelist in Ronan Bennett's The Catastrophist
+1298	W7162333863	2026	S2	The Ontology of Measurement and Uncertainty: Operational Deepening of the Observer's Measurement Constitution
+1299	W7166862500	2026	S2	The Ontology of Measurement and Uncertainty: Operational Deepening of the Observer's Measurement Constitution
+1300	W3090139470	2020	B	The Oxford Radar RobotCar Dataset: A Radar Extension to the Oxford RobotCar Dataset
+1301	W3034753035	2020	S5	The Professionalization of Academic Advising: A Structured Literature Review – A Professional Advisor's Response
+1302	W2796573900	2018	S5	The Replication Crisis in Epidemiology: Snowball, Snow Job, or Winter Solstice?
+1303	W1650975994	2009	B	The three-dimensional normal-distributions transform : an efficient representation for registration, surface analysis, and loop detection
+1304	W2330610671	1999	S5	The Thrill of Victory
+1305	W2768737714	2017	B	The Two-State Implicit Filter Recursive Estimation for Mobile Robots
+1306	W7114766129	2025	S5	The Universe as a Mirror of the Mind: A Falsifiable Model for Unifying Physics and Cognition via Discrete/Continuous Duality
+1307	W7114811617	2025	S5	The Universe as a Mirror of the Mind: A Falsifiable Model for Unifying Physics and Cognition via Discrete/Continuous Duality
+1308	W1978930763	2012	F	The UspIC: Performing Scan Matching Localization Using an Imaging Sonar
+1309	W2274362023	2015	S5	The value of artefacts in stimulated-recall interviews
+1310	W2744953493	2017	F	Three examples of the stability properties of the invariant extended Kalman filter
+1311	W4413244398	2025	F	Three-Dimensional Point Cloud Reconstruction of Unstructured Terrain for Autonomous Robots
+1312	W2124549189	2007	S5	Throwing the baby out with the bathwater? A lateral view of nursing research
+1313	W7165156700	2026	F	Tightly-coupled LiDAR-inertial-visual odometry with dual-confidence fusion and degradation awareness
+1314	W4386821026	2023	F	Tightly-Coupled Lidar-Visual-Inertial Odometry and Mapping in Real Time
+1315	W4391237394	2023	F	Tightly-coupled Lidar-Visual-Inertial SLAM considering 3D-2D Line Correspondences
+1316	W4411048277	2025	F	Tire wear aware trajectory tracking control for Multi-axle Swerve-drive Autonomous Mobile Robots
+1317	W7115072148	2025	S3	TOE
+1318	W7115579211	2025	S3	TOE
+1319	W7203888859	2026	F	ToF-Wheel Odometry: Navigating Degeneration of Localization With Limited Sensing Capabilities
+1320	W7171269724	2026	S5	Tolmácsolás az Országos Idegenrendészeti Főigazgatóságon: terepkutatás = Interpreting Practices at the Hungarian National Directorate-General for Aliens Policing: A Field Study
+1321	W4390204220	2023	F	Tool Center Point Calibration via Posture-Sequence Particle Swarm Optimization
+1322	W4365606300	2023	F	Toward Reliable Human Pose Forecasting with Uncertainty
+1323	W4392523578	2024	F	Toward Reliable Human Pose Forecasting With Uncertainty
+1324	W3152786524	2021	F	Towards 3D LiDAR-based semantic scene understanding of 3D point cloud sequences: The SemanticKITTI Dataset
+1325	W3164892132	2021	B,F	Towards a Fully Automated 3D Reconstruction System Based on LiDAR and GNSS in Challenging Scenarios
+1326	W4383108536	2023	F	Towards Consistent Batch State Estimation Using a Time-Correlated Measurement Noise Model
+1327	W3113196146	2020	F	Towards Efficient and Robust LiDAR-based 3D Mapping in Urban Environments
+1328	W4412605582	2025	F	Towards Fast Correspondence-Free Odometry Using Multiple FMCW Lidars
+1329	W4308080817	2022	F	Towards Image-Grade LiDAR Odometry and Mapping
+1330	W2736160108	2017	B,F	Towards realistic covariance estimation of ICP-based Kinect V1 scan matching: The 1D case
+1331	W4388993226	2024	M	Towards Retail Stores Automation: 6-DOF Pose Estimation Combining Deep Learning Object Detection and Dense Depth Alignment
+1332	W1896736147	2015	S2	Towards scene adaptive image correspondence for placental vasculature mosaic in computer assisted fetoscopic procedures
+1333	W3027636084	2019	S2	Tracking Registration Algorithm for Augmented Reality based on Random Fern
+1334	W2972364461	2019	S2	Tracking Registration Algorithm for Augmented Reality Based on Template Tracking
+1335	W4210360923	2022	S5	Training Surgeons: Simulation and Reflection
+1336	W4226213012	2022	F	Translation Invariant Global Estimation of Heading Angle Using Sinogram of LiDAR Point Cloud
+1337	W4399438941	2024	F	TS-LCD: Two-Stage Loop-Closure Detection Based on Heterogeneous Data Fusion
+1338	W4401416815	2024	F	TSCM: A Teacher-Student Model for Vision Place Recognition Using Cross-Metric Knowledge Distillation
+1339	W4415047882	2025	F	Tunnel-LIVO: LiDAR-Inertial-Visual Odometry for Degenerate Tunnel Environments
+1340	W7134049950	2026	F	Tunnel-SLAM: Low-Cost LiDAR/Vision/RTK/Inertial Integration on Vehicles for Roadway Tunnels
+1341	W4416750884	2025	F	TWC-SLAM: Multi-Agent Cooperative SLAM with Text Semantics and WiFi Features Integration for Similar Indoor Environments
+1342	W4317598226	2023	F	UAVs Beneath the Surface: Cooperative Autonomy for Subterranean Search and Rescue in DARPA SubT
+1343	W4404103156	2024	F	UAVs Beneath the Surface: Cooperative Autonomy for Subterranean Search and Rescue in DARPA SubT
+1344	W2151560515	2006	S2	Ultrasound self-calibration
+1345	W7202267989	2026	F	Uncertainty Anisotropy—Based Landmark Selection for 2D LiDAR Mapping
+1346	W3161235374	2021	F	Uncertainty evaluation of small wear measurements on complex technological surfaces by machine vision-aided topographical methods
+1347	W3087829522	2020	F	Uncertainty quantification for multi-scan registration
+1348	W4360995378	2023	F	Uncertainty-Aware Adaptive Semidirect LiDAR Scan Matching for Ground Vehicle Positioning
+1349	W4308162007	2022	S5	Uncertainty-Aware DNN for Multi-Modal Camera Localization
+1350	W4413679578	2025	F	Uncertainty-Driven Radar-Inertial Fusion for Instantaneous 3D Ego-Velocity Estimation
+1351	W4400448400	2024	F	Uncertainty‐aware LiDAR‐based localization for outdoor mobile robots
+1352	W3089835902	2020	B	Under the Radar: Learning to Predict Robust Keypoints for Odometry Estimation and Metric Localisation in Radar
+1353	W2997586652	2019	F	Underwater Localization and Mapping with Imaging Sonar
+1354	W4389310694	2023	F	Underwater Pose SLAM using GMM scan matching for a mechanical profiling sonar
+1355	W2910089361	2019	B	Unified Motion-Based Calibration of Mobile Multi-Sensor Platforms With Time Delay Estimation
+1356	W3098410961	2021	F	Unified Multi-Modal Landmark Tracking for Tightly Coupled Lidar-Visual-Inertial Odometry
+1357	W7211885441	2026	S5	UNITARES: runtime governance for heterogeneous AI-agent fleets
+1358	W1982582014	2014	B	Unmanned Aerial Vehicle Path Following: A Survey and Analysis of Algorithms for Fixed-Wing Unmanned Aerial Vehicless
+1359	W2604425362	2017	B	Unscented Kalman filtering on Lie groups
+1360	W4300178276	2017	B	Unscented Kalman Filtering on Lie Groups
+1361	W2973962935	2019	F	Unstructured Road SLAM using Map Predictive Road Tracking
+1362	W3119595865	2021	F	Unsupervised Balanced Covariance Learning for Visual-Inertial Sensor Fusion
+1363	W2415159553	2016	F	Unsupervised calibration of wheeled mobile platforms
+1364	W3132075760	2021	F	Unsupervised Learning of Lidar Features for Use in a Probabilistic Trajectory Estimator
+1365	W3130946423	2021	F	Unsupervised Learning of Lidar Features for Use ina Probabilistic Trajectory Estimator
+1366	W2124123377	2006	M	Using laser range data for 3D SLAM in outdoor environments
+1367	W1979700120	2003	M	Using surface envelopes for discrimination of molecular models
+1368	W4386204205	2023	F	USTC FLICAR: A sensors fusion dataset of LiDAR-inertial-camera for heavy-duty autonomous aerial work robots
+1369	W4405489952	2024	F	UWB-Visual-Inertial Fusion Localization with Fast and Robust UWB Extrinsic Calibration
+1370	W2517637050	2016	M	Vehicle localization with low cost radar sensors
+1371	W2210594414	2009	M	Vehicle Perception: Localization, Mapping with Detection, Classification and Tracking of Moving Objects
+1372	W3132600665	2020	F	Versatile 3D Multi-Sensor Fusion for Lightweight 2D Localization
+1373	W4415047676	2025	F	VI_MCPR: Viewpoint Invariant Place Recognition Driven by Multicamera for Large-Scale Environments
+1374	W3016650291	2020	S2	Viewpoints Planning for Active 3-D Reconstruction of Profiled Blades Using Estimated Occupancy Probabilities (EOP)
+1375	W7135207260	2026	F	VINA-SLAM: A Voxel-Based Inertial and Normal-Aligned LiDAR–IMU SLAM
+1376	W2910234834	2018	F	Virtual Occupancy Grid Map for Submap-based Pose Graph SLAM and Planning in 3D Environments
+1377	W3194388872	2021	S5	Virtual Reality as a Research Method in Criminology
+1378	W4387692031	2023	S5	Virtual Reality Meditation for Fatigue in Persons With Rheumatoid Arthritis: Mixed Methods Pilot Study
+1379	W3106129785	2018	F	Vision-Depth Landmarks and Inertial Fusion for Navigation in Degraded Visual Environments
+1380	W2792481847	2017	S5	VISUAL EXPECTATIONS AND VISUAL IMAGINATION
+1381	W4400679144	2024	F	Visual Landmark-Aided LiDAR–Inertial Odometry for Rail Vehicle
+1382	W3138171450	2021	F	Visual Place Recognition using LiDAR Intensity Information
+1383	W2284029970	2015	B	Visual Place Recognition: A Survey
+1384	W4220786440	2022	F	Visual-Inertial Image-Odometry Network (VIIONet): A Gaussian process regression-based deep architecture proposal for UAV pose estimation
+1385	W1512698229	2015	B	Visual-lidar odometry and mapping: low-drift, robust, and fast
+1386	W2899761469	2019	F	Visual-Thermal Landmarks and Inertial Fusion for Navigation in Degraded Visual Environments
+1387	W4416010696	2025	F	Visual–LiDAR SLAM for Rover Navigation in Planetary Environments With Plane Constraints and Global Optimization
+1388	W1483243511	2010	S3	Volumetric Image Registration of Multi-modality Images of CT, MRI and PET
+1389	W7165194444	2026	F	Voxel-to-Voxel Generalized ICP for Fast and Accurate LiDAR Odometry
+1390	W4388755175	2023	F	VoxelMap++: Mergeable Voxel Mapping Method for Online LiDAR(-Inertial) Odometry
+1391	W4408296360	2025	F	VS-SLAM: Robust SLAM Based on LiDAR Loop Closure Detection with Virtual Descriptors and Selective Memory Storage in Challenging Environments
+1392	W7115919951	2025	F,S4	VSEL-SLAM: visual semantic information enhanced LiDAR SLAM for degenerate scenes
+1393	W2413477357	2015	M	WA-ICP algorithm for tackling ambiguous correspondence
+1394	W2157554397	2003	B	Weighted range sensor matching algorithms for mobile robot displacement estimation
+1395	W2990844533	2019	B,S5	What Could Go Wrong? Introspective Radar Odometry in Challenging Environments
+1396	W4283313978	2022	B	What Goes Around: Leveraging a Constant-Curvature Motion Constraint in Radar Odometry
+1397	W2943931832	2019	S5	What the replication crisis means for intervention science
+1398	W4281682914	2022	B	Wildcat: Online Continuous-Time 3D Lidar-Inertial SLAM
+1399	W2801418892	2018	B,F	Windowed multiscan optimization using weighted least squares for improving localization accuracy of mobile robots
+1400	W4388983935	2023	F,anchor	X-ICP: Localizability-Aware LiDAR Registration for Robust Localization in Extreme Environments
+1401	W4415707458	2025	F	XPRESS: X-Band Radar Place Recognition via Elliptical Scan Shaping
+1402	W2201290997	2015	F	You are Here: Mimicking the Human Thinking Process in Reading Floor-Plans
+1403	W7202377866	2026	F	一种基于双视角状态空间模型的激光雷达位置识别算法
+1404	W7208721860	2026	F	基于关键帧的点云三维重建方法研究
+1405	W4406476458	2024	F	基于混合回环检校实现激光SLAM优化和高精度三维地图构建
+1406	W4408719583	2025	F	基于特征融合的激光雷达点云位置识别方法
+1407	W7167023871	2026	F	多传感器融合的退化场景SLAM算法研究
+1408	W4413253642	2025	F	退化环境下的连续运动校正-强度辅助的LiDAR惯性同时定位与建图
