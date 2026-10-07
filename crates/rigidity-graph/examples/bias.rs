@@ -39,6 +39,7 @@
 //! cargo run --release -p rigidity-graph --example bias -- <directory> [pairs]
 //! RIGIDITY_INIT_SIGMA=0.10 …   # how far the initialisations are thrown
 //! RIGIDITY_ALL_PAIRS=1 …       # every combination of stations, not the legs
+//! RIGIDITY_ONLY_PAIRS=1-3,2-4 … # only these pairs, with the draws they get in the full run
 //! ```
 
 use std::path::{Path, PathBuf};
@@ -102,6 +103,19 @@ fn main() {
     };
     let quiet = |_: &_| std::ops::ControlFlow::Continue(());
 
+    // `RIGIDITY_ONLY_PAIRS` keeps a subset of the pairs, so that a slow scene
+    // can be split across processes. The draws are seeded by the position in
+    // the full list, not in the subset, so each pair gets the same numbers
+    // it gets when everything runs in one process.
+    let only: Option<Vec<(usize, usize)>> = std::env::var("RIGIDITY_ONLY_PAIRS").ok().map(|text| {
+        text.split(',')
+            .filter_map(|pair| {
+                let (from, to) = pair.trim().split_once('-')?;
+                Some((from.parse().ok()?, to.parse().ok()?))
+            })
+            .collect()
+    });
+
     println!(
         "\n{DRAWS} initialisations per pair, thrown {throw} m and \
          {INIT_ROTATION} rad about the truth"
@@ -111,6 +125,12 @@ fn main() {
     );
     let mut rows: Vec<[f64; 11]> = Vec::new();
     for (place, &(from, to)) in legs.iter().enumerate() {
+        if only
+            .as_ref()
+            .is_some_and(|keep| !keep.contains(&(from, to)))
+        {
+            continue;
+        }
         let exact = truth[from].inverse() * truth[to];
         // Seeded by position, which in the walked case is the leg index, so
         // the draws are the ones the earlier tables were measured from.

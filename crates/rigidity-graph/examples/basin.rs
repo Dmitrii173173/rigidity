@@ -49,6 +49,8 @@
 //! ```text
 //! cargo run --release -p rigidity-graph --example basin -- <directory> [stations]
 //! RIGIDITY_SECTOR=60 …    # the cropped view, where wrong basins are common
+//! RIGIDITY_SCAN_EXT=pcd …  # scans other than Hokuyo_<i>.csv
+//! RIGIDITY_NOISE=0.02 …    # another sensor's noise; 0.03, the Hokuyo's, by default
 //! ```
 
 use std::path::{Path, PathBuf};
@@ -62,8 +64,20 @@ use rigidity_pipeline::{
     register_pair_observed,
 };
 
-/// Sensor noise along the normal, metres. The Hokuyo UTM-30LX, as M9 took it.
-const NOISE: f64 = 0.03;
+/// Sensor noise along the normal, metres. The Hokuyo UTM-30LX, as M9 took it,
+/// unless `RIGIDITY_NOISE` names another sensor's. The thresholds of Table 4
+/// were fixed with the Hokuyo's value, and a second sensor is reported both
+/// ways: with them unchanged, which is the test out of sample, and with its
+/// own noise put in their place.
+fn noise() -> f64 {
+    static NOISE: std::sync::OnceLock<f64> = std::sync::OnceLock::new();
+    *NOISE.get_or_init(|| {
+        std::env::var("RIGIDITY_NOISE")
+            .ok()
+            .and_then(|text| text.parse().ok())
+            .unwrap_or(0.03)
+    })
+}
 
 /// How far from the theodolite counts as the wrong basin, metres.
 ///
@@ -272,7 +286,7 @@ fn main() {
     // then not touched. Every other run below is out of sample for them.
     println!("\n  at the fixed thresholds chosen on plain 360°:");
     println!("  detector          threshold   caught  missed  false alarms  clean");
-    for ((name, values, higher_is_worse), fixed) in detectors.iter().zip(FIXED) {
+    for ((name, values, higher_is_worse), fixed) in detectors.iter().zip(fixed()) {
         let (mut caught, mut missed, mut alarms, mut clean) = (0, 0, 0, 0);
         for (value, is_lost) in values.iter().zip(&lost) {
             // A value that is not finite means the registration fell over
@@ -304,7 +318,7 @@ fn main() {
     let (mut caught, mut missed, mut alarms, mut clean) = (0, 0, 0, 0);
     let mut escaped: Vec<f64> = Vec::new();
     for (index, is_lost) in lost.iter().enumerate() {
-        let flagged = cases[index].rmse >= FIXED[0] || cases[index].inlier <= FIXED[3];
+        let flagged = cases[index].rmse >= fixed()[0] || cases[index].inlier <= fixed()[3];
         match (flagged, is_lost) {
             (true, true) => caught += 1,
             (false, true) => {
@@ -339,7 +353,9 @@ fn main() {
 /// Read off the plain at 360° with sixteen stations, rounded into the
 /// middle of the gap that survey shows, and then left alone. A threshold
 /// tuned on the run it is reported on is not a measurement.
-const FIXED: [f64; 7] = [3.0 * NOISE, 1.50, 0.960, 0.500, NOISE, 0.050, 0.050];
+fn fixed() -> [f64; 7] {
+    [3.0 * noise(), 1.50, 0.960, 0.500, noise(), 0.050, 0.050]
+}
 
 /// The interval one class occupies, or `None` if the class is empty.
 fn range(values: &[f64], lost: &[bool], want_lost: bool) -> Option<(f64, f64)> {
@@ -500,7 +516,7 @@ fn residual_shape(
         found += 1;
         let target = fixed.cloud.point(nearest.index as usize);
         let normal = fixed.normals[nearest.index as usize];
-        if normal.dot(&(point - target)).abs() < NOISE {
+        if normal.dot(&(point - target)).abs() < noise() {
             inside += 1;
         }
     }
@@ -544,7 +560,11 @@ fn read_scans(directory: &Path, stations: usize, sector: Option<f64>) -> Vec<Pre
     }
     (0..stations)
         .map(|index| {
-            let path = directory.join(format!("Hokuyo_{index}.csv"));
+            // `RIGIDITY_SCAN_EXT` as in `global.rs`: the Oxford Spires keyframes
+            // are binary PCD, laid out as `Hokuyo_<i>.pcd` by
+            // `datasets/spires/prepare_spires.py`.
+            let extension = std::env::var("RIGIDITY_SCAN_EXT").unwrap_or_else(|_| "csv".into());
+            let path = directory.join(format!("Hokuyo_{index}.{extension}"));
             let raw = rigidity_io::read(&path).unwrap_or_else(|error| {
                 eprintln!("{}: {error}", path.display());
                 std::process::exit(1);

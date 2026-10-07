@@ -9,11 +9,12 @@ holding symbolic links Hokuyo_0.ply ... to the scans and the poses.
 
 Which way a .tfm points was settled by the loops, not assumed: sa-sb maps the
 coordinates of scan a into the frame of scan b, because with that reading every
-triangle of the facade closes to 0.0 mm, of the office to 17.6 mm and of the arch
-to 9.1 mm, while the other reading leaves metres. So with s1 as the world, the
+triangle of the facade and the courtyard closes to 0.0 mm, of the office to 17.6 mm
+and of the arch to 9.1 mm, while the other reading leaves metres. A closure of exactly
+zero means those two references come from one adjustment and do not check each other. So with s1 as the world, the
 pose of station j is sj-s1.tfm, and s1 is the identity.
 
-    python3 prepare_tls.py            # office, arch, facade, whichever are extracted
+    python3 prepare_tls.py            # office, arch, facade, courtyard, whichever are extracted
 """
 import os, sys
 import numpy as np
@@ -46,6 +47,6 @@ def prepare(scene):
     return out, n
 
 if __name__ == "__main__":
-    for scene in sys.argv[1:] or ["office", "arch", "facade"]:
+    for scene in sys.argv[1:] or ["office", "arch", "facade", "courtyard"]:
         done = prepare(scene)
         print(f"{scene}: " + (f"{done[1]} stations -> {done[0]}" if done else "not extracted"))
