@@ -1,6 +1,7 @@
 #!/bin/sh
 # ETH TLS registration benchmark (Theiler et al., 2015), ETH Zurich PRS group.
-# office and arch are the scenes of Table 2 and Section 5.5; facade is a second scene with repeating structure.
+# office and arch are the scenes of Table 2 and Section 5.5; facade and courtyard are the two scenes the
+# probe of Section 5.6 finds no copy in.
 cd "$(dirname "$0")"
 while read scene url; do
   f=$(basename "$url")
