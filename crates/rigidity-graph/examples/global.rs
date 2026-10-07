@@ -35,6 +35,11 @@
 //! `pose_scanner_leica.csv` beside the scans — the datasets ship that file
 //! in `csv_global` and sometimes in `leica`, and any of the three will do
 //! as long as it sits next to the `Hokuyo_*.csv` the run reads.
+//!
+//! ```text
+//! RIGIDITY_SCAN_EXT=pcd …  # scans other than Hokuyo_<i>.csv
+//! RIGIDITY_NOISE=0.02 …    # another sensor's noise; 0.03, the Hokuyo's, by default
+//! ```
 
 use std::path::{Path, PathBuf};
 use std::time::Instant;
@@ -46,9 +51,18 @@ use rigidity_pipeline::{
     register_globally, register_pair_observed,
 };
 
-/// Sensor noise along the normal, metres. The Hokuyo UTM-30LX, as M9 took
-/// it and as `basin.rs` takes it.
-const NOISE: f64 = 0.03;
+/// Sensor noise along the normal, metres. The Hokuyo UTM-30LX, as M9 took it,
+/// unless `RIGIDITY_NOISE` names another sensor's. As `basin.rs` takes it, so
+/// the two runs read the same line.
+fn noise() -> f64 {
+    static NOISE: std::sync::OnceLock<f64> = std::sync::OnceLock::new();
+    *NOISE.get_or_init(|| {
+        std::env::var("RIGIDITY_NOISE")
+            .ok()
+            .and_then(|text| text.parse().ok())
+            .unwrap_or(0.03)
+    })
+}
 
 /// How far from the theodolite counts as the wrong basin, metres. The same
 /// line `basin.rs` draws, so the two runs count the same failures.
@@ -177,12 +191,12 @@ fn main() {
     // The dangerous half: wrong, and saying nothing about it.
     let silent = searched_lost
         .iter()
-        .filter(|edge| edge.median <= NOISE)
+        .filter(|edge| edge.median <= noise())
         .count();
     // And the false alarms: right, but reported as suspect.
     let cried_wolf = edges
         .iter()
-        .filter(|edge| edge.searched <= LOST && edge.median > NOISE)
+        .filter(|edge| edge.searched <= LOST && edge.median > noise())
         .count();
     let total: f64 = edges.iter().map(|edge| edge.seconds).sum();
 
@@ -191,10 +205,11 @@ fn main() {
     println!("    walking the survey  {walked_lost}");
     println!("    searching, no guess {}", searched_lost.len());
     println!(
-        "  of the {} the search lost, {} said so (median past {NOISE:.2} m) \
+        "  of the {} the search lost, {} said so (median past {:.2} m) \
          and {silent} did not",
         searched_lost.len(),
-        searched_lost.len() - silent
+        searched_lost.len() - silent,
+        noise()
     );
     println!(
         "  false alarms: {cried_wolf} of {} sound edges",
@@ -205,7 +220,7 @@ fn main() {
     // is ambiguous and the criterion is not at fault.
     let unresolvable = searched_lost
         .iter()
-        .filter(|edge| edge.median <= NOISE && edge.median <= edge.at_truth)
+        .filter(|edge| edge.median <= noise() && edge.median <= edge.at_truth)
         .count();
     println!(
         "  of the {silent} silent, {unresolvable} fit at least as well as the truth does \
