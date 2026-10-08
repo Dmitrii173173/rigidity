@@ -7,7 +7,7 @@
 [![crates.io](https://img.shields.io/crates/v/rigidity.svg)](https://crates.io/crates/rigidity)
 [![docs.rs](https://img.shields.io/docsrs/rigidity)](https://docs.rs/rigidity)
 [![CI](https://github.com/Dmitrii173173/rigidity/actions/workflows/ci.yml/badge.svg)](https://github.com/Dmitrii173173/rigidity/actions/workflows/ci.yml)
-[![licence: AGPL-3.0 or commercial](https://img.shields.io/badge/licence-AGPL--3.0%20or%20commercial-blue.svg)](LICENSING.md)
+[![licence: AGPL-3.0](https://img.shields.io/badge/licence-AGPL--3.0-blue.svg)](LICENSING.md)
 
 **Point-cloud registration that tells you which degrees of freedom the geometry
 actually determined — and which it did not.**
@@ -320,15 +320,11 @@ rerun corridor.rrd
 
 ## License
 
-Dual-licensed: **AGPL-3.0-only**, or a commercial licence.
+Licensed under **AGPL-3.0-only**, and under nothing else.
 
-Free under the [AGPL](LICENSE) for students, universities, research,
-personal projects, evaluation and non-profits — and for anything else you
-are willing to publish the source of. Note that in Rust a crate that
+Free under the [AGPL](LICENSE) for everyone. Note that in Rust a crate that
 depends on `rigidity-core` is a derivative work, so the AGPL reaches the
 whole binary; running it internally without distributing the result asks
-nothing of you.
-
-Shipping it inside a closed product, or hosting it as a service, needs the
-commercial licence. [`LICENSING.md`](LICENSING.md) has the boundary in a
-table, and the address to write to.
+nothing of you, and anything you distribute or host as a service has to be
+released under the AGPL with its source. [`LICENSING.md`](LICENSING.md) has
+the boundary in a table.

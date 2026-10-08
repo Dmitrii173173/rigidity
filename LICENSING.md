@@ -1,19 +1,18 @@
 # Licensing
 
-`rigidity` is dual-licensed. The same code is available under two licences,
-and you choose the one that fits what you are doing with it.
+`rigidity` is free software under a single licence, the GNU AGPL-3.0. There
+is no commercial licence and no other terms on offer.
 
 Copyright (C) 2026 Perfilev Dmitrii <dmitrii.perfilev2020@gmail.com>
 
-## 1. GNU AGPL-3.0 — free, and free for good
+## GNU AGPL-3.0 — free, and free for good
 
 The full text is in [`LICENSE`](LICENSE). SPDX: `AGPL-3.0-only`.
 
-Free of charge, with no registration and nothing to sign, for **students,
-university courses, theses, academic and public research, personal
-projects, evaluation and non-profit organisations**. This is the licence
-the project is developed under and the one almost every reader of this
-file wants.
+Free of charge, with no registration and nothing to sign, for everyone:
+students, university courses, theses, academic and public research,
+personal projects, evaluation, non-profit organisations and companies
+alike.
 
 What it asks in return: anything you build on `rigidity` and then
 **distribute or expose over a network** must itself be released under
@@ -32,48 +31,25 @@ Two consequences that catch people out with Rust specifically:
   without offering it as a service, triggers nothing at all. The AGPL only
   begins to ask for things when the software reaches someone else.
 
-## 2. A commercial licence — for closed products
+## What that means in practice
 
-Buy this if you want to use `rigidity` in a product or service whose source
-you do not intend to publish. It removes the copyleft obligation entirely;
-everything else about the software is the same code.
-
-Typical cases: embedding the registration pipeline in commercial metrology,
-robotics or surveying software; a hosted service that registers customers'
-scans; an OEM integration shipped to your own customers.
-
-Terms are negotiated per case (per-seat, per-product or per-site, with or
-without support and priority fixes). Write to
-**dmitrii.perfilev2020@gmail.com** with what you are building and roughly how
-many people or units are involved.
-
-## Which one do I need?
-
-| What you are doing | Licence |
+| What you are doing | What the AGPL asks |
 |---|---|
-| University course, thesis, published research | AGPL — free |
-| Personal or hobby project | AGPL — free |
-| Evaluating it before deciding | AGPL — free |
-| Internal use in a company, results never distributed | AGPL — free |
-| Open-source product, itself under AGPL-3.0 | AGPL — free |
-| Closed-source product that ships to customers | commercial |
-| SaaS or any hosted service | commercial |
-| Redistributing under your own terms, or sublicensing | commercial |
-
-If you are unsure which line you are on, ask before you build on it. The
-answer is usually short and usually "the free one".
+| University course, thesis, published research | nothing |
+| Personal or hobby project | nothing |
+| Evaluating it before deciding | nothing |
+| Internal use in a company, results never distributed | nothing |
+| Open-source product, itself under AGPL-3.0 | nothing further |
+| Product that ships to customers | release it under AGPL-3.0, with source |
+| SaaS or any hosted service | release it under AGPL-3.0, with source |
 
 ## Contributing
 
-Dual licensing only works while one party holds the rights to the whole
-work. A contribution accepted into this repository must therefore come with
-a licence grant to the copyright holder wide enough to relicense it —
-otherwise the commercial licence could not be offered for the file you
-touched. Until a formal CLA exists, patches are accepted on the
-understanding that you grant that right; say so in the pull request.
+Contributions are accepted under the same licence as the project: by
+opening a pull request you agree that your patch is released under
+AGPL-3.0-only.
 
 ## Note
 
-This file explains the arrangement in plain language. Where it differs from
-[`LICENSE`](LICENSE) or from a signed commercial agreement, those documents
-govern.
+This file explains the licence in plain language. Where it differs from
+[`LICENSE`](LICENSE), that document governs.
